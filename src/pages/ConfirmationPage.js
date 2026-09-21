@@ -118,12 +118,15 @@ export function renderConfirmationPage() {
         </p>
       </div>
 
-      <div style="display: flex; gap: var(--spacing-4); margin-top: var(--spacing-2);">
-        <button type="button" class="btn-card-white" id="btn-print-ticket" style="flex: 1;">
+      <div style="display: flex; gap: var(--spacing-3); margin-top: var(--spacing-4); flex-wrap: wrap;">
+        <button type="button" class="btn-card-white" id="btn-print-ticket" style="flex: 1; min-width: 160px;">
           <span>Imprimer mon billet</span>
         </button>
-        <a href="#/history" class="btn-primary-blue" style="flex: 1; text-align: center;">
-          <span>Mes Billets (Historique)</span>
+        <a href="#/history" class="btn-card-white" style="flex: 1; min-width: 160px; text-align: center;">
+          <span>🎟️ Mes Billets</span>
+        </a>
+        <a href="#/profile" class="btn-primary-blue" style="flex: 1; min-width: 160px; text-align: center;">
+          <span>👤 Mon Profil</span>
         </a>
       </div>
     </div>

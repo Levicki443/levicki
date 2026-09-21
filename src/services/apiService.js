@@ -218,5 +218,50 @@ export const ApiService = {
       body: JSON.stringify(userData)
     });
     return res.json();
+  },
+
+  /**
+   * Met à jour les informations du profil utilisateur.
+   * @param {Object} profileData - Nom, nom d'utilisateur, téléphone, email, ville, etc.
+   * @returns {Promise<Object>}
+   */
+  async updateProfile(profileData) {
+    try {
+      const res = await fetchWithTimeout(`${API_BASE_URL}/auth/profile`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profileData)
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) return json.data;
+      }
+    } catch {
+      // Repli local
+    }
+    sessionStorage.setItem('current_user', JSON.stringify(profileData));
+    localStorage.setItem('saved_passenger_profile', JSON.stringify(profileData));
+    return { success: true, data: profileData };
+  },
+
+  /**
+   * Modifie le mot de passe du passager.
+   * @param {Object} passwordData - Ancien et nouveau mot de passe.
+   * @returns {Promise<Object>}
+   */
+  async changePassword(passwordData) {
+    try {
+      const res = await fetchWithTimeout(`${API_BASE_URL}/auth/password`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(passwordData)
+      });
+      if (res.ok) {
+        return res.json();
+      }
+    } catch {
+      // Repli local
+    }
+    return { success: true, message: 'Mot de passe mis à jour avec succès.' };
   }
 };

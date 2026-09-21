@@ -13,6 +13,8 @@ export function createHeader() {
   const header = document.createElement('header');
   header.className = 'site-header';
 
+  const user = JSON.parse(sessionStorage.getItem('current_user') || 'null');
+
   header.innerHTML = `
     <a href="#/" class="brand-logo" aria-label="Accueil - Gare Routière">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -27,6 +29,14 @@ export function createHeader() {
     </a>
 
     <nav class="nav-actions" aria-label="Navigation secondaire">
+      ${user ? `
+        <a href="#/profile" class="btn-nav-link" style="color: #93c5fd; border-color: rgba(147, 197, 253, 0.3);">
+          👤 ${user.fullname.split(' ')[0]}
+        </a>
+        <a href="#/app" class="btn-nav-link">
+          🚌 Trajets
+        </a>
+      ` : ''}
       <button type="button" class="btn-nav-link" id="nav-btn-about">
         À propos
       </button>
