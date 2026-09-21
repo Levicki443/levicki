@@ -1,0 +1,341 @@
+/**
+ * @file profile.css
+ * @description Styles de l'espace profil passager, gestion de compte, sécurité et préférences.
+ * Respecte rigoureusement la charte graphique : Fond rouge sombre (#1b070a), cartes bleu profond (#0f1c3f).
+ */
+
+/* ==========================================================================
+   CONTENEUR ET HERO BANNER DU PROFIL
+   ========================================================================== */
+
+.profile-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-bottom: var(--spacing-12);
+  animation: fadeIn 300ms ease;
+}
+
+.profile-hero-card {
+  background: linear-gradient(135deg, #12224e 0%, #0d1633 100%);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.profile-user-details {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.profile-avatar-large {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.profile-name-group h1 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-1);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.profile-username-badge {
+  font-size: var(--font-size-xs);
+  background-color: rgba(37, 99, 235, 0.3);
+  color: #93c5fd;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.profile-meta-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.profile-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  font-size: var(--font-size-xs);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.profile-hero-actions {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   BARRE DE STATISTIQUES VOYAGEUR
+   ========================================================================== */
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.profile-stat-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  text-align: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.profile-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: #60a5fa;
+}
+
+.profile-stat-icon {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-1);
+}
+
+.profile-stat-value {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: #fbbf24;
+  margin-bottom: 2px;
+}
+
+.profile-stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   GRILLE DES FORMULAIRES DE PARAMÈTRES
+   ========================================================================== */
+
+.profile-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 860px) {
+  .profile-grid-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .profile-card-full {
+    grid-column: 1 / -1;
+  }
+}
+
+.profile-section-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-section-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: rgba(37, 99, 235, 0.2);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.profile-section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.profile-section-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   CHAMPS & JAUGE DE MOT DE PASSE
+   ========================================================================== */
+
+.password-strength-container {
+  margin-top: var(--spacing-2);
+}
+
+.password-strength-bar {
+  height: 4px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.password-strength-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 300ms ease, background-color 300ms ease;
+}
+
+.password-strength-fill.weak {
+  width: 33%;
+  background-color: #ef4444;
+}
+
+.password-strength-fill.medium {
+  width: 66%;
+  background-color: #f59e0b;
+}
+
+.password-strength-fill.strong {
+  width: 100%;
+  background-color: #10b981;
+}
+
+.password-strength-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   SÉLECTEURS DE PRÉFÉRENCES (OPÉRATEURS & SIÈGES)
+   ========================================================================== */
+
+.operator-radio-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.operator-radio-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.operator-radio-label input {
+  display: none;
+}
+
+.operator-radio-label.selected {
+  background-color: rgba(37, 99, 235, 0.25);
+  border-color: #60a5fa;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+/* ==========================================================================
+   NOTIFICATIONS / TOASTS DE CONFIRMATION
+   ========================================================================== */
+
+.profile-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #064e3b;
+  color: #ecfdf5;
+  border: 1px solid #059669;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3) var(--spacing-5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  z-index: 2000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+.profile-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.profile-toast.error {
+  background-color: #7f1d1d;
+  border-color: #dc2626;
+  color: #fef2f2;
+}

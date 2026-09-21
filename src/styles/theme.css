@@ -1,0 +1,105 @@
+/**
+ * @file theme.css
+ * @description Système de design centralisé et variables CSS du projet « Gestion d'une gare routière ».
+ * Conforme aux spécifications du cahier des charges et aux exigences de Precision.MD.
+ */
+
+:root {
+  /* ==========================================================================
+     PALETTE DE COULEURS PRIMAIRES & ARRIÈRE-PLANS
+     ========================================================================== */
+  
+  /* Fond global : Rouge légèrement sombre, non éblouissant et immersif */
+  --color-bg-global: #1b070a;
+  --color-bg-gradient: radial-gradient(circle at 50% 15%, #380e14 0%, #170508 100%);
+  --color-bg-surface-elevated: #280b10;
+
+  /* Cartes et conteneurs sur le fond : Bleu profond élégant */
+  --color-card-bg: #0f1c3f;
+  --color-card-bg-hover: #142554;
+  --color-card-border: #1e3570;
+  --color-card-border-glow: rgba(59, 130, 246, 0.4);
+
+  /* Couleurs de texte */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-text-dark: #0f172a;
+
+  /* ==========================================================================
+     BOUTONS & INTERACTIONS
+     ========================================================================== */
+  
+  /* Boutons directement sur le fond : Bleu vif */
+  --color-btn-blue-bg: #2563eb;
+  --color-btn-blue-hover: #1d4ed8;
+  --color-btn-blue-active: #1e40af;
+  --color-btn-blue-text: #ffffff;
+  --color-btn-blue-shadow: rgba(37, 99, 235, 0.45);
+
+  /* Boutons placés dans une carte / composant : Blanc pur */
+  --color-btn-white-bg: #ffffff;
+  --color-btn-white-hover: #f1f5f9;
+  --color-btn-white-active: #e2e8f0;
+  --color-btn-white-text: #0f172a;
+  --color-btn-white-shadow: rgba(255, 255, 255, 0.35);
+
+  /* Bouton 3D Retour réutilisable */
+  --color-btn-back-bg: #1e293b;
+  --color-btn-back-text: #ffffff;
+  --color-btn-back-border: #334155;
+  --color-btn-back-shadow: #0f172a;
+  --color-btn-back-hover-bg: #2563eb;
+
+  /* États & alertes */
+  --color-accent-gold: #f59e0b;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-info: #0ea5e9;
+
+  /* ==========================================================================
+     TYPOGRAPHIE & ESPACEMENTS
+     ========================================================================== */
+  --font-family-base: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.25rem;  /* 20px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-10: 2.5rem;  /* 40px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-16: 4rem;    /* 64px */
+
+  /* Rayons de courbure */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Ombres & Profondeur */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-glow-blue: 0 0 25px rgba(37, 99, 235, 0.35);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}

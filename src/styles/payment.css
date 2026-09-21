@@ -1,0 +1,106 @@
+/**
+ * @file payment.css
+ * @description Styles pour le module de paiement Mobile Money et l'historique des réservations (Section 12).
+ */
+
+/* ==========================================================================
+   GRILLE DES OPÉRATEURS DE PAIEMENT MOBILE MONEY
+   ========================================================================== */
+
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--spacing-3);
+  margin: var(--spacing-4) 0;
+}
+
+.payment-method-card {
+  background-color: rgba(15, 23, 42, 0.7);
+  border: 2px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4) var(--spacing-2);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.payment-method-card:hover {
+  border-color: #60a5fa;
+  transform: translateY(-2px);
+}
+
+.payment-method-card.active {
+  border-color: #3b82f6;
+  background-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.4);
+}
+
+.operator-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: var(--font-size-xs);
+  color: #ffffff;
+}
+
+.operator-wave { background-color: #1ba0e2; }
+.operator-orange { background-color: #ff7900; }
+.operator-mtn { background-color: #ffcc00; color: #000000; }
+.operator-moov { background-color: #004f9e; }
+
+.operator-name {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   HISTORIQUE DES VOYAGES
+   ========================================================================== */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-6);
+}
+
+.history-item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+}
+
+.history-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-paid {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.status-pending {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}

@@ -1,0 +1,200 @@
+/**
+ * @file components.css
+ * @description Styles des composants réutilisables : Bouton 3D Retour, modales immersives, en-tête et imports globaux.
+ */
+
+@import url('./landing.css');
+@import url('./auth.css');
+@import url('./booking.css');
+@import url('./payment.css');
+@import url('./profile.css');
+
+/* ==========================================================================
+   COMPOSANT : BOUTON RETOUR EFFET 3D (Spécification Section 7 du Cahier des Charges)
+   ========================================================================== */
+
+.btn-back-3d-wrapper {
+  display: inline-block;
+  perspective: 600px;
+  margin-bottom: var(--spacing-4);
+}
+
+.btn-back-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-5);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-btn-back-text);
+  background-color: var(--color-btn-back-bg);
+  border: 1px solid var(--color-btn-back-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  box-shadow: 
+    0 4px 0 var(--color-btn-back-shadow),
+    0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn-back-3d:hover {
+  background-color: var(--color-btn-blue-bg);
+  border-color: var(--color-card-border-glow);
+  transform: translateY(-2px) translateZ(4px);
+  box-shadow: 
+    0 6px 0 var(--color-btn-back-shadow),
+    0 10px 18px rgba(37, 99, 235, 0.35);
+}
+
+.btn-back-3d:active {
+  transform: translateY(3px) translateZ(-2px);
+  box-shadow: 
+    0 1px 0 var(--color-btn-back-shadow),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-back-3d svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.btn-back-3d:hover svg {
+  transform: translateX(-3px);
+}
+
+/* ==========================================================================
+   COMPOSANT : EN-TÊTE DE NAVIGATION (HEADER)
+   ========================================================================== */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: var(--spacing-6);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.brand-badge {
+  background-color: var(--color-btn-blue-bg);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.btn-nav-link {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-nav-link:hover {
+  color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   COMPOSANT : MODALES IMMERSIVES (À PROPOS & CONTACT)
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 2, 4, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+  padding: var(--spacing-4);
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  max-width: 540px;
+  width: 100%;
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px) scale(0.97);
+  transition: transform var(--transition-smooth);
+}
+
+.modal-backdrop.active .modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.modal-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  padding: var(--spacing-1);
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  color: var(--color-text-primary);
+}
