@@ -4,6 +4,8 @@
  */
 
 import { initModals } from './components/Modals.js';
+import { initAssistantBot } from './components/AssistantBot.js';
+import { initInteractiveRipples, init3DTiltCards } from './services/interactiveEffects.js';
 import { renderLandingPage } from './pages/LandingPage.js';
 import { renderRegisterPage } from './pages/RegisterPage.js';
 import { renderLoginPage } from './pages/LoginPage.js';
@@ -54,6 +56,12 @@ function handleRouting() {
 
   // Remise en haut de page fluide
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Ré-attachement des effets interactifs (Ripples & 3D Tilt)
+  requestAnimationFrame(() => {
+    initInteractiveRipples(appRoot);
+    init3DTiltCards(appRoot);
+  });
 }
 
 /**
@@ -63,9 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialisation des modales globales
   initModals();
 
-  // 2. Écoute des changements de hash
+  // 2. Initialisation de l'assistant virtuel interactif flottant (Djassa-Bot)
+  initAssistantBot();
+
+  // 3. Écoute des changements de hash
   window.addEventListener('hashchange', handleRouting);
 
-  // 3. Rendu initial
+  // 4. Rendu initial
   handleRouting();
 });

@@ -1,0 +1,631 @@
+/**
+ * @file animations.css
+ * @description Animations CSS avancées, micro-interactions, effets glassmorphism et composants interactifs.
+ */
+
+/* ==========================================================================
+   KEYFRAMES D'ANIMATION
+   ========================================================================== */
+
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.15); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, -30px) scale(0.9); }
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulseRadar {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes busRouteMove {
+  0% { left: 0%; transform: translateY(-50%) scaleX(1); }
+  48% { left: calc(100% - 36px); transform: translateY(-50%) scaleX(1); }
+  50% { left: calc(100% - 36px); transform: translateY(-50%) scaleX(-1); }
+  98% { left: 0%; transform: translateY(-50%) scaleX(-1); }
+  100% { left: 0%; transform: translateY(-50%) scaleX(1); }
+}
+
+@keyframes rippleWave {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes bounceSeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+@keyframes shimmerGlow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   ARRIÈRE-PLAN AMBIANT AVEC ORBES FLOTTANTS
+   ========================================================================== */
+
+.ambient-background-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.28;
+}
+
+.ambient-orb-1 {
+  top: 5%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #2563eb 0%, #1e3a8a 70%, transparent 100%);
+  animation: floatOrb1 18s ease-in-out infinite;
+}
+
+.ambient-orb-2 {
+  bottom: 10%;
+  right: 15%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #dc2626 0%, #7f1d1d 70%, transparent 100%);
+  animation: floatOrb2 22s ease-in-out infinite;
+}
+
+.ambient-orb-3 {
+  top: 45%;
+  right: 35%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, #f59e0b 0%, #b45309 70%, transparent 100%);
+  opacity: 0.12;
+  animation: floatOrb1 26s ease-in-out infinite reverse;
+}
+
+/* ==========================================================================
+   EFFET RIPPLE SUR LES BOUTONS
+   ========================================================================== */
+
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: rippleWave 600ms linear;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   BANDEAU DÉFILANT EN DIRECT (LIVE TICKER)
+   ========================================================================== */
+
+.live-ticker-bar {
+  background: linear-gradient(90deg, rgba(15, 28, 63, 0.95) 0%, rgba(27, 7, 10, 0.95) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-4);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.live-ticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-right: var(--spacing-3);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.radar-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulseRadar 1.5s infinite;
+}
+
+.live-ticker-viewport {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.live-ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marqueeScroll 35s linear infinite;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.live-ticker-viewport:hover .live-ticker-content {
+  animation-play-state: paused;
+}
+
+.live-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--spacing-8);
+}
+
+.live-ticker-item strong {
+  color: #93c5fd;
+  margin-right: 4px;
+}
+
+.live-ticker-clock {
+  font-size: var(--font-size-xs);
+  color: #fbbf24;
+  font-weight: 700;
+  padding-left: var(--spacing-3);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   SIMULATEUR DE TRAJET INTERACTIF ANIMÉ
+   ========================================================================== */
+
+.route-visualizer-card {
+  background: linear-gradient(135deg, #0f1c3f 0%, #0a1329 100%);
+  border: 1px solid #1e3570;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  margin: var(--spacing-4) 0 var(--spacing-6) 0;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.route-visualizer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-6);
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.route-track-container {
+  position: relative;
+  margin: var(--spacing-8) var(--spacing-4) var(--spacing-4) var(--spacing-4);
+  padding-bottom: var(--spacing-6);
+}
+
+.route-track-line {
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6 0%, #10b981 50%, #fbbf24 100%);
+  border-radius: var(--radius-full);
+  position: relative;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+.route-bus-sprite {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+  animation: busRouteMove 14s ease-in-out infinite;
+  z-index: 10;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.route-pin {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.route-pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid #2563eb;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.8);
+}
+
+.route-pin-start { left: 0%; }
+.route-pin-mid { left: 50%; }
+.route-pin-end { left: 100%; }
+
+.route-pin-label {
+  position: absolute;
+  top: 20px;
+  white-space: nowrap;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: rgba(15, 23, 42, 0.85);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.route-weather-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: #fbbf24;
+}
+
+/* ==========================================================================
+   MODAL PLAN DE L'AUTOCAR & SÉLECTION DE SIÈGE INTERACTIF
+   ========================================================================== */
+
+.coach-modal-container {
+  max-width: 680px;
+  width: 100%;
+}
+
+.coach-blueprint {
+  background-color: #080e1d;
+  border: 2px solid #1e3570;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  margin: var(--spacing-4) 0;
+  position: relative;
+}
+
+.coach-windshield {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.25) 0%, rgba(15, 28, 63, 0.4) 100%);
+  border: 1px dashed rgba(96, 165, 250, 0.4);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--spacing-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+  color: #93c5fd;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.coach-seats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.coach-aisle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  writing-mode: vertical-lr;
+}
+
+.coach-seat-btn {
+  height: 42px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(30, 41, 59, 0.7);
+  color: #cbd5e1;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  outline: none;
+}
+
+.coach-seat-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.06);
+  border-color: #60a5fa;
+  background-color: rgba(37, 99, 235, 0.4);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+.coach-seat-btn.selected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #34d399;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.6);
+  animation: bounceSeat 300ms ease;
+}
+
+.coach-seat-btn.occupied {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #64748b;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.coach-seat-btn.vip {
+  border-color: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.3);
+}
+
+.coach-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.coach-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   WIDGET ASSISTANT CHATBOT FLOTTANT (DJASSA-BOT)
+   ========================================================================== */
+
+.assistant-widget-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.assistant-trigger-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.assistant-trigger-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
+}
+
+.assistant-badge-alert {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0f1c3f;
+  animation: pulseRadar 2s infinite;
+}
+
+.assistant-chat-window {
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  height: 460px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: all var(--transition-smooth);
+}
+
+.assistant-chat-window.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.assistant-chat-header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+  padding: var(--spacing-3) var(--spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.assistant-chat-messages {
+  flex: 1;
+  padding: var(--spacing-4);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  animation: slideUpFade 200ms ease;
+}
+
+.chat-bubble.bot {
+  align-self: flex-start;
+  background-color: #1e293b;
+  color: var(--color-text-primary);
+  border-bottom-left-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background-color: var(--color-btn-blue-bg);
+  color: #ffffff;
+  border-bottom-right-radius: 2px;
+}
+
+.assistant-quick-prompts {
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: rgba(10, 19, 44, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: var(--spacing-1);
+  overflow-x: auto;
+}
+
+.quick-chip-btn {
+  background: rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.quick-chip-btn:hover {
+  background: var(--color-btn-blue-bg);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   CANVAS DE CONFETTIS
+   ========================================================================== */
+
+.confetti-canvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ==========================================================================
+   BOUTON DE CONTRÔLE AUDIO DANS LE HEADER
+   ========================================================================== */
+
+.sound-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-full);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+.sound-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: #60a5fa;
+  transform: scale(1.08);
+}

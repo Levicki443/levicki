@@ -4,6 +4,7 @@
  */
 
 import { openModal } from './Modals.js';
+import { SoundEngine } from '../services/interactiveEffects.js';
 
 /**
  * Crée et retourne l'élément Header de navigation principale.
@@ -14,6 +15,7 @@ export function createHeader() {
   header.className = 'site-header';
 
   const user = JSON.parse(sessionStorage.getItem('current_user') || 'null');
+  const isSoundOn = SoundEngine.isEnabled();
 
   header.innerHTML = `
     <a href="#/" class="brand-logo" aria-label="Accueil - Gare Routière">
@@ -43,12 +45,16 @@ export function createHeader() {
       <button type="button" class="btn-nav-link" id="nav-btn-contact">
         Nous contacter
       </button>
+      <button type="button" class="sound-toggle-btn" id="btn-toggle-sound" title="Activer / Couper les effets sonores">
+        ${isSoundOn ? '🔊' : '🔇'}
+      </button>
     </nav>
   `;
 
   // Gestion des clics pour l'ouverture des modales immersives
   const aboutBtn = header.querySelector('#nav-btn-about');
   const contactBtn = header.querySelector('#nav-btn-contact');
+  const soundBtn = header.querySelector('#btn-toggle-sound');
 
   if (aboutBtn) {
     aboutBtn.addEventListener('click', () => {
@@ -59,6 +65,13 @@ export function createHeader() {
   if (contactBtn) {
     contactBtn.addEventListener('click', () => {
       openModal('contact-modal');
+    });
+  }
+
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      const active = SoundEngine.toggleSound();
+      soundBtn.textContent = active ? '🔊' : '🔇';
     });
   }
 

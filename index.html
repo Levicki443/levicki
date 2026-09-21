@@ -12,6 +12,11 @@
     content="Plateforme moderne et immersive de réservation de tickets de transport interurbain en Côte d'Ivoire. Consultez les départs et réservez facilement depuis chez vous." />
   <meta name="theme-color" content="#1b070a" />
 
+  <!-- Polices modernes Google Fonts (Outfit & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Feuilles de styles du Design System -->
   <link rel="stylesheet" href="./src/styles/theme.css" />
   <link rel="stylesheet" href="./src/styles/base.css" />
@@ -19,6 +24,13 @@
 </head>
 
 <body>
+  <!-- Orbes luminescents ambiants d'arrière-plan -->
+  <div class="ambient-background-glow" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+
   <div id="app" class="app-container">
     <!-- Le contenu de l'application sera injecté dynamiquement par le routeur frontend -->
   </div>

@@ -1,9 +1,10 @@
 /**
  * @file ConfirmationPage.js
- * @description Page de confirmation et ticket numérique (Section 11 du cahier des charges).
+ * @description Page de confirmation et ticket numérique avec feux d'artifice/confettis interactifs.
  */
 
 import { createBackButton } from '../components/BackButton.js';
+import { triggerConfetti, initInteractiveRipples, init3DTiltCards } from '../services/interactiveEffects.js';
 
 /**
  * Construit et retourne l'élément DOM de la page de confirmation de réservation.
@@ -46,16 +47,16 @@ export function renderConfirmationPage() {
   ticketWrapper.innerHTML = `
     <div class="ticket-header-band">
       <h2 style="color: #ffffff; font-size: var(--font-size-xl); margin-bottom: var(--spacing-1);">
-        ✓ Réservation & Paiement Confirmés
+        🎉 Réservation & Paiement Confirmés !
       </h2>
-      <span style="color: rgba(255, 255, 255, 0.9); font-size: var(--font-size-sm); font-weight: 600;">
-        Réf Ticket : ${ticket.bookingRef}
+      <span style="color: rgba(255, 255, 255, 0.95); font-size: var(--font-size-sm); font-weight: 700;">
+        Réf Billet Officiel : ${ticket.bookingRef}
       </span>
     </div>
 
     <div class="ticket-body">
-      <!-- QR Code de contrôle -->
-      <div class="ticket-qr-mock">
+      <!-- QR Code de contrôle avec effet de scan -->
+      <div class="ticket-qr-mock" style="position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
         <svg viewBox="0 0 24 24" width="90" height="90" fill="#0f172a">
           <path d="M2 2h8v8H2zM4 4v4h4V4zm10-2h8v8h-8zM16 4v4h4V4zM2 14h8v8H2zm2 2v4h4v-4zm10 0h2v2h-2zm4 0h4v6h-4zm-4 4h2v2h-2zm2-2h2v2h-2zm-6-2h2v2h-2zm0 4h2v2h-2z"/>
         </svg>
@@ -97,6 +98,10 @@ export function renderConfirmationPage() {
           <strong style="color: #ffffff;">${ticket.passengerPhone}</strong>
         </div>
         <div>
+          <span style="color: var(--color-text-muted); display: block;">Siège Réservé :</span>
+          <strong style="color: #fbbf24; font-size: var(--font-size-base);">💺 N° ${ticket.seatNumber || '14'} (${ticket.seatType || 'Fenêtre'})</strong>
+        </div>
+        <div>
           <span style="color: var(--color-text-muted); display: block;">Compagnie :</span>
           <strong style="color: #ffffff;">${ticket.company}</strong>
         </div>
@@ -120,7 +125,7 @@ export function renderConfirmationPage() {
 
       <div style="display: flex; gap: var(--spacing-3); margin-top: var(--spacing-4); flex-wrap: wrap;">
         <button type="button" class="btn-card-white" id="btn-print-ticket" style="flex: 1; min-width: 160px;">
-          <span>Imprimer mon billet</span>
+          <span>🖨️ Imprimer mon billet</span>
         </button>
         <a href="#/history" class="btn-card-white" style="flex: 1; min-width: 160px; text-align: center;">
           <span>🎟️ Mes Billets</span>
@@ -141,5 +146,13 @@ export function renderConfirmationPage() {
   }
 
   container.appendChild(ticketWrapper);
+
+  // Déclenchement automatique des confettis de célébration
+  requestAnimationFrame(() => {
+    triggerConfetti();
+    initInteractiveRipples(container);
+    init3DTiltCards(container);
+  });
+
   return container;
 }
