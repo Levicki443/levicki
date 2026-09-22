@@ -4,6 +4,7 @@
  */
 
 import { createBackButton } from '../components/BackButton.js';
+import { createUserTopBar } from '../components/UserTopBar.js';
 import { CITIES } from '../data/tripsData.js';
 
 /**
@@ -57,13 +58,13 @@ export function renderProfilePage() {
   const container = document.createElement('div');
   container.className = 'main-content profile-container';
 
-  // 1. Récupération ou initialisation des données du passager connecté
+  // 1. Récupération ou initialisation robuste des données du passager connecté
   const rawUser = sessionStorage.getItem('current_user');
-  const user = rawUser ? JSON.parse(rawUser) : {
-    fullname: 'Kouassi Jean-Philippe',
-    username: 'kouassi_jp',
+  let user = {
+    fullname: 'Voyageur Express',
+    username: 'voyageur_express',
     phone: '+225 07 12 34 56 78',
-    email: 'jean.kouassi@transport.ci',
+    email: 'voyageur@transport.ci',
     city: 'Abidjan',
     emergencyContactName: 'Kouassi Marie (Épouse)',
     emergencyContactPhone: '+225 05 98 76 54 32',
@@ -74,9 +75,27 @@ export function renderProfilePage() {
     memberSince: 'Janvier 2026'
   };
 
-  // Si des champs manquent dans la session, on les complète
-  user.username = user.username || user.fullname.toLowerCase().replace(/[\s-]/g, '_');
+  if (rawUser) {
+    try {
+      const parsed = JSON.parse(rawUser);
+      if (parsed && typeof parsed === 'object') {
+        user = { ...user, ...parsed };
+      }
+    } catch {
+      // Ignorer l'erreur JSON
+    }
+  }
+
+  // Sécurisation stricte de toutes les propriétés
+  user.fullname = (user.fullname && typeof user.fullname === 'string' && user.fullname.trim().length > 0)
+    ? user.fullname.trim()
+    : 'Voyageur Express';
+  user.username = (user.username && typeof user.username === 'string' && user.username.trim().length > 0)
+    ? user.username.trim()
+    : user.fullname.toLowerCase().replace(/[\s-]/g, '_');
   user.city = user.city || 'Abidjan';
+  user.phone = user.phone || '';
+  user.email = user.email || '';
   user.emergencyContactName = user.emergencyContactName || '';
   user.emergencyContactPhone = user.emergencyContactPhone || '';
   user.preferredPayment = user.preferredPayment || 'wave';
@@ -86,11 +105,25 @@ export function renderProfilePage() {
   user.memberSince = user.memberSince || '2026';
 
   // Récupération de l'historique des billets pour les statistiques
-  const history = JSON.parse(localStorage.getItem('user_tickets_history') || '[]');
+  let history = [];
+  try {
+    const rawHistory = localStorage.getItem('user_tickets_history');
+    if (rawHistory) {
+      const parsedHistory = JSON.parse(rawHistory);
+      if (Array.isArray(parsedHistory)) history = parsedHistory;
+    }
+  } catch {
+    history = [];
+  }
+
   const totalTrips = history.length;
   const totalSpent = history.reduce((sum, t) => sum + (t.priceCfa || 0), 0);
   const loyaltyPoints = totalTrips * 150 + 500;
   const loyaltyStatus = totalTrips >= 5 ? 'Membre Gold ⭐' : totalTrips >= 2 ? 'Membre Silver ✨' : 'Passager Certifié ✓';
+
+  // 1. Barre supérieure utilisateur unifiée
+  const topbar = createUserTopBar({ activeRoute: '/profile' });
+  container.appendChild(topbar);
 
   // 2. Bouton Retour 3D
   const backWrapper = createBackButton({
@@ -107,7 +140,7 @@ export function renderProfilePage() {
   heroCard.innerHTML = `
     <div class="profile-user-details">
       <div class="profile-avatar-large" id="profile-avatar-display">
-        ${user.fullname.charAt(0).toUpperCase()}
+        ${user.fullname.charAt(0).toUpperCase() || 'V'}
       </div>
       <div class="profile-name-group">
         <h1 id="profile-hero-name">

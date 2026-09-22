@@ -4,6 +4,7 @@
  */
 
 import { createBackButton } from '../components/BackButton.js';
+import { createUserTopBar } from '../components/UserTopBar.js';
 
 /**
  * Construit et retourne l'élément DOM de la page d'historique.
@@ -13,28 +14,21 @@ export function renderHistoryPage() {
   const container = document.createElement('div');
   container.className = 'main-content';
 
-  const user = JSON.parse(sessionStorage.getItem('current_user') || '{"fullname": "Voyageur", "phone": "" }');
+  let history = [];
+  try {
+    const rawHistory = localStorage.getItem('user_tickets_history');
+    if (rawHistory) {
+      const parsed = JSON.parse(rawHistory);
+      if (Array.isArray(parsed)) {
+        history = parsed;
+      }
+    }
+  } catch {
+    history = [];
+  }
 
-  // 1. Barre supérieure avec accès au profil
-  const topbar = document.createElement('div');
-  topbar.className = 'booking-topbar';
-  topbar.innerHTML = `
-    <div class="user-badge-info">
-      <div class="user-avatar">${user.fullname.charAt(0).toUpperCase()}</div>
-      <div>
-        <div style="font-weight: 700; color: var(--color-text-primary); font-size: var(--font-size-base);">${user.fullname}</div>
-        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Espace Mes Billets & Voyages</div>
-      </div>
-    </div>
-    <div style="display: flex; gap: var(--spacing-2); align-items: center; flex-wrap: wrap;">
-      <a href="#/profile" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3);">
-        👤 Mon Profil
-      </a>
-      <a href="#/app" class="btn-primary-blue" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
-        🚌 Nouveau Trajet
-      </a>
-    </div>
-  `;
+  // 1. Barre supérieure utilisateur unifiée
+  const topbar = createUserTopBar({ activeRoute: '/history' });
   container.appendChild(topbar);
 
   // 2. Bouton Retour 3D

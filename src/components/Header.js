@@ -31,7 +31,7 @@ export function createHeader() {
       </a>
       ${user ? `
         <a href="#/profile" class="btn-nav-link" style="color: #93c5fd; border-color: rgba(147, 197, 253, 0.3);">
-          👤 ${user.fullname.split(' ')[0]}
+          👤 ${(user.fullname || 'Voyageur').split(' ')[0]}
         </a>
         <a href="#/app" class="btn-nav-link">
           🚌 Trajets

@@ -4,6 +4,7 @@
  */
 
 import { createBackButton } from '../components/BackButton.js';
+import { createUserTopBar } from '../components/UserTopBar.js';
 import { CITIES } from '../data/tripsData.js';
 import { PACKAGE_CATEGORIES, calculateShippingFee, generateTrackingNumber, generateSecretPin } from '../data/courierData.js';
 import { SoundEngine, triggerConfetti, initInteractiveRipples } from '../services/interactiveEffects.js';
@@ -12,7 +13,13 @@ export function renderCourierPage() {
   const container = document.createElement('div');
   container.className = 'main-content courier-container';
 
-  const user = JSON.parse(sessionStorage.getItem('current_user') || '{"fullname": "Expéditeur Express", "phone": "+225 07 12 34 56 78" }');
+  let user = { fullname: 'Expéditeur Express', phone: '+225 07 12 34 56 78' };
+  try {
+    const raw = sessionStorage.getItem('current_user');
+    if (raw) user = { ...user, ...JSON.parse(raw) };
+  } catch {
+    // fallback
+  }
 
   // État local de la page
   let activeTab = 'send'; // 'send' | 'track' | 'history' | 'receipt'
@@ -23,7 +30,11 @@ export function renderCourierPage() {
   let selectedOperator = 'wave';
   let activeReceipt = null;
 
-  // 1. Bouton Retour 3D
+  // 1. Barre supérieure utilisateur unifiée
+  const topbar = createUserTopBar({ activeRoute: '/courier' });
+  container.appendChild(topbar);
+
+  // 2. Bouton Retour 3D
   const backWrapper = createBackButton({
     label: 'Retour aux départs voyageurs',
     onClick: () => { window.location.hash = '#/app'; }

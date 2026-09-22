@@ -59,10 +59,30 @@ function handleRouting() {
     document.body.classList.remove('page-courier');
   }
 
-  // Nettoyage et rendu du composant
-  appRoot.innerHTML = '';
-  const viewElement = renderFunction();
-  appRoot.appendChild(viewElement);
+  // Nettoyage et rendu sécurisé du composant
+  try {
+    appRoot.innerHTML = '';
+    const viewElement = renderFunction();
+    if (viewElement) {
+      appRoot.appendChild(viewElement);
+    }
+  } catch (err) {
+    console.error('Erreur de rendu sur la route:', cleanPath, err);
+    appRoot.innerHTML = `
+      <div class="main-content" style="text-align: center; padding: var(--spacing-8) var(--spacing-4);">
+        <div class="card-blue" style="max-width: 500px; margin: 0 auto; text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: var(--spacing-3);">⚠️</div>
+          <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2);">Page momentanément indisponible</h2>
+          <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">
+            Une erreur inattendue est survenue lors de l'accès à cette section.
+          </p>
+          <a href="#/app" class="btn-card-white">
+            <span>Retour à l'espace réservation</span>
+          </a>
+        </div>
+      </div>
+    `;
+  }
 
   // Remise en haut de page fluide
   window.scrollTo({ top: 0, behavior: 'smooth' });

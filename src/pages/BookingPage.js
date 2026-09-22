@@ -5,6 +5,7 @@
 
 import { createBackButton } from '../components/BackButton.js';
 import { createLiveTicker } from '../components/LiveTicker.js';
+import { createUserTopBar } from '../components/UserTopBar.js';
 import { openSeatSelectorModal } from '../components/SeatSelectorModal.js';
 import { ApiService } from '../services/apiService.js';
 import { CITIES, findTrip } from '../data/tripsData.js';
@@ -18,7 +19,13 @@ export function renderBookingPage() {
   const container = document.createElement('div');
   container.className = 'main-content';
 
-  const user = JSON.parse(sessionStorage.getItem('current_user') || '{"fullname": "Voyageur", "phone": "" }');
+  let user = { fullname: 'Voyageur Express', phone: '' };
+  try {
+    const raw = sessionStorage.getItem('current_user');
+    if (raw) user = { ...user, ...JSON.parse(raw) };
+  } catch {
+    // fallback
+  }
 
   // État local initial avec vérification des valeurs de recherche rapide
   let currentCities = [...CITIES];
@@ -33,32 +40,8 @@ export function renderBookingPage() {
   const liveTicker = createLiveTicker();
   container.appendChild(liveTicker);
 
-  // 2. Barre supérieure utilisateur avec accès rapide au profil
-  const topbar = document.createElement('div');
-  topbar.className = 'booking-topbar';
-  topbar.innerHTML = `
-    <a href="#/profile" class="user-badge-info" style="text-decoration: none; cursor: pointer;">
-      <div class="user-avatar">${user.fullname.charAt(0).toUpperCase()}</div>
-      <div>
-        <div style="font-weight: 700; color: var(--color-text-primary); font-size: var(--font-size-base);">${user.fullname}</div>
-        <div style="font-size: var(--font-size-xs); color: #93c5fd;">👤 Gérer mon profil & mot de passe ➔</div>
-      </div>
-    </a>
-    <div style="display: flex; gap: var(--spacing-2); align-items: center; flex-wrap: wrap;">
-      <a href="#/courier" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3); color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">
-        📦 Envoyer un Colis
-      </a>
-      <a href="#/profile" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3);">
-        👤 Mon Profil
-      </a>
-      <a href="#/history" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3);">
-        🎟️ Mes Billets
-      </a>
-      <a href="#/" class="btn-primary-blue" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
-        Déconnexion
-      </a>
-    </div>
-  `;
+  // 2. Barre supérieure utilisateur unifiée
+  const topbar = createUserTopBar({ activeRoute: '/app' });
   container.appendChild(topbar);
 
   // 3. Bouton Retour 3D
