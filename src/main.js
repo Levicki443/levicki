@@ -42,13 +42,25 @@ const routes = {
 };
 
 /**
+ * Routes nécessitant d'être connecté.
+ */
+const protectedRoutes = ['/profile', '/history'];
+
+/**
  * Gestionnaire du routage SPA basé sur le hash d'URL.
  */
-function handleRouting() {
+export function handleRouting() {
   if (!appRoot) return;
 
   const rawHash = window.location.hash.slice(1) || '/';
   const cleanPath = rawHash.startsWith('/') ? rawHash : `/${rawHash}`;
+
+  // Vérification d'accès aux routes protégées
+  const currentUser = sessionStorage.getItem('current_user');
+  if (protectedRoutes.includes(cleanPath) && !currentUser) {
+    window.location.hash = '#/login';
+    return;
+  }
 
   const renderFunction = routes[cleanPath] || routes['/'];
 
@@ -95,6 +107,33 @@ function handleRouting() {
     }
   });
 }
+
+/**
+ * Fonction de navigation globale programmatique.
+ * @param {string} path - Chemin de destination (ex: '/app', '/profile').
+ */
+export function navigateTo(path) {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const targetHash = `#${cleanPath}`;
+  if (window.location.hash !== targetHash) {
+    window.location.hash = targetHash;
+  }
+  handleRouting();
+}
+
+/**
+ * Déconnexion globale de l'utilisateur avec purge de session et retour à l'accueil.
+ */
+export function performLogout() {
+  sessionStorage.removeItem('current_user');
+  sessionStorage.removeItem('pending_ticket');
+  sessionStorage.removeItem('current_ticket');
+  navigateTo('/');
+}
+
+// Exposition sur l'objet window pour garantir un accès universel
+window.navigateTo = navigateTo;
+window.performLogout = performLogout;
 
 /**
  * Initialisation au chargement du DOM.

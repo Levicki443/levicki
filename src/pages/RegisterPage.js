@@ -171,7 +171,11 @@ export function renderRegisterPage() {
       sessionStorage.setItem('current_user', JSON.stringify(userData));
 
       // Redirection immédiate vers l'espace de réservation
-      window.location.hash = '#/app';
+      if (window.navigateTo) {
+        window.navigateTo('/app');
+      } else {
+        window.location.hash = '#/app';
+      }
     }
   });
 

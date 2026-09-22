@@ -117,7 +117,11 @@ export function renderLoginPage() {
       sessionStorage.setItem('current_user', JSON.stringify(currentUser));
 
       // Redirection vers l'espace de réservation
-      window.location.hash = '#/app';
+      if (window.navigateTo) {
+        window.navigateTo('/app');
+      } else {
+        window.location.hash = '#/app';
+      }
     }
   });
 

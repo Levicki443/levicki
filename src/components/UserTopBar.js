@@ -87,21 +87,21 @@ export function createUserTopBar(options = {}) {
   `;
 
   // Fonction utilitaire de navigation directe
-  function safeNavigate(targetHash) {
+  function safeNavigate(path) {
     SoundEngine.play('click');
-    if (window.location.hash === targetHash) {
-      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    if (window.navigateTo) {
+      window.navigateTo(path);
     } else {
-      window.location.hash = targetHash;
+      window.location.hash = `#${path.startsWith('/') ? path : '/' + path}`;
     }
   }
 
-  // Écouteurs de clics directs et explicites sur chaque lien de la barre supérieure
+  // Écouteurs de clics directs sur chaque lien de la barre supérieure
   const userBadge = topbar.querySelector('#topbar-user-badge');
   if (userBadge) {
     userBadge.addEventListener('click', (e) => {
       e.preventDefault();
-      safeNavigate('#/profile');
+      safeNavigate('/profile');
     });
   }
 
@@ -109,7 +109,7 @@ export function createUserTopBar(options = {}) {
   if (courierLink) {
     courierLink.addEventListener('click', (e) => {
       e.preventDefault();
-      safeNavigate('#/courier');
+      safeNavigate('/courier');
     });
   }
 
@@ -117,7 +117,7 @@ export function createUserTopBar(options = {}) {
   if (appLink) {
     appLink.addEventListener('click', (e) => {
       e.preventDefault();
-      safeNavigate('#/app');
+      safeNavigate('/app');
     });
   }
 
@@ -125,7 +125,7 @@ export function createUserTopBar(options = {}) {
   if (profileLink) {
     profileLink.addEventListener('click', (e) => {
       e.preventDefault();
-      safeNavigate('#/profile');
+      safeNavigate('/profile');
     });
   }
 
@@ -133,34 +133,25 @@ export function createUserTopBar(options = {}) {
   if (historyLink) {
     historyLink.addEventListener('click', (e) => {
       e.preventDefault();
-      safeNavigate('#/history');
+      safeNavigate('/history');
     });
   }
 
-  // Gestionnaire de déconnexion sécurisé et garanti
+  // Gestionnaire de déconnexion universel et garanti
   const logoutBtn = topbar.querySelector('#btn-global-logout');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       SoundEngine.play('click');
-      
-      // Nettoyage complet de la session
-      sessionStorage.removeItem('current_user');
-      sessionStorage.removeItem('pending_ticket');
-      sessionStorage.removeItem('current_ticket');
-      
-      // Redirection immédiate vers l'accueil
-      if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
-        window.location.reload();
+      if (window.performLogout) {
+        window.performLogout();
       } else {
+        sessionStorage.removeItem('current_user');
+        sessionStorage.removeItem('pending_ticket');
+        sessionStorage.removeItem('current_ticket');
         window.location.hash = '#/';
-        setTimeout(() => {
-          if (window.location.hash !== '#/') {
-            window.location.hash = '#/';
-          }
-          window.dispatchEvent(new HashChangeEvent('hashchange'));
-        }, 50);
+        window.location.reload();
       }
     });
   }
