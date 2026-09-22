@@ -1,0 +1,290 @@
+/**
+ * @file courier.css
+ * @description Styles du service courrier, fret de colis et expédition de marchandises en gare routière.
+ * Respecte la charte : Fond rouge sombre (#1b070a), cartes bleu profond (#0f1c3f).
+ */
+
+/* ==========================================================================
+   CONTENEUR & EN-TÊTE DU SERVICE COURRIER
+   ========================================================================== */
+
+.courier-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-bottom: var(--spacing-12);
+  animation: fadeIn 300ms ease;
+}
+
+.courier-hero-banner {
+  background: linear-gradient(135deg, #10214a 0%, #0d1733 100%);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.courier-hero-banner::after {
+  content: '📦';
+  position: absolute;
+  right: 20px;
+  bottom: -15px;
+  font-size: 7rem;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ONGLETS DE NAVIGATION DU SERVICE COURRIER
+   ========================================================================== */
+
+.courier-tabs-nav {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.courier-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary);
+  padding: var(--spacing-3) var(--spacing-5);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  transition: all var(--transition-fast);
+}
+
+.courier-tab-btn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.courier-tab-btn.active {
+  background-color: var(--color-btn-blue-bg);
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 14px var(--color-btn-blue-shadow);
+}
+
+/* ==========================================================================
+   SÉLECTEUR DE CATÉGORIE DE COLIS (CARTES CLIQUABLES)
+   ========================================================================== */
+
+.package-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-3);
+  margin: var(--spacing-3) 0 var(--spacing-4) 0;
+}
+
+.package-type-card {
+  background-color: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.package-type-card:hover {
+  border-color: #60a5fa;
+  transform: translateY(-2px);
+  background-color: rgba(37, 99, 235, 0.15);
+}
+
+.package-type-card.selected {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.35) 0%, rgba(30, 58, 138, 0.45) 100%);
+  border-color: #60a5fa;
+  box-shadow: 0 0 14px rgba(96, 165, 250, 0.4);
+}
+
+.package-type-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-1);
+}
+
+.package-type-name {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.package-type-price {
+  font-size: 11px;
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   CURSEUR DE POIDS INTERACTIF
+   ========================================================================== */
+
+.weight-slider-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  margin: var(--spacing-3) 0;
+}
+
+.weight-display-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2);
+}
+
+.weight-range-input {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #1e293b;
+  outline: none;
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+/* ==========================================================================
+   MODULE DE SUIVI DE COLIS & TIMELINE EN DIRECT
+   ========================================================================== */
+
+.tracking-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: var(--spacing-6) 0;
+  position: relative;
+  padding-left: var(--spacing-6);
+}
+
+.tracking-timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 17px;
+  width: 3px;
+  background: linear-gradient(180deg, #10b981 0%, #3b82f6 60%, rgba(255, 255, 255, 0.2) 100%);
+}
+
+.tracking-step {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+}
+
+.tracking-step-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #1e293b;
+  border: 2px solid #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #cbd5e1;
+  position: absolute;
+  left: -29px;
+  top: 0;
+  background-color: var(--color-card-bg);
+  z-index: 2;
+}
+
+.tracking-step.done .tracking-step-dot {
+  background-color: #10b981;
+  border-color: #34d399;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+}
+
+.tracking-step.current .tracking-step-dot {
+  background-color: #2563eb;
+  border-color: #60a5fa;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.8);
+  animation: pulseRadar 1.5s infinite;
+}
+
+.tracking-step-content {
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  flex: 1;
+}
+
+.tracking-step-title {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tracking-step-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+.tracking-step-time {
+  font-size: 11px;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   BORDEREAU OFFICIEL D'EXPÉDITION (REÇU COLIS)
+   ========================================================================== */
+
+.courier-receipt-card {
+  max-width: 680px;
+  margin: var(--spacing-6) auto;
+  border: 2px dashed #3b82f6;
+  background-color: #0b1429;
+}
+
+.courier-receipt-header {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  padding: var(--spacing-4);
+  text-align: center;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.pin-security-box {
+  background: rgba(245, 158, 11, 0.15);
+  border: 2px dashed #f59e0b;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: center;
+  margin: var(--spacing-3) 0;
+}
+
+.pin-code-large {
+  font-size: var(--font-size-3xl);
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}

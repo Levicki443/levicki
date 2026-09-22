@@ -17,6 +17,7 @@ import { PaymentPage } from './pages/PaymentPage.jsx';
 import { ConfirmationPage } from './pages/ConfirmationPage.jsx';
 import { HistoryPage } from './pages/HistoryPage.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
+import { CourierPage } from './pages/CourierPage.jsx';
 import { AdminDashboardPage } from './pages/AdminDashboardPage.jsx';
 import { AdminDeparturesPage } from './pages/AdminDeparturesPage.jsx';
 
@@ -57,6 +58,8 @@ function AppContent() {
         return <HistoryPage />;
       case '/profile':
         return <ProfilePage />;
+      case '/courier':
+        return <CourierPage />;
       case '/admin':
         return <AdminDashboardPage />;
       case '/admin/departures':

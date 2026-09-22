@@ -31,6 +31,9 @@ export function createHeader() {
     </a>
 
     <nav class="nav-actions" aria-label="Navigation secondaire">
+      <a href="#/courier" class="btn-nav-link" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.35);">
+        📦 Fret & Colis
+      </a>
       ${user ? `
         <a href="#/profile" class="btn-nav-link" style="color: #93c5fd; border-color: rgba(147, 197, 253, 0.3);">
           👤 ${user.fullname.split(' ')[0]}

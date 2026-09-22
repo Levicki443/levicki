@@ -8,6 +8,7 @@ import { SoundEngine } from '../services/interactiveEffects.js';
 const KNOWLEDGE_BASE = {
   horaires: "🚌 Les départs ont lieu tous les jours : 1er départ (06h30 - Matinal), 2e départ (12h00 - Midi) et 3e départ (17h30 - Soir). Présentez-vous 30 min avant l'embarquement !",
   paiement: "💳 Vous pouvez régler votre billet en 1 clic par Wave, Orange Money, MTN MoMo ou Moov Flooz sans aucun frais supplémentaire.",
+  colis: "📦 Vous pouvez expédier vos courriers, vivres et marchandises via l'onglet « Fret & Colis » (#/courier). Un code PIN secret est transmis par SMS au destinataire pour le retrait sécurisé !",
   bagages: "🧳 Chaque passager a droit à 1 valise en soute (jusqu'à 25 kg) + 1 bagage à main gratuit. Les colis volumineux font l'objet d'un supplément au guichet.",
   gares: "📍 À Abidjan, les principales gares sont : Gare Internationale d'Adjamé (Bd Nangui Abrogoua), Gare UTB Yopougon Siporex, et Gare de Treichville.",
   ticket: "🎟️ Une fois votre paiement validé, votre billet électronique officiel est généré instantanément avec un QR Code. Vous pouvez le présenter sur votre smartphone ou l'imprimer !"
@@ -41,11 +42,11 @@ export function initAssistantBot() {
       </div>
 
       <div class="assistant-quick-prompts">
+        <button type="button" class="quick-chip-btn" data-topic="colis">📦 Fret & Colis</button>
         <button type="button" class="quick-chip-btn" data-topic="horaires">🕐 Horaires</button>
-        <button type="button" class="quick-chip-btn" data-topic="paiement">💳 Paiement Wave/OM</button>
+        <button type="button" class="quick-chip-btn" data-topic="paiement">💳 Paiement</button>
         <button type="button" class="quick-chip-btn" data-topic="bagages">🧳 Bagages</button>
-        <button type="button" class="quick-chip-btn" data-topic="gares">📍 Gares</button>
-        <button type="button" class="quick-chip-btn" data-topic="ticket">🎟️ Mon Billet</button>
+        <button type="button" class="quick-chip-btn" data-topic="ticket">🎟️ Billet</button>
       </div>
     </div>
 

@@ -14,6 +14,7 @@ import { renderPaymentPage } from './pages/PaymentPage.js';
 import { renderConfirmationPage } from './pages/ConfirmationPage.js';
 import { renderHistoryPage } from './pages/HistoryPage.js';
 import { renderProfilePage } from './pages/ProfilePage.js';
+import { renderCourierPage } from './pages/CourierPage.js';
 import { renderAdminDashboardPage } from './pages/AdminDashboardPage.js';
 import { renderAdminDeparturesPage } from './pages/AdminDeparturesPage.js';
 
@@ -34,6 +35,7 @@ const routes = {
   '/confirmation': renderConfirmationPage,
   '/history': renderHistoryPage,
   '/profile': renderProfilePage,
+  '/courier': renderCourierPage,
   '/admin': renderAdminDashboardPage,
   '/admin/departures': renderAdminDeparturesPage
 };

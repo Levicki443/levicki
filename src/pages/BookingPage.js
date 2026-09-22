@@ -45,6 +45,9 @@ export function renderBookingPage() {
       </div>
     </a>
     <div style="display: flex; gap: var(--spacing-2); align-items: center; flex-wrap: wrap;">
+      <a href="#/courier" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3); color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">
+        📦 Envoyer un Colis
+      </a>
       <a href="#/profile" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-3);">
         👤 Mon Profil
       </a>
