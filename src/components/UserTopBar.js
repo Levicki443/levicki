@@ -86,20 +86,81 @@ export function createUserTopBar(options = {}) {
     </div>
   `;
 
-  // Gestionnaire de déconnexion sécurisé
+  // Fonction utilitaire de navigation directe
+  function safeNavigate(targetHash) {
+    SoundEngine.play('click');
+    if (window.location.hash === targetHash) {
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    } else {
+      window.location.hash = targetHash;
+    }
+  }
+
+  // Écouteurs de clics directs et explicites sur chaque lien de la barre supérieure
+  const userBadge = topbar.querySelector('#topbar-user-badge');
+  if (userBadge) {
+    userBadge.addEventListener('click', (e) => {
+      e.preventDefault();
+      safeNavigate('#/profile');
+    });
+  }
+
+  const courierLink = topbar.querySelector('#nav-topbar-courier');
+  if (courierLink) {
+    courierLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      safeNavigate('#/courier');
+    });
+  }
+
+  const appLink = topbar.querySelector('#nav-topbar-app');
+  if (appLink) {
+    appLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      safeNavigate('#/app');
+    });
+  }
+
+  const profileLink = topbar.querySelector('#nav-topbar-profile');
+  if (profileLink) {
+    profileLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      safeNavigate('#/profile');
+    });
+  }
+
+  const historyLink = topbar.querySelector('#nav-topbar-history');
+  if (historyLink) {
+    historyLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      safeNavigate('#/history');
+    });
+  }
+
+  // Gestionnaire de déconnexion sécurisé et garanti
   const logoutBtn = topbar.querySelector('#btn-global-logout');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       SoundEngine.play('click');
+      
+      // Nettoyage complet de la session
       sessionStorage.removeItem('current_user');
       sessionStorage.removeItem('pending_ticket');
       sessionStorage.removeItem('current_ticket');
       
-      if (window.location.hash === '#/' || window.location.hash === '') {
+      // Redirection immédiate vers l'accueil
+      if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#') {
         window.location.reload();
       } else {
         window.location.hash = '#/';
+        setTimeout(() => {
+          if (window.location.hash !== '#/') {
+            window.location.hash = '#/';
+          }
+          window.dispatchEvent(new HashChangeEvent('hashchange'));
+        }, 50);
       }
     });
   }

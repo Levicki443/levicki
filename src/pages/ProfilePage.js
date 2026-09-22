@@ -619,12 +619,49 @@ export function renderProfilePage() {
     showToast('Vos préférences de voyage et contact d\'urgence ont été enregistrés !');
   });
 
-  // 6. Déconnexion
+  // 6. Gestion des actions de la carte Hero
+  const heroTicketsBtn = heroCard.querySelector('a[href="#/history"]');
+  if (heroTicketsBtn) {
+    heroTicketsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.location.hash === '#/history') {
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      } else {
+        window.location.hash = '#/history';
+      }
+    });
+  }
+
+  const heroBookingBtn = heroCard.querySelector('a[href="#/app"]');
+  if (heroBookingBtn) {
+    heroBookingBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.location.hash === '#/app') {
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      } else {
+        window.location.hash = '#/app';
+      }
+    });
+  }
+
   const logoutBtn = heroCard.querySelector('#btn-logout-profile');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       sessionStorage.removeItem('current_user');
-      window.location.hash = '#/';
+      sessionStorage.removeItem('pending_ticket');
+      sessionStorage.removeItem('current_ticket');
+      if (window.location.hash === '#/' || window.location.hash === '') {
+        window.location.reload();
+      } else {
+        window.location.hash = '#/';
+        setTimeout(() => {
+          if (window.location.hash !== '#/') {
+            window.location.hash = '#/';
+          }
+          window.dispatchEvent(new HashChangeEvent('hashchange'));
+        }, 50);
+      }
     });
   }
 
