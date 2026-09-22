@@ -4,10 +4,9 @@
  */
 
 import { createBackButton } from '../components/BackButton.js';
-import { createLiveTicker } from '../components/LiveTicker.js';
 import { CITIES } from '../data/tripsData.js';
 import { PACKAGE_CATEGORIES, calculateShippingFee, generateTrackingNumber, generateSecretPin } from '../data/courierData.js';
-import { SoundEngine, triggerConfetti, initInteractiveRipples, init3DTiltCards } from '../services/interactiveEffects.js';
+import { SoundEngine, triggerConfetti, initInteractiveRipples } from '../services/interactiveEffects.js';
 
 export function renderCourierPage() {
   const container = document.createElement('div');
@@ -24,23 +23,19 @@ export function renderCourierPage() {
   let selectedOperator = 'wave';
   let activeReceipt = null;
 
-  // 1. Bandeau en direct
-  const liveTicker = createLiveTicker();
-  container.appendChild(liveTicker);
-
-  // 2. Bouton Retour 3D
+  // 1. Bouton Retour 3D
   const backWrapper = createBackButton({
     label: 'Retour aux départs voyageurs',
     onClick: () => { window.location.hash = '#/app'; }
   });
   container.appendChild(backWrapper);
 
-  // 3. Hero Banner du Service Courrier
+  // 2. Hero Banner du Service Courrier (Statique et fixe)
   const heroBanner = document.createElement('div');
-  heroBanner.className = 'courier-hero-banner';
+  heroBanner.className = 'courier-hero-banner no-tilt';
   heroBanner.innerHTML = `
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--spacing-2);">
-      <span class="radar-dot" style="background-color: #10b981;"></span>
+      <span class="radar-dot" style="background-color: #10b981; animation: none;"></span>
       <span style="font-size: var(--font-size-xs); color: #34d399; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
         Service Fret & Courrier Express en Gare Routière
       </span>
@@ -54,7 +49,7 @@ export function renderCourierPage() {
   `;
   container.appendChild(heroBanner);
 
-  // 4. Onglets de navigation
+  // 3. Onglets de navigation
   const tabsNav = document.createElement('div');
   tabsNav.className = 'courier-tabs-nav';
   tabsNav.innerHTML = `
@@ -70,7 +65,7 @@ export function renderCourierPage() {
   `;
   container.appendChild(tabsNav);
 
-  // 5. Zone dynamique du contenu
+  // 4. Zone dynamique du contenu
   const tabContentContainer = document.createElement('div');
   tabContentContainer.id = 'courier-tab-content';
   container.appendChild(tabContentContainer);
@@ -92,7 +87,6 @@ export function renderCourierPage() {
 
     requestAnimationFrame(() => {
       initInteractiveRipples(tabContentContainer);
-      init3DTiltCards(tabContentContainer);
     });
   }
 
@@ -101,7 +95,7 @@ export function renderCourierPage() {
     const totalFee = calculateShippingFee(selectedCategory, weightKg, { isFragile, isInsured });
 
     tabContentContainer.innerHTML = `
-      <div class="card-blue" style="border: 1px solid rgba(59, 130, 246, 0.4);">
+      <div class="card-blue no-tilt" style="border: 1px solid rgba(59, 130, 246, 0.4);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-4); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: var(--spacing-3); flex-wrap: wrap; gap: var(--spacing-2);">
           <div>
             <h2 style="font-size: var(--font-size-xl); margin-bottom: 2px;">Bordereau d'Expédition de Marchandise</h2>
@@ -382,7 +376,7 @@ export function renderCourierPage() {
   // --- VUE 2 : SUIVI EN DIRECT DU COLIS (TRACKER) ---
   function renderTrackingView() {
     tabContentContainer.innerHTML = `
-      <div class="card-blue" style="max-width: 780px; margin: 0 auto;">
+      <div class="card-blue no-tilt" style="max-width: 780px; margin: 0 auto;">
         <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2);">
           🔍 Suivi de Colis & Marchandise en Temps Réel
         </h2>
@@ -508,7 +502,7 @@ export function renderCourierPage() {
 
     if (history.length === 0) {
       tabContentContainer.innerHTML = `
-        <div class="card-blue" style="max-width: 600px; margin: 0 auto; text-align: center; padding: var(--spacing-8);">
+        <div class="card-blue no-tilt" style="max-width: 600px; margin: 0 auto; text-align: center; padding: var(--spacing-8);">
           <div style="font-size: 3rem; margin-bottom: var(--spacing-3);">📦</div>
           <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2);">Aucun colis expédié pour le moment</h2>
           <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">
@@ -541,7 +535,7 @@ export function renderCourierPage() {
 
         <div style="display: flex; flex-direction: column; gap: var(--spacing-3);">
           ${history.map((item) => `
-            <div class="card-blue" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-3); padding: var(--spacing-4);">
+            <div class="card-blue no-tilt" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-3); padding: var(--spacing-4);">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                   <span class="profile-status-badge">✓ Payé (${item.paymentOperator.toUpperCase()})</span>
@@ -609,7 +603,7 @@ export function renderCourierPage() {
     );
 
     tabContentContainer.innerHTML = `
-      <div class="card-blue courier-receipt-card">
+      <div class="card-blue courier-receipt-card no-tilt">
         <div class="courier-receipt-header">
           <h2 style="color: #ffffff; font-size: var(--font-size-xl); margin-bottom: 2px;">
             ✓ BORDEREAU OFFICIEL D'EXPÉDITION COLIS

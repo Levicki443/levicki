@@ -5,6 +5,7 @@
 
 import { initModals } from './components/Modals.js';
 import { initAssistantBot } from './components/AssistantBot.js';
+import { initWelcomeSplash } from './components/WelcomeSplash.js';
 import { initInteractiveRipples, init3DTiltCards } from './services/interactiveEffects.js';
 import { renderLandingPage } from './pages/LandingPage.js';
 import { renderRegisterPage } from './pages/RegisterPage.js';
@@ -51,6 +52,13 @@ function handleRouting() {
 
   const renderFunction = routes[cleanPath] || routes['/'];
 
+  // Gestion de la classe spécifique pour l'immobilité du service courrier
+  if (cleanPath === '/courier') {
+    document.body.classList.add('page-courier');
+  } else {
+    document.body.classList.remove('page-courier');
+  }
+
   // Nettoyage et rendu du composant
   appRoot.innerHTML = '';
   const viewElement = renderFunction();
@@ -62,7 +70,9 @@ function handleRouting() {
   // Ré-attachement des effets interactifs (Ripples & 3D Tilt)
   requestAnimationFrame(() => {
     initInteractiveRipples(appRoot);
-    init3DTiltCards(appRoot);
+    if (cleanPath !== '/courier') {
+      init3DTiltCards(appRoot);
+    }
   });
 }
 
@@ -70,15 +80,18 @@ function handleRouting() {
  * Initialisation au chargement du DOM.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialisation des modales globales
+  // 1. Écran de bienvenue & réveil intelligent du Backend (Render)
+  initWelcomeSplash();
+
+  // 2. Initialisation des modales globales
   initModals();
 
-  // 2. Initialisation de l'assistant virtuel interactif flottant (Djassa-Bot)
+  // 3. Initialisation de l'assistant virtuel interactif flottant (Djassa-Bot)
   initAssistantBot();
 
-  // 3. Écoute des changements de hash
+  // 4. Écoute des changements de hash
   window.addEventListener('hashchange', handleRouting);
 
-  // 4. Rendu initial
+  // 5. Rendu initial
   handleRouting();
 });

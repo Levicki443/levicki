@@ -120,6 +120,15 @@
   animation: floatOrb1 26s ease-in-out infinite reverse;
 }
 
+/* Immobilisation complète des orbes d'arrière-plan sur la page du service courrier */
+body.page-courier .ambient-orb,
+body:has(.courier-container) .ambient-orb,
+.page-courier .ambient-background-glow .ambient-orb,
+.courier-container ~ .ambient-background-glow .ambient-orb {
+  animation: none !important;
+  transform: none !important;
+}
+
 /* ==========================================================================
    EFFET RIPPLE SUR LES BOUTONS
    ========================================================================== */

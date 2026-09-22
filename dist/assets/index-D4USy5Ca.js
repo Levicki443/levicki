@@ -1,4 +1,4 @@
-(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))r(s);new MutationObserver(s=>{for(const o of s)if(o.type==="childList")for(const i of o.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function e(s){const o={};return s.integrity&&(o.integrity=s.integrity),s.referrerPolicy&&(o.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?o.credentials="include":s.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function r(s){if(s.ep)return;s.ep=!0;const o=e(s);fetch(s.href,o)}})();function Z(t){const a=document.getElementById(t);a&&(a.classList.add("active"),document.body.style.overflow="hidden")}function G(t){const a=document.getElementById(t);a&&(a.classList.remove("active"),document.body.style.overflow="")}function le(){if(document.getElementById("modals-container"))return;const t=document.createElement("div");t.id="modals-container",t.innerHTML=`
+(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))s(r);new MutationObserver(r=>{for(const o of r)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function e(r){const o={};return r.integrity&&(o.integrity=r.integrity),r.referrerPolicy&&(o.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?o.credentials="include":r.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function s(r){if(r.ep)return;r.ep=!0;const o=e(r);fetch(r.href,o)}})();function Q(t){const a=document.getElementById(t);a&&(a.classList.add("active"),document.body.style.overflow="hidden")}function V(t){const a=document.getElementById(t);a&&(a.classList.remove("active"),document.body.style.overflow="")}function le(){if(document.getElementById("modals-container"))return;const t=document.createElement("div");t.id="modals-container",t.innerHTML=`
     <!-- Modale : À propos -->
     <div id="about-modal" class="modal-backdrop" role="dialog" aria-labelledby="about-title" aria-modal="true">
       <div class="modal-dialog">
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-  `,document.body.appendChild(t),t.querySelectorAll("[data-close]").forEach(a=>{a.addEventListener("click",()=>{const e=a.getAttribute("data-close");G(e)})}),t.querySelectorAll(".modal-backdrop").forEach(a=>{a.addEventListener("click",e=>{e.target===a&&G(a.id)})}),document.addEventListener("keydown",a=>{if(a.key==="Escape"){const e=document.querySelector(".modal-backdrop.active");e&&G(e.id)}})}let R=null,L=localStorage.getItem("app_sound_enabled")!=="false";function ce(){if(!R&&typeof window<"u"){const t=window.AudioContext||window.webkitAudioContext;t&&(R=new t)}return R&&R.state==="suspended"&&R.resume(),R}const C={isEnabled(){return L},toggleSound(){return L=!L,localStorage.setItem("app_sound_enabled",L?"true":"false"),L&&this.play("click"),L},play(t="click"){if(L)try{const a=ce();if(!a)return;const e=a.currentTime;if(t==="click"){const r=a.createOscillator(),s=a.createGain();r.type="sine",r.frequency.setValueAtTime(800,e),r.frequency.exponentialRampToValueAtTime(300,e+.05),s.gain.setValueAtTime(.15,e),s.gain.exponentialRampToValueAtTime(.01,e+.05),r.connect(s),s.connect(a.destination),r.start(e),r.stop(e+.05)}else if(t==="seat"){const r=a.createOscillator(),s=a.createGain();r.type="triangle",r.frequency.setValueAtTime(520,e),r.frequency.exponentialRampToValueAtTime(780,e+.08),s.gain.setValueAtTime(.2,e),s.gain.exponentialRampToValueAtTime(.01,e+.08),r.connect(s),s.connect(a.destination),r.start(e),r.stop(e+.08)}else if(t==="success")[523.25,659.25,783.99,1046.5].forEach((s,o)=>{const i=a.createOscillator(),n=a.createGain(),u=e+o*.09;i.type="triangle",i.frequency.setValueAtTime(s,u),n.gain.setValueAtTime(.25,u),n.gain.exponentialRampToValueAtTime(.001,u+.35),i.connect(n),n.connect(a.destination),i.start(u),i.stop(u+.35)});else if(t==="horn"){const r=a.createOscillator(),s=a.createOscillator(),o=a.createGain();r.type="sawtooth",s.type="sawtooth",r.frequency.setValueAtTime(370,e),s.frequency.setValueAtTime(440,e),o.gain.setValueAtTime(.12,e),o.gain.exponentialRampToValueAtTime(.01,e+.25),r.connect(o),s.connect(o),o.connect(a.destination),r.start(e),s.start(e),r.stop(e+.25),s.stop(e+.25)}else if(t==="bubble"){const r=a.createOscillator(),s=a.createGain();r.type="sine",r.frequency.setValueAtTime(400,e),r.frequency.exponentialRampToValueAtTime(900,e+.1),s.gain.setValueAtTime(.18,e),s.gain.exponentialRampToValueAtTime(.01,e+.1),r.connect(s),s.connect(a.destination),r.start(e),r.stop(e+.1)}}catch{}}};function ae(){C.play("success");const t=document.createElement("canvas");t.className="confetti-canvas-overlay",document.body.appendChild(t);const a=t.getContext("2d");let e=t.width=window.innerWidth,r=t.height=window.innerHeight;const s=["#2563eb","#3b82f6","#10b981","#fbbf24","#f59e0b","#ec4899","#ffffff"],o=[],i=140;for(let v=0;v<i;v++)o.push({x:e*.5+(Math.random()-.5)*200,y:r*.4+(Math.random()-.5)*100,vx:(Math.random()-.5)*18,vy:(Math.random()-.8)*20-4,size:Math.random()*8+6,color:s[Math.floor(Math.random()*s.length)],rotation:Math.random()*360,vRot:(Math.random()-.5)*12,opacity:1,shape:Math.random()>.4?"rect":"circle"});let n;const u=Date.now();function b(){const v=Date.now()-u;a.clearRect(0,0,e,r);let h=0;o.forEach(l=>{l.x+=l.vx,l.y+=l.vy,l.vy+=.45,l.vx*=.98,l.rotation+=l.vRot,v>1800&&(l.opacity-=.02),l.opacity>0&&l.y<r+50&&(h++,a.save(),a.translate(l.x,l.y),a.rotate(l.rotation*Math.PI/180),a.globalAlpha=Math.max(0,l.opacity),a.fillStyle=l.color,l.shape==="rect"?a.fillRect(-l.size/2,-l.size/2,l.size,l.size*.6):(a.beginPath(),a.arc(0,0,l.size/2,0,Math.PI*2),a.fill()),a.restore())}),h>0&&v<4e3?n=requestAnimationFrame(b):(cancelAnimationFrame(n),t.parentNode&&t.parentNode.removeChild(t))}b()}function B(t=document){t.querySelectorAll(".btn-primary-blue, .btn-card-white, .btn-back-3d, .btn-nav-link").forEach(e=>{e.dataset.hasRipple||(e.dataset.hasRipple="true",e.classList.add("btn-interactive"),e.addEventListener("click",r=>{C.play("click");const s=e.getBoundingClientRect(),o=document.createElement("span"),i=Math.max(s.width,s.height),n=i/2;o.style.width=o.style.height=`${i}px`,o.style.left=`${r.clientX-s.left-n}px`,o.style.top=`${r.clientY-s.top-n}px`,o.classList.add("ripple-circle");const u=e.querySelector(".ripple-circle");u&&u.remove(),e.appendChild(o),setTimeout(()=>{o.remove()},600)}))})}function O(t=document){t.querySelectorAll(".card-blue, .departure-card, .feature-card, .profile-hero-card").forEach(e=>{e.dataset.hasTilt||(e.dataset.hasTilt="true",e.addEventListener("mousemove",r=>{const s=e.getBoundingClientRect(),o=r.clientX-s.left,i=r.clientY-s.top,n=s.width/2,u=s.height/2,b=(i-u)/u*-5,v=(o-n)/n*5;e.style.transform=`perspective(1000px) rotateX(${b.toFixed(2)}deg) rotateY(${v.toFixed(2)}deg) translateY(-2px)`}),e.addEventListener("mouseleave",()=>{e.style.transform="perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)"}))})}function de(t=document){t.querySelectorAll("[data-counter-target]").forEach(e=>{const r=parseInt(e.getAttribute("data-counter-target"),10);if(isNaN(r))return;let s=0;const o=1200,i=25,n=o/i,u=r/n,b=setInterval(()=>{s+=u,s>=r?(e.textContent=r.toLocaleString("fr-FR"),clearInterval(b)):e.textContent=Math.floor(s).toLocaleString("fr-FR")},i)})}const pe={horaires:"🚌 Les départs ont lieu tous les jours : 1er départ (06h30 - Matinal), 2e départ (12h00 - Midi) et 3e départ (17h30 - Soir). Présentez-vous 30 min avant l'embarquement !",paiement:"💳 Vous pouvez régler votre billet en 1 clic par Wave, Orange Money, MTN MoMo ou Moov Flooz sans aucun frais supplémentaire.",colis:"📦 Vous pouvez expédier vos courriers, vivres et marchandises via l'onglet « Fret & Colis » (#/courier). Un code PIN secret est transmis par SMS au destinataire pour le retrait sécurisé !",bagages:"🧳 Chaque passager a droit à 1 valise en soute (jusqu'à 25 kg) + 1 bagage à main gratuit. Les colis volumineux font l'objet d'un supplément au guichet.",gares:"📍 À Abidjan, les principales gares sont : Gare Internationale d'Adjamé (Bd Nangui Abrogoua), Gare UTB Yopougon Siporex, et Gare de Treichville.",ticket:"🎟️ Une fois votre paiement validé, votre billet électronique officiel est généré instantanément avec un QR Code. Vous pouvez le présenter sur votre smartphone ou l'imprimer !"};function ue(){if(document.getElementById("assistant-bot-root"))return;const a=document.createElement("div");a.id="assistant-bot-root",a.className="assistant-widget-container",a.innerHTML=`
+  `,document.body.appendChild(t),t.querySelectorAll("[data-close]").forEach(a=>{a.addEventListener("click",()=>{const e=a.getAttribute("data-close");V(e)})}),t.querySelectorAll(".modal-backdrop").forEach(a=>{a.addEventListener("click",e=>{e.target===a&&V(a.id)})}),document.addEventListener("keydown",a=>{if(a.key==="Escape"){const e=document.querySelector(".modal-backdrop.active");e&&V(e.id)}})}let R=null,T=localStorage.getItem("app_sound_enabled")!=="false";function ce(){if(!R&&typeof window<"u"){const t=window.AudioContext||window.webkitAudioContext;t&&(R=new t)}return R&&R.state==="suspended"&&R.resume(),R}const S={isEnabled(){return T},toggleSound(){return T=!T,localStorage.setItem("app_sound_enabled",T?"true":"false"),T&&this.play("click"),T},play(t="click"){if(T)try{const a=ce();if(!a)return;const e=a.currentTime;if(t==="click"){const s=a.createOscillator(),r=a.createGain();s.type="sine",s.frequency.setValueAtTime(800,e),s.frequency.exponentialRampToValueAtTime(300,e+.05),r.gain.setValueAtTime(.15,e),r.gain.exponentialRampToValueAtTime(.01,e+.05),s.connect(r),r.connect(a.destination),s.start(e),s.stop(e+.05)}else if(t==="seat"){const s=a.createOscillator(),r=a.createGain();s.type="triangle",s.frequency.setValueAtTime(520,e),s.frequency.exponentialRampToValueAtTime(780,e+.08),r.gain.setValueAtTime(.2,e),r.gain.exponentialRampToValueAtTime(.01,e+.08),s.connect(r),r.connect(a.destination),s.start(e),s.stop(e+.08)}else if(t==="success")[523.25,659.25,783.99,1046.5].forEach((r,o)=>{const n=a.createOscillator(),c=a.createGain(),p=e+o*.09;n.type="triangle",n.frequency.setValueAtTime(r,p),c.gain.setValueAtTime(.25,p),c.gain.exponentialRampToValueAtTime(.001,p+.35),n.connect(c),c.connect(a.destination),n.start(p),n.stop(p+.35)});else if(t==="horn"){const s=a.createOscillator(),r=a.createOscillator(),o=a.createGain();s.type="sawtooth",r.type="sawtooth",s.frequency.setValueAtTime(370,e),r.frequency.setValueAtTime(440,e),o.gain.setValueAtTime(.12,e),o.gain.exponentialRampToValueAtTime(.01,e+.25),s.connect(o),r.connect(o),o.connect(a.destination),s.start(e),r.start(e),s.stop(e+.25),r.stop(e+.25)}else if(t==="bubble"){const s=a.createOscillator(),r=a.createGain();s.type="sine",s.frequency.setValueAtTime(400,e),s.frequency.exponentialRampToValueAtTime(900,e+.1),r.gain.setValueAtTime(.18,e),r.gain.exponentialRampToValueAtTime(.01,e+.1),s.connect(r),r.connect(a.destination),s.start(e),s.stop(e+.1)}}catch{}}};function ee(){S.play("success");const t=document.createElement("canvas");t.className="confetti-canvas-overlay",document.body.appendChild(t);const a=t.getContext("2d");let e=t.width=window.innerWidth,s=t.height=window.innerHeight;const r=["#2563eb","#3b82f6","#10b981","#fbbf24","#f59e0b","#ec4899","#ffffff"],o=[],n=140;for(let u=0;u<n;u++)o.push({x:e*.5+(Math.random()-.5)*200,y:s*.4+(Math.random()-.5)*100,vx:(Math.random()-.5)*18,vy:(Math.random()-.8)*20-4,size:Math.random()*8+6,color:r[Math.floor(Math.random()*r.length)],rotation:Math.random()*360,vRot:(Math.random()-.5)*12,opacity:1,shape:Math.random()>.4?"rect":"circle"});let c;const p=Date.now();function f(){const u=Date.now()-p;a.clearRect(0,0,e,s);let v=0;o.forEach(i=>{i.x+=i.vx,i.y+=i.vy,i.vy+=.45,i.vx*=.98,i.rotation+=i.vRot,u>1800&&(i.opacity-=.02),i.opacity>0&&i.y<s+50&&(v++,a.save(),a.translate(i.x,i.y),a.rotate(i.rotation*Math.PI/180),a.globalAlpha=Math.max(0,i.opacity),a.fillStyle=i.color,i.shape==="rect"?a.fillRect(-i.size/2,-i.size/2,i.size,i.size*.6):(a.beginPath(),a.arc(0,0,i.size/2,0,Math.PI*2),a.fill()),a.restore())}),v>0&&u<4e3?c=requestAnimationFrame(f):(cancelAnimationFrame(c),t.parentNode&&t.parentNode.removeChild(t))}f()}function O(t=document){t.querySelectorAll(".btn-primary-blue, .btn-card-white, .btn-back-3d, .btn-nav-link").forEach(e=>{e.dataset.hasRipple||(e.dataset.hasRipple="true",e.classList.add("btn-interactive"),e.addEventListener("click",s=>{S.play("click");const r=e.getBoundingClientRect(),o=document.createElement("span"),n=Math.max(r.width,r.height),c=n/2;o.style.width=o.style.height=`${n}px`,o.style.left=`${s.clientX-r.left-c}px`,o.style.top=`${s.clientY-r.top-c}px`,o.classList.add("ripple-circle");const p=e.querySelector(".ripple-circle");p&&p.remove(),e.appendChild(o),setTimeout(()=>{o.remove()},600)}))})}function F(t=document){t.querySelectorAll(".card-blue, .departure-card, .feature-card, .profile-hero-card").forEach(e=>{if(e.closest(".courier-container")||e.closest(".no-tilt")||e.classList.contains("no-tilt")||e.classList.contains("courier-receipt-card")||document.body.classList.contains("page-courier")){e.style.transform="none";return}e.dataset.hasTilt||(e.dataset.hasTilt="true",e.addEventListener("mousemove",s=>{if(e.closest(".courier-container")||document.body.classList.contains("page-courier")){e.style.transform="none";return}const r=e.getBoundingClientRect(),o=s.clientX-r.left,n=s.clientY-r.top,c=r.width/2,p=r.height/2,f=(n-p)/p*-5,u=(o-c)/c*5;e.style.transform=`perspective(1000px) rotateX(${f.toFixed(2)}deg) rotateY(${u.toFixed(2)}deg) translateY(-2px)`}),e.addEventListener("mouseleave",()=>{e.style.transform="perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)"}))})}function de(t=document){t.querySelectorAll("[data-counter-target]").forEach(e=>{const s=parseInt(e.getAttribute("data-counter-target"),10);if(isNaN(s))return;let r=0;const o=1200,n=25,c=o/n,p=s/c,f=setInterval(()=>{r+=p,r>=s?(e.textContent=s.toLocaleString("fr-FR"),clearInterval(f)):e.textContent=Math.floor(r).toLocaleString("fr-FR")},n)})}const pe={horaires:"🚌 Les départs ont lieu tous les jours : 1er départ (06h30 - Matinal), 2e départ (12h00 - Midi) et 3e départ (17h30 - Soir). Présentez-vous 30 min avant l'embarquement !",paiement:"💳 Vous pouvez régler votre billet en 1 clic par Wave, Orange Money, MTN MoMo ou Moov Flooz sans aucun frais supplémentaire.",colis:"📦 Vous pouvez expédier vos courriers, vivres et marchandises via l'onglet « Fret & Colis » (#/courier). Un code PIN secret est transmis par SMS au destinataire pour le retrait sécurisé !",bagages:"🧳 Chaque passager a droit à 1 valise en soute (jusqu'à 25 kg) + 1 bagage à main gratuit. Les colis volumineux font l'objet d'un supplément au guichet.",gares:"📍 À Abidjan, les principales gares sont : Gare Internationale d'Adjamé (Bd Nangui Abrogoua), Gare UTB Yopougon Siporex, et Gare de Treichville.",ticket:"🎟️ Une fois votre paiement validé, votre billet électronique officiel est généré instantanément avec un QR Code. Vous pouvez le présenter sur votre smartphone ou l'imprimer !"};function ue(){if(document.getElementById("assistant-bot-root"))return;const a=document.createElement("div");a.id="assistant-bot-root",a.className="assistant-widget-container",a.innerHTML=`
     <div class="assistant-chat-window" id="assistant-window">
       <div class="assistant-chat-header">
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -80,15 +80,52 @@
       <span>💬</span>
       <span class="assistant-badge-alert">1</span>
     </button>
-  `,document.body.appendChild(a);const e=a.querySelector("#assistant-window"),r=a.querySelector("#btn-toggle-assistant"),s=a.querySelector("#btn-close-chat"),o=a.querySelector("#chat-messages-container"),i=a.querySelectorAll(".quick-chip-btn"),n=a.querySelector(".assistant-badge-alert");function u(){C.play("bubble"),e.classList.toggle("active")&&n&&(n.style.display="none")}r.addEventListener("click",u),s.addEventListener("click",u),i.forEach(b=>{b.addEventListener("click",()=>{C.play("click");const v=b.getAttribute("data-topic"),h=b.textContent,l=pe[v]||"Je suis à votre disposition pour vous orienter dans vos voyages !",d=document.createElement("div");d.className="chat-bubble user",d.textContent=h,o.appendChild(d),setTimeout(()=>{C.play("bubble");const g=document.createElement("div");g.className="chat-bubble bot",g.textContent=l,o.appendChild(g),o.scrollTop=o.scrollHeight},400),o.scrollTop=o.scrollHeight})})}function me(){const t=document.createElement("header");t.className="site-header";const a=JSON.parse(sessionStorage.getItem("current_user")||"null"),e=C.isEnabled();t.innerHTML=`
-    <a href="#/" class="brand-logo" aria-label="Accueil - Gare Routière">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-        <path d="M7 10h10"></path>
-        <path d="M7 14h10"></path>
-        <circle cx="8" cy="18" r="1"></circle>
-        <circle cx="16" cy="18" r="1"></circle>
-      </svg>
+  `,document.body.appendChild(a);const e=a.querySelector("#assistant-window"),s=a.querySelector("#btn-toggle-assistant"),r=a.querySelector("#btn-close-chat"),o=a.querySelector("#chat-messages-container"),n=a.querySelectorAll(".quick-chip-btn"),c=a.querySelector(".assistant-badge-alert");function p(){S.play("bubble"),e.classList.toggle("active")&&c&&(c.style.display="none")}s.addEventListener("click",p),r.addEventListener("click",p),n.forEach(f=>{f.addEventListener("click",()=>{S.play("click");const u=f.getAttribute("data-topic"),v=f.textContent,i=pe[u]||"Je suis à votre disposition pour vous orienter dans vos voyages !",m=document.createElement("div");m.className="chat-bubble user",m.textContent=v,o.appendChild(m),setTimeout(()=>{S.play("bubble");const y=document.createElement("div");y.className="chat-bubble bot",y.textContent=i,o.appendChild(y),o.scrollTop=o.scrollHeight},400),o.scrollTop=o.scrollHeight})})}const te="/assets/logo-CKy6Vzk5.png",q=["Abidjan","Bondoukou","Bouaké","Yamoussoukro","Korhogo","San-Pédro","Man","Daloa"],me=[{id:"trip-abj-bdk",departureCity:"Abidjan",arrivalCity:"Bondoukou",distanceKm:420,estimatedDuration:"7h 30min",departures:[{id:"dep-abj-bdk-1",rankLabel:"1er Départ",time:"06h30",stationName:"Gare Principale d'Adjamé (Quai Nord)",stationAddress:"Adjamé Liberté, à 100m du grand carrefour",directions:"Emprunter le boulevard principal, quai n°3 réservé aux lignes de l'Est (Bondoukou / Bouna). Présentation recommandée 30 minutes avant le départ.",busType:"Car Grand Confort VIP (Climatisé, Wifi, Prises USB)",company:"Compagnie Express du Zanzan",priceCfa:7500,availableSeats:18},{id:"dep-abj-bdk-2",rankLabel:"2e Départ",time:"10h00",stationName:"Gare Routière d'Adjamé — Pôle Est",stationAddress:"Boulevard Nangui Abrogoua, Face Pharmacie Centrale",directions:"Accès direct par le couloir central des cars interurbains. Guichet d'enregistrement et dépose bagages Quai 2.",busType:"Car Standard 60 places (Climatisation active)",company:"Compagnie Express du Zanzan",priceCfa:7e3,availableSeats:24},{id:"dep-abj-bdk-3",rankLabel:"3e Départ",time:"14h30",stationName:"Gare de Yopougon Siporex",stationAddress:"Carrefour Siporex, Terminus des lignes Est",directions:"Point d'embarquement côté autoroute du Nord avant bifurcation vers l'Est. Parking voyageurs disponible.",busType:"Car VIP Confort Plus (Climatisé, Écrans individuels)",company:"Union des Transporteurs de l'Est",priceCfa:8e3,availableSeats:12}]},{id:"trip-abj-bke",departureCity:"Abidjan",arrivalCity:"Bouaké",distanceKm:350,estimatedDuration:"4h 45min",departures:[{id:"dep-abj-bke-1",rankLabel:"1er Départ",time:"07h00",stationName:"Gare d'Adjamé Renaissance",stationAddress:"Boulevard de la Paix, Adjamé",directions:"Quai réservé aux lignes Centre & Nord. Voie express directe autoroute.",busType:"Car VIP Grand Tourisme",company:"Société Nationale de Transport",priceCfa:6e3,availableSeats:15},{id:"dep-abj-bke-2",rankLabel:"2e Départ",time:"11h30",stationName:"Gare de Yopougon Gesco",stationAddress:"Sortie Autoroute du Nord, Gesco",directions:"Embarquement rapide en bordure d'autoroute, idéal pour les résidents de Yopougon.",busType:"Car Standard Confort",company:"Société Nationale de Transport",priceCfa:5500,availableSeats:28}]},{id:"trip-abj-yakro",departureCity:"Abidjan",arrivalCity:"Yamoussoukro",distanceKm:240,estimatedDuration:"2h 45min",departures:[{id:"dep-abj-yak-1",rankLabel:"1er Départ",time:"08h00",stationName:"Gare Routière Internationale d'Adjamé",stationAddress:"Adjamé Cité Fairmont",directions:"Hall départ direct autoroute de Yamoussoukro. Enregistrement quai A.",busType:"Car Navette Express Directe",company:"Capitale Express Transport",priceCfa:4500,availableSeats:30}]},{id:"trip-bdk-abj",departureCity:"Bondoukou",arrivalCity:"Abidjan",distanceKm:420,estimatedDuration:"7h 30min",departures:[{id:"dep-bdk-abj-1",rankLabel:"1er Départ",time:"06h00",stationName:"Gare Centrale de Bondoukou",stationAddress:"Quartier Zanzan, Face Grand Marché",directions:"Présentation des voyageurs dès 05h30 pour l'étiquetage des bagages et la validation du ticket en ligne.",busType:"Car Grand Confort VIP",company:"Compagnie Express du Zanzan",priceCfa:7500,availableSeats:20}]}];function ae(t,a){const e=me.find(s=>s.departureCity.toLowerCase()===t.toLowerCase()&&s.arrivalCity.toLowerCase()===a.toLowerCase());return e||{id:`trip-${t.toLowerCase()}-${a.toLowerCase()}`,departureCity:t,arrivalCity:a,distanceKm:320,estimatedDuration:"5h 00min",departures:[{id:`dep-${t.toLowerCase()}-1`,rankLabel:"1er Départ",time:"07h30",stationName:`Gare Centrale de ${t}`,stationAddress:`Boulevard principal de ${t}`,directions:`Se rendre au hall d'embarquement n°1 de ${t} avec la référence de réservation.`,busType:"Car Confort Interurbain",company:"Réseau National des Transporteurs",priceCfa:6e3,availableSeats:22},{id:`dep-${t.toLowerCase()}-2`,rankLabel:"2e Départ",time:"13h00",stationName:`Gare Routière Sud de ${t}`,stationAddress:`Carrefour de la Paix, ${t}`,directions:"Embarquement direct voie B. Dépose des bagages 20 minutes avant le départ.",busType:"Car Confort Interurbain",company:"Réseau National des Transporteurs",priceCfa:6e3,availableSeats:16}]}}const N="http://localhost:5000/api",fe=4e3;async function A(t,a={},e=fe){const s=new AbortController,r=setTimeout(()=>s.abort(),e);try{return await fetch(t,{...a,signal:s.signal})}finally{clearTimeout(r)}}const B={async checkHealth(t=4e3){try{const a=await A(`${N}/health`,{},t);if(a.ok)return(await a.json().catch(()=>({status:"healthy"}))).status==="healthy"||a.status===200}catch{}return!1},async getCities(){try{const t=await A(`${N}/trips/cities`);if(t.ok){const a=await t.json();if(a.success&&Array.isArray(a.data))return a.data}}catch{}return[...q]},async searchTrips(t,a){try{const e=new URLSearchParams({from:t,to:a}),s=await A(`${N}/trips/search?${e.toString()}`);if(s.ok){const r=await s.json();if(r.success&&r.data)return r.data}}catch{}return ae(t,a)},async createReservation(t){try{const a=await A(`${N}/trips/reservations`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return{bookingRef:`GR-${Date.now().toString().slice(-6)}`,createdAt:new Date().toISOString(),...t,status:"CONFIRMED"}},async getTicketByReference(t){try{const e=await A(`${N}/trips/tickets/${encodeURIComponent(t)}`);if(e.ok){const s=await e.json();if(s.success&&s.data)return s.data}}catch{}return JSON.parse(localStorage.getItem("user_tickets_history")||"[]").find(e=>e.bookingRef===t)||null},async getPassengerHistory(t){try{const a=await A(`${N}/trips/passenger/${encodeURIComponent(t)}/history`);if(a.ok){const e=await a.json();if(e.success&&Array.isArray(e.data))return e.data}}catch{}return JSON.parse(localStorage.getItem("user_tickets_history")||"[]")},async getPaymentOperators(){try{const t=await A(`${N}/payments/operators`);if(t.ok){const a=await t.json();if(a.success&&Array.isArray(a.data))return a.data}}catch{}return[{id:"wave",name:"Wave Côte d'Ivoire",feePercentage:1},{id:"orange",name:"Orange Money",feePercentage:1},{id:"mtn",name:"MTN Mobile Money",feePercentage:1},{id:"moov",name:"Moov Money Flooz",feePercentage:1}]},async initiatePayment(t){try{const a=await A(`${N}/payments/initiate`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return{success:!0,transaction:{transactionId:`TXN-${(t.operatorId||"LOCAL").toUpperCase()}-${Date.now().toString().slice(-6)}`,bookingRef:t.bookingRef||"GR-LOC",amountCfa:t.amountCfa,completedAt:new Date().toISOString(),status:"COMPLETED"}}},async login(t){return(await A(`${N}/auth/login`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)})).json()},async register(t){return(await A(`${N}/auth/register`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)})).json()},async updateProfile(t){try{const a=await A(`${N}/auth/profile`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return sessionStorage.setItem("current_user",JSON.stringify(t)),localStorage.setItem("saved_passenger_profile",JSON.stringify(t)),{success:!0,data:t}},async changePassword(t){try{const a=await A(`${N}/auth/password`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok)return a.json()}catch{}return{success:!0,message:"Mot de passe mis à jour avec succès."}}},ve=9e4,ge=2500,be=1200;function ye(t={}){if(sessionStorage.getItem("gareexpress_backend_ready")==="true"&&!t.force)return Promise.resolve();let e=document.getElementById("welcome-splash-overlay");if(e)return Promise.resolve();e=document.createElement("div"),e.id="welcome-splash-overlay",e.className="welcome-splash-overlay",e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.setAttribute("aria-label","Écran de bienvenue et initialisation de GareExpress"),e.innerHTML=`
+    <div class="welcome-splash-card">
+      <!-- Halo lumineux et Logo circulaire -->
+      <div class="welcome-splash-logo-container">
+        <div class="welcome-splash-logo-glow"></div>
+        <img src="${te}" alt="GareExpress - Logo Officiel" class="welcome-splash-logo" />
+      </div>
+
+      <!-- Titre et sous-titre de marque -->
+      <h1 class="welcome-splash-title">
+        Gare<span class="welcome-splash-title-highlight">Express</span>
+      </h1>
+      <p class="welcome-splash-subtitle">
+        Plateforme Nationale de Réservation de Billets & Fret Routier en Côte d'Ivoire
+      </p>
+
+      <!-- Badge d'état de connexion -->
+      <div class="welcome-splash-status-badge" id="splash-status-badge">
+        <span class="splash-spinner" id="splash-spinner"></span>
+        <span id="splash-status-text">Connexion au serveur sécurisé...</span>
+      </div>
+
+      <!-- Barre de progression intelligente -->
+      <div class="welcome-splash-progress-track">
+        <div class="welcome-splash-progress-bar" id="splash-progress-bar"></div>
+      </div>
+
+      <!-- Chronomètre & Info Render -->
+      <div class="welcome-splash-info-row">
+        <span id="splash-timer-text">Initialisation des services...</span>
+        <span class="splash-render-tag" id="splash-subtext">Hébergement Cloud VIP</span>
+      </div>
+
+      <!-- Bouton d'accès de secours (s'active après quelques secondes ou timeout) -->
+      <div class="welcome-splash-actions" id="splash-actions" style="display: none;">
+        <button type="button" class="btn-card-white welcome-splash-skip-btn" id="btn-splash-skip">
+          <span>Accéder directement à l'application ➔</span>
+        </button>
+        <button type="button" class="btn-primary-blue welcome-splash-retry-btn" id="btn-splash-retry" style="display: none;">
+          <span>🔄 Réessayer la connexion</span>
+        </button>
+      </div>
+    </div>
+  `,document.body.appendChild(e);const s=e.querySelector("#splash-status-text"),r=e.querySelector("#splash-status-badge"),o=e.querySelector("#splash-spinner"),n=e.querySelector("#splash-progress-bar"),c=e.querySelector("#splash-timer-text"),p=e.querySelector("#splash-subtext"),f=e.querySelector("#splash-actions"),u=e.querySelector("#btn-splash-skip"),v=e.querySelector("#btn-splash-retry"),i=Date.now();let m=!1,y=null,x=null;function $(d=!0){if(m)return;m=!0,clearInterval(y),clearInterval(x),d&&(sessionStorage.setItem("gareexpress_backend_ready","true"),n&&(n.style.width="100%"),s&&(s.textContent="✓ Serveur connecté ! Bienvenue sur GareExpress."),r&&r.classList.add("ready"),o&&(o.style.display="none"));const g=Date.now()-i,w=Math.max(0,be-g);setTimeout(()=>{e.classList.add("fade-out"),setTimeout(()=>{e.parentNode&&e.parentNode.removeChild(e)},700)},w)}u&&u.addEventListener("click",()=>{$(!0)}),v&&v.addEventListener("click",()=>{v.style.display="none",u&&(u.style.display="inline-flex"),o&&(o.style.display="inline-block"),r&&r.classList.remove("error"),l()}),x=setInterval(()=>{if(m)return;const d=Date.now()-i,g=Math.floor(d/1e3),w=Math.min(92,Math.round((1-Math.exp(-d/25e3))*95));n&&(n.style.width=`${Math.max(8,w)}%`),c&&(g<4?c.textContent="Vérification du statut du serveur...":g<15?c.textContent=`Démarrage des microservices (${g}s)...`:g<40?c.textContent=`Réveil du serveur Render en cours (${g}s / 90s max)...`:c.textContent=`Chargement des données gares & lignes (${g}s)...`),p&&g>8&&(p.textContent="Mise en ligne automatique"),g>=8&&f&&f.style.display==="none"&&(f.style.display="flex"),d>=ve&&(clearInterval(y),clearInterval(x),s&&(s.textContent="Le serveur met du temps à répondre."),r&&r.classList.add("error"),c&&(c.textContent="Mode local disponible ou nouvelle tentative"),o&&(o.style.display="none"),f&&(f.style.display="flex"),v&&(v.style.display="inline-flex"))},300);async function z(){if(!m)try{await B.checkHealth(4e3)&&$(!0)}catch{}}function l(){z(),y=setInterval(z,ge)}l()}function he(){const t=document.createElement("header");t.className="site-header";const a=JSON.parse(sessionStorage.getItem("current_user")||"null"),e=S.isEnabled();t.innerHTML=`
+    <a href="#/" class="brand-logo" aria-label="Accueil - GareExpress">
+      <img src="${te}" alt="Logo GareExpress" class="brand-logo-img" />
       <span>Gare<span style="color: var(--color-btn-blue-bg);">Express</span></span>
       <span class="brand-badge">Côte d'Ivoire</span>
     </a>
@@ -115,7 +152,7 @@
         ${e?"🔊":"🔇"}
       </button>
     </nav>
-  `;const r=t.querySelector("#nav-btn-about"),s=t.querySelector("#nav-btn-contact"),o=t.querySelector("#btn-toggle-sound");return r&&r.addEventListener("click",()=>{Z("about-modal")}),s&&s.addEventListener("click",()=>{Z("contact-modal")}),o&&o.addEventListener("click",()=>{const i=C.toggleSound();o.textContent=i?"🔊":"🔇"}),t}function U(){const t=document.createElement("div");t.className="live-ticker-bar",t.innerHTML=`
+  `;const s=t.querySelector("#nav-btn-about"),r=t.querySelector("#nav-btn-contact"),o=t.querySelector("#btn-toggle-sound");return s&&s.addEventListener("click",()=>{Q("about-modal")}),r&&r.addEventListener("click",()=>{Q("contact-modal")}),o&&o.addEventListener("click",()=>{const n=S.toggleSound();o.textContent=n?"🔊":"🔇"}),t}function se(){const t=document.createElement("div");t.className="live-ticker-bar",t.innerHTML=`
     <div class="live-ticker-badge">
       <span class="radar-dot"></span>
       <span>En direct</span>
@@ -148,7 +185,7 @@
       <span>⏱️ Abidjan</span>
       <strong id="live-clock-time">--:--:--</strong>
     </div>
-  `;const a=t.querySelector("#live-clock-time");function e(){const r=new Date;a&&(a.textContent=r.toLocaleTimeString("fr-FR",{timeZone:"UTC",hour:"2-digit",minute:"2-digit",second:"2-digit"}))}return setInterval(e,1e3),e(),t}const T=["Abidjan","Bondoukou","Bouaké","Yamoussoukro","Korhogo","San-Pédro","Man","Daloa"],fe=[{id:"trip-abj-bdk",departureCity:"Abidjan",arrivalCity:"Bondoukou",distanceKm:420,estimatedDuration:"7h 30min",departures:[{id:"dep-abj-bdk-1",rankLabel:"1er Départ",time:"06h30",stationName:"Gare Principale d'Adjamé (Quai Nord)",stationAddress:"Adjamé Liberté, à 100m du grand carrefour",directions:"Emprunter le boulevard principal, quai n°3 réservé aux lignes de l'Est (Bondoukou / Bouna). Présentation recommandée 30 minutes avant le départ.",busType:"Car Grand Confort VIP (Climatisé, Wifi, Prises USB)",company:"Compagnie Express du Zanzan",priceCfa:7500,availableSeats:18},{id:"dep-abj-bdk-2",rankLabel:"2e Départ",time:"10h00",stationName:"Gare Routière d'Adjamé — Pôle Est",stationAddress:"Boulevard Nangui Abrogoua, Face Pharmacie Centrale",directions:"Accès direct par le couloir central des cars interurbains. Guichet d'enregistrement et dépose bagages Quai 2.",busType:"Car Standard 60 places (Climatisation active)",company:"Compagnie Express du Zanzan",priceCfa:7e3,availableSeats:24},{id:"dep-abj-bdk-3",rankLabel:"3e Départ",time:"14h30",stationName:"Gare de Yopougon Siporex",stationAddress:"Carrefour Siporex, Terminus des lignes Est",directions:"Point d'embarquement côté autoroute du Nord avant bifurcation vers l'Est. Parking voyageurs disponible.",busType:"Car VIP Confort Plus (Climatisé, Écrans individuels)",company:"Union des Transporteurs de l'Est",priceCfa:8e3,availableSeats:12}]},{id:"trip-abj-bke",departureCity:"Abidjan",arrivalCity:"Bouaké",distanceKm:350,estimatedDuration:"4h 45min",departures:[{id:"dep-abj-bke-1",rankLabel:"1er Départ",time:"07h00",stationName:"Gare d'Adjamé Renaissance",stationAddress:"Boulevard de la Paix, Adjamé",directions:"Quai réservé aux lignes Centre & Nord. Voie express directe autoroute.",busType:"Car VIP Grand Tourisme",company:"Société Nationale de Transport",priceCfa:6e3,availableSeats:15},{id:"dep-abj-bke-2",rankLabel:"2e Départ",time:"11h30",stationName:"Gare de Yopougon Gesco",stationAddress:"Sortie Autoroute du Nord, Gesco",directions:"Embarquement rapide en bordure d'autoroute, idéal pour les résidents de Yopougon.",busType:"Car Standard Confort",company:"Société Nationale de Transport",priceCfa:5500,availableSeats:28}]},{id:"trip-abj-yakro",departureCity:"Abidjan",arrivalCity:"Yamoussoukro",distanceKm:240,estimatedDuration:"2h 45min",departures:[{id:"dep-abj-yak-1",rankLabel:"1er Départ",time:"08h00",stationName:"Gare Routière Internationale d'Adjamé",stationAddress:"Adjamé Cité Fairmont",directions:"Hall départ direct autoroute de Yamoussoukro. Enregistrement quai A.",busType:"Car Navette Express Directe",company:"Capitale Express Transport",priceCfa:4500,availableSeats:30}]},{id:"trip-bdk-abj",departureCity:"Bondoukou",arrivalCity:"Abidjan",distanceKm:420,estimatedDuration:"7h 30min",departures:[{id:"dep-bdk-abj-1",rankLabel:"1er Départ",time:"06h00",stationName:"Gare Centrale de Bondoukou",stationAddress:"Quartier Zanzan, Face Grand Marché",directions:"Présentation des voyageurs dès 05h30 pour l'étiquetage des bagages et la validation du ticket en ligne.",busType:"Car Grand Confort VIP",company:"Compagnie Express du Zanzan",priceCfa:7500,availableSeats:20}]}];function re(t,a){const e=fe.find(r=>r.departureCity.toLowerCase()===t.toLowerCase()&&r.arrivalCity.toLowerCase()===a.toLowerCase());return e||{id:`trip-${t.toLowerCase()}-${a.toLowerCase()}`,departureCity:t,arrivalCity:a,distanceKm:320,estimatedDuration:"5h 00min",departures:[{id:`dep-${t.toLowerCase()}-1`,rankLabel:"1er Départ",time:"07h30",stationName:`Gare Centrale de ${t}`,stationAddress:`Boulevard principal de ${t}`,directions:`Se rendre au hall d'embarquement n°1 de ${t} avec la référence de réservation.`,busType:"Car Confort Interurbain",company:"Réseau National des Transporteurs",priceCfa:6e3,availableSeats:22},{id:`dep-${t.toLowerCase()}-2`,rankLabel:"2e Départ",time:"13h00",stationName:`Gare Routière Sud de ${t}`,stationAddress:`Carrefour de la Paix, ${t}`,directions:"Embarquement direct voie B. Dépose des bagages 20 minutes avant le départ.",busType:"Car Confort Interurbain",company:"Réseau National des Transporteurs",priceCfa:6e3,availableSeats:16}]}}function ve(){const t=document.createElement("div");t.className="landing-view";const a=me();t.appendChild(a);const e=U();t.appendChild(e);const r=document.createElement("main");r.className="main-content",r.innerHTML=`
+  `;const a=t.querySelector("#live-clock-time");function e(){const s=new Date;a&&(a.textContent=s.toLocaleTimeString("fr-FR",{timeZone:"UTC",hour:"2-digit",minute:"2-digit",second:"2-digit"}))}return setInterval(e,1e3),e(),t}function xe(){const t=document.createElement("div");t.className="landing-view";const a=he();t.appendChild(a);const e=se();t.appendChild(e);const s=document.createElement("main");s.className="main-content",s.innerHTML=`
     <section class="landing-hero">
       <div class="hero-tag">
         <span class="radar-dot" style="background-color: #3b82f6;"></span>
@@ -177,14 +214,14 @@
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" style="font-size: var(--font-size-xs);" for="quick-from">Ville de départ</label>
             <select id="quick-from" class="form-select" style="padding: var(--spacing-2) var(--spacing-3); font-size: var(--font-size-sm);">
-              ${T.map(o=>`<option value="${o}" ${o==="Abidjan"?"selected":""}>${o}</option>`).join("")}
+              ${q.map(o=>`<option value="${o}" ${o==="Abidjan"?"selected":""}>${o}</option>`).join("")}
             </select>
           </div>
 
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" style="font-size: var(--font-size-xs);" for="quick-to">Destination</label>
             <select id="quick-to" class="form-select" style="padding: var(--spacing-2) var(--spacing-3); font-size: var(--font-size-sm);">
-              ${T.map(o=>`<option value="${o}" ${o==="Bondoukou"?"selected":""}>${o}</option>`).join("")}
+              ${q.map(o=>`<option value="${o}" ${o==="Bondoukou"?"selected":""}>${o}</option>`).join("")}
             </select>
           </div>
 
@@ -278,13 +315,13 @@
     <footer class="landing-footer-info">
       <p>Plateforme de Gestion d'une Gare Routière — Conçue pour une expérience voyageur moderne, animée et sécurisée.</p>
     </footer>
-  `;const s=r.querySelector("#hero-quick-search-form");return s&&s.addEventListener("submit",o=>{o.preventDefault();const i=s.querySelector("#quick-from").value,n=s.querySelector("#quick-to").value;sessionStorage.setItem("search_from",i),sessionStorage.setItem("search_to",n),window.location.hash="#/app"}),t.appendChild(r),requestAnimationFrame(()=>{B(t),O(t),de(t)}),t}function M(t={}){const{label:a="Retour",onClick:e=null,customClass:r=""}=t,s=document.createElement("div");s.className=`btn-back-3d-wrapper ${r}`.trim();const o=document.createElement("button");return o.type="button",o.className="btn-back-3d",o.setAttribute("aria-label",a),o.innerHTML=`
+  `;const r=s.querySelector("#hero-quick-search-form");return r&&r.addEventListener("submit",o=>{o.preventDefault();const n=r.querySelector("#quick-from").value,c=r.querySelector("#quick-to").value;sessionStorage.setItem("search_from",n),sessionStorage.setItem("search_to",c),window.location.hash="#/app"}),t.appendChild(s),requestAnimationFrame(()=>{O(t),F(t),de(t)}),t}function P(t={}){const{label:a="Retour",onClick:e=null,customClass:s=""}=t,r=document.createElement("div");r.className=`btn-back-3d-wrapper ${s}`.trim();const o=document.createElement("button");return o.type="button",o.className="btn-back-3d",o.setAttribute("aria-label",a),o.innerHTML=`
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <line x1="19" y1="12" x2="5" y2="12"></line>
       <polyline points="12 19 5 12 12 5"></polyline>
     </svg>
     <span>${a}</span>
-  `,o.addEventListener("click",i=>{i.preventDefault(),typeof e=="function"?e(i):window.history.length>1?window.history.back():window.location.hash="#/"}),s.appendChild(o),s}function ge(){const t=document.createElement("div");t.className="auth-view-container";const a=M({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(a);const e=document.createElement("div");e.className="auth-card",e.innerHTML=`
+  `,o.addEventListener("click",n=>{n.preventDefault(),typeof e=="function"?e(n):window.history.length>1?window.history.back():window.location.hash="#/"}),r.appendChild(o),r}function ke(){const t=document.createElement("div");t.className="auth-view-container";const a=P({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(a);const e=document.createElement("div");e.className="auth-card",e.innerHTML=`
     <div class="auth-header">
       <h1 class="auth-title">Créer un compte</h1>
       <p class="auth-subtitle">Rejoignez la plateforme et réservez vos trajets en quelques clics.</p>
@@ -372,7 +409,7 @@
       <span>Vous possédez déjà un compte ?</span>
       <a href="#/login">Se connecter ici</a>
     </div>
-  `;const r=e.querySelector("#register-form");return r.addEventListener("submit",s=>{s.preventDefault();const o=r.querySelector("#reg-fullname").value.trim(),i=r.querySelector("#reg-phone").value.trim(),n=r.querySelector("#reg-email").value.trim(),u=r.querySelector("#reg-password").value,b=r.querySelector("#reg-password-confirm").value;let v=!0;const h=r.querySelector("#feedback-fullname");o?h.className="form-feedback":(h.className="form-feedback error",v=!1);const l=r.querySelector("#feedback-phone");!i||i.length<8?(l.className="form-feedback error",v=!1):l.className="form-feedback";const d=r.querySelector("#feedback-password");u.length<6?(d.className="form-feedback error",v=!1):d.className="form-feedback";const g=r.querySelector("#feedback-password-confirm");if(u!==b?(g.className="form-feedback error",v=!1):g.className="form-feedback",v){const k={fullname:o,phone:i,email:n||"contact@client.ci"};sessionStorage.setItem("current_user",JSON.stringify(k)),window.location.hash="#/app"}}),t.appendChild(e),t}function be(){const t=document.createElement("div");t.className="auth-view-container";const a=M({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(a);const e=document.createElement("div");e.className="auth-card",e.innerHTML=`
+  `;const s=e.querySelector("#register-form");return s.addEventListener("submit",r=>{r.preventDefault();const o=s.querySelector("#reg-fullname").value.trim(),n=s.querySelector("#reg-phone").value.trim(),c=s.querySelector("#reg-email").value.trim(),p=s.querySelector("#reg-password").value,f=s.querySelector("#reg-password-confirm").value;let u=!0;const v=s.querySelector("#feedback-fullname");o?v.className="form-feedback":(v.className="form-feedback error",u=!1);const i=s.querySelector("#feedback-phone");!n||n.length<8?(i.className="form-feedback error",u=!1):i.className="form-feedback";const m=s.querySelector("#feedback-password");p.length<6?(m.className="form-feedback error",u=!1):m.className="form-feedback";const y=s.querySelector("#feedback-password-confirm");if(p!==f?(y.className="form-feedback error",u=!1):y.className="form-feedback",u){const x={fullname:o,phone:n,email:c||"contact@client.ci"};sessionStorage.setItem("current_user",JSON.stringify(x)),window.location.hash="#/app"}}),t.appendChild(e),t}function we(){const t=document.createElement("div");t.className="auth-view-container";const a=P({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(a);const e=document.createElement("div");e.className="auth-card",e.innerHTML=`
     <div class="auth-header">
       <h1 class="auth-title">Connexion</h1>
       <p class="auth-subtitle">Accédez à votre espace voyageur et gérez vos réservations.</p>
@@ -424,7 +461,7 @@
       <span>Vous n'avez pas encore de compte ?</span>
       <a href="#/register">Créer un compte</a>
     </div>
-  `;const r=e.querySelector("#login-form");return r.addEventListener("submit",s=>{s.preventDefault();const o=r.querySelector("#login-identifier").value.trim(),i=r.querySelector("#login-password").value;let n=!0;const u=r.querySelector("#feedback-login-id");o?u.className="form-feedback":(u.className="form-feedback error",n=!1);const b=r.querySelector("#feedback-login-pwd");if(i?b.className="form-feedback":(b.className="form-feedback error",n=!1),n){const h=JSON.parse(sessionStorage.getItem("current_user")||"null")||{fullname:o.includes("@")?"Voyageur":"Passager Express",phone:o,email:o.includes("@")?o:"voyageur@transport.ci"};sessionStorage.setItem("current_user",JSON.stringify(h)),window.location.hash="#/app"}}),t.appendChild(e),t}function ye({currentSeat:t="12",company:a="Compagnie Express",onSeatConfirmed:e}){let r=document.getElementById("coach-seat-modal");r||(r=document.createElement("div"),r.id="coach-seat-modal",r.className="modal-backdrop",document.body.appendChild(r));let s=t;const o=11,i=[3,7,8,15,16,21,22,28,33,34,40];r.innerHTML=`
+  `;const s=e.querySelector("#login-form");return s.addEventListener("submit",r=>{r.preventDefault();const o=s.querySelector("#login-identifier").value.trim(),n=s.querySelector("#login-password").value;let c=!0;const p=s.querySelector("#feedback-login-id");o?p.className="form-feedback":(p.className="form-feedback error",c=!1);const f=s.querySelector("#feedback-login-pwd");if(n?f.className="form-feedback":(f.className="form-feedback error",c=!1),c){const v=JSON.parse(sessionStorage.getItem("current_user")||"null")||{fullname:o.includes("@")?"Voyageur":"Passager Express",phone:o,email:o.includes("@")?o:"voyageur@transport.ci"};sessionStorage.setItem("current_user",JSON.stringify(v)),window.location.hash="#/app"}}),t.appendChild(e),t}function Ce({currentSeat:t="12",company:a="Compagnie Express",onSeatConfirmed:e}){let s=document.getElementById("coach-seat-modal");s||(s=document.createElement("div"),s.id="coach-seat-modal",s.className="modal-backdrop",document.body.appendChild(s));let r=t;const o=11,n=[3,7,8,15,16,21,22,28,33,34,40];s.innerHTML=`
     <div class="modal-dialog coach-modal-container">
       <div class="modal-header">
         <div>
@@ -446,25 +483,25 @@
 
         <!-- Grille des sièges (2 à gauche - allée - 2 à droite) -->
         <div class="coach-seats-grid">
-          ${Array.from({length:o}).map((v,h)=>{const l=h*4,d=l+1,g=l+2,k=l+3,P=l+4,E=h===0,m=(c,p)=>{const w=i.includes(c),y=String(c)===String(s),x=p==="left-window"||p==="right-window",S=x?`N°${c} (Fenêtre)`:`N°${c} (Couloir)`;return`
+          ${Array.from({length:o}).map((u,v)=>{const i=v*4,m=i+1,y=i+2,x=i+3,$=i+4,z=v===0,l=(d,g)=>{const w=n.includes(d),h=String(d)===String(r),k=g==="left-window"||g==="right-window",E=k?`N°${d} (Fenêtre)`:`N°${d} (Couloir)`;return`
                 <button 
                   type="button" 
-                  class="coach-seat-btn ${y?"selected":""} ${w?"occupied":""} ${E?"vip":""}" 
-                  data-seat-num="${c}"
-                  data-seat-type="${x?"Fenêtre":"Couloir"}"
-                  data-row="${h+1}"
-                  title="${w?"Siège déjà réservé":S}"
+                  class="coach-seat-btn ${h?"selected":""} ${w?"occupied":""} ${z?"vip":""}" 
+                  data-seat-num="${d}"
+                  data-seat-type="${k?"Fenêtre":"Couloir"}"
+                  data-row="${v+1}"
+                  title="${w?"Siège déjà réservé":E}"
                   ${w?"disabled":""}
                 >
-                  <span style="font-size: 11px;">${c}</span>
-                  <span style="font-size: 8px; opacity: 0.8;">${x?"🪟":"🚶"}</span>
+                  <span style="font-size: 11px;">${d}</span>
+                  <span style="font-size: 8px; opacity: 0.8;">${k?"🪟":"🚶"}</span>
                 </button>
               `};return`
-              ${m(d,"left-window")}
-              ${m(g,"left-aisle")}
+              ${l(m,"left-window")}
+              ${l(y,"left-aisle")}
               <div class="coach-aisle">ALLÉE</div>
-              ${m(k,"right-aisle")}
-              ${m(P,"right-window")}
+              ${l(x,"right-aisle")}
+              ${l($,"right-window")}
             `}).join("")}
         </div>
 
@@ -494,7 +531,7 @@
         <div>
           <span style="font-size: var(--font-size-xs); color: var(--color-text-muted); display: block;">Place actuellement choisie :</span>
           <strong id="seat-selection-label" style="color: #60a5fa; font-size: var(--font-size-base);">
-            Siège N° ${s} (Côté ${parseInt(s,10)%2===1?"Fenêtre":"Couloir"})
+            Siège N° ${r} (Côté ${parseInt(r,10)%2===1?"Fenêtre":"Couloir"})
           </strong>
         </div>
         <button type="button" id="btn-confirm-seat-choice" class="btn-card-white" style="padding: var(--spacing-2) var(--spacing-5); font-size: var(--font-size-sm);">
@@ -502,7 +539,7 @@
         </button>
       </div>
     </div>
-  `,requestAnimationFrame(()=>{r.classList.add("active")});const n=r.querySelectorAll(".coach-seat-btn:not(.occupied)"),u=r.querySelector("#seat-selection-label");n.forEach(v=>{v.addEventListener("click",()=>{C.play("seat"),n.forEach(d=>d.classList.remove("selected")),v.classList.add("selected"),s=v.getAttribute("data-seat-num");const h=v.getAttribute("data-seat-type"),l=v.getAttribute("data-row");u&&(u.textContent=`Siège N° ${s} (${h} - Rangée ${l})`)})});function b(){r.classList.remove("active")}r.querySelector("#btn-close-seat-modal").addEventListener("click",b),r.querySelector("#btn-confirm-seat-choice").addEventListener("click",()=>{C.play("success"),e&&e(s),b()})}const N="http://localhost:5000/api",he=3e3;async function A(t,a={}){const e=new AbortController,r=setTimeout(()=>e.abort(),he);try{return await fetch(t,{...a,signal:e.signal})}finally{clearTimeout(r)}}const F={async getCities(){try{const t=await A(`${N}/trips/cities`);if(t.ok){const a=await t.json();if(a.success&&Array.isArray(a.data))return a.data}}catch{}return[...T]},async searchTrips(t,a){try{const e=new URLSearchParams({from:t,to:a}),r=await A(`${N}/trips/search?${e.toString()}`);if(r.ok){const s=await r.json();if(s.success&&s.data)return s.data}}catch{}return re(t,a)},async createReservation(t){try{const a=await A(`${N}/trips/reservations`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return{bookingRef:`GR-${Date.now().toString().slice(-6)}`,createdAt:new Date().toISOString(),...t,status:"CONFIRMED"}},async getTicketByReference(t){try{const e=await A(`${N}/trips/tickets/${encodeURIComponent(t)}`);if(e.ok){const r=await e.json();if(r.success&&r.data)return r.data}}catch{}return JSON.parse(localStorage.getItem("user_tickets_history")||"[]").find(e=>e.bookingRef===t)||null},async getPassengerHistory(t){try{const a=await A(`${N}/trips/passenger/${encodeURIComponent(t)}/history`);if(a.ok){const e=await a.json();if(e.success&&Array.isArray(e.data))return e.data}}catch{}return JSON.parse(localStorage.getItem("user_tickets_history")||"[]")},async getPaymentOperators(){try{const t=await A(`${N}/payments/operators`);if(t.ok){const a=await t.json();if(a.success&&Array.isArray(a.data))return a.data}}catch{}return[{id:"wave",name:"Wave Côte d'Ivoire",feePercentage:1},{id:"orange",name:"Orange Money",feePercentage:1},{id:"mtn",name:"MTN Mobile Money",feePercentage:1},{id:"moov",name:"Moov Money Flooz",feePercentage:1}]},async initiatePayment(t){try{const a=await A(`${N}/payments/initiate`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return{success:!0,transaction:{transactionId:`TXN-${(t.operatorId||"LOCAL").toUpperCase()}-${Date.now().toString().slice(-6)}`,bookingRef:t.bookingRef||"GR-LOC",amountCfa:t.amountCfa,completedAt:new Date().toISOString(),status:"COMPLETED"}}},async login(t){return(await A(`${N}/auth/login`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)})).json()},async register(t){return(await A(`${N}/auth/register`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)})).json()},async updateProfile(t){try{const a=await A(`${N}/auth/profile`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok){const e=await a.json();if(e.success&&e.data)return e.data}}catch{}return sessionStorage.setItem("current_user",JSON.stringify(t)),localStorage.setItem("saved_passenger_profile",JSON.stringify(t)),{success:!0,data:t}},async changePassword(t){try{const a=await A(`${N}/auth/password`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)});if(a.ok)return a.json()}catch{}return{success:!0,message:"Mot de passe mis à jour avec succès."}}};function xe(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Voyageur", "phone": "" }');let e=[...T],r=sessionStorage.getItem("search_from")||"Abidjan",s=sessionStorage.getItem("search_to")||"Bondoukou",o=re(r,s),i=o.departures[1]||o.departures[0],n="14",u="Côté Fenêtre";const b=U();t.appendChild(b);const v=document.createElement("div");v.className="booking-topbar",v.innerHTML=`
+  `,requestAnimationFrame(()=>{s.classList.add("active")});const c=s.querySelectorAll(".coach-seat-btn:not(.occupied)"),p=s.querySelector("#seat-selection-label");c.forEach(u=>{u.addEventListener("click",()=>{S.play("seat"),c.forEach(m=>m.classList.remove("selected")),u.classList.add("selected"),r=u.getAttribute("data-seat-num");const v=u.getAttribute("data-seat-type"),i=u.getAttribute("data-row");p&&(p.textContent=`Siège N° ${r} (${v} - Rangée ${i})`)})});function f(){s.classList.remove("active")}s.querySelector("#btn-close-seat-modal").addEventListener("click",f),s.querySelector("#btn-confirm-seat-choice").addEventListener("click",()=>{S.play("success"),e&&e(r),f()})}function Se(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Voyageur", "phone": "" }');let e=[...q],s=sessionStorage.getItem("search_from")||"Abidjan",r=sessionStorage.getItem("search_to")||"Bondoukou",o=ae(s,r),n=o.departures[1]||o.departures[0],c="14",p="Côté Fenêtre";const f=se();t.appendChild(f);const u=document.createElement("div");u.className="booking-topbar",u.innerHTML=`
     <a href="#/profile" class="user-badge-info" style="text-decoration: none; cursor: pointer;">
       <div class="user-avatar">${a.fullname.charAt(0).toUpperCase()}</div>
       <div>
@@ -524,7 +561,7 @@
         Déconnexion
       </a>
     </div>
-  `,t.appendChild(v);const h=M({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(h);const l=document.createElement("div");l.id="booking-workspace";function d(){l.innerHTML=`
+  `,t.appendChild(u);const v=P({label:"Retour à l'accueil",onClick:()=>{window.location.hash="#/"}});t.appendChild(v);const i=document.createElement("div");i.id="booking-workspace";function m(){i.innerHTML=`
       <!-- Formulaire de recherche interactif -->
       <section class="card-blue search-trip-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-2); flex-wrap: wrap; gap: var(--spacing-2);">
@@ -543,14 +580,14 @@
           <div class="form-group">
             <label class="form-label" for="select-from">Ville de départ</label>
             <select id="select-from" class="form-select">
-              ${e.map(m=>`<option value="${m}" ${m===r?"selected":""}>${m}</option>`).join("")}
+              ${e.map(l=>`<option value="${l}" ${l===s?"selected":""}>${l}</option>`).join("")}
             </select>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="select-to">Ville d'arrivée (Destination)</label>
             <select id="select-to" class="form-select">
-              ${e.map(m=>`<option value="${m}" ${m===s?"selected":""}>${m}</option>`).join("")}
+              ${e.map(l=>`<option value="${l}" ${l===r?"selected":""}>${l}</option>`).join("")}
             </select>
           </div>
 
@@ -568,7 +605,7 @@
               Visualisation dynamique du parcours
             </span>
             <h3 style="font-size: var(--font-size-2xl); color: #60a5fa; margin-bottom: 0;">
-              ${r} ➔ ${s}
+              ${s} ➔ ${r}
             </h3>
           </div>
           <div style="text-align: right;">
@@ -584,7 +621,7 @@
             <div class="route-bus-sprite" title="Autocar en déplacement" id="interactive-bus-sprite">🚌</div>
             <div class="route-pin route-pin-start">
               <div class="route-pin-dot"></div>
-              <span class="route-pin-label">📍 Départ : ${r}</span>
+              <span class="route-pin-label">📍 Départ : ${s}</span>
             </div>
             <div class="route-pin route-pin-mid">
               <div class="route-pin-dot" style="background-color: #10b981; border-color: #059669;"></div>
@@ -592,7 +629,7 @@
             </div>
             <div class="route-pin route-pin-end">
               <div class="route-pin-dot" style="background-color: #fbbf24; border-color: #d97706;"></div>
-              <span class="route-pin-label">🏁 Arrivée : ${s}</span>
+              <span class="route-pin-label">🏁 Arrivée : ${r}</span>
             </div>
           </div>
         </div>
@@ -601,31 +638,31 @@
       <!-- Liste des départs et détails -->
       <section class="departures-section">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <h3>Départs disponibles : <span style="color: #60a5fa;">${r} → ${s}</span></h3>
+          <h3>Départs disponibles : <span style="color: #60a5fa;">${s} → ${r}</span></h3>
           <span style="font-size: var(--font-size-sm); color: var(--color-text-muted);">
             Cliquez sur un convoi pour sélectionner votre place
           </span>
         </div>
 
         <div class="departures-grid">
-          ${o.departures.map(m=>`
-            <div class="card-blue departure-card ${i&&i.id===m.id?"active":""}" data-dep-id="${m.id}">
+          ${o.departures.map(l=>`
+            <div class="card-blue departure-card ${n&&n.id===l.id?"active":""}" data-dep-id="${l.id}">
               <div>
                 <div class="departure-header">
-                  <span class="departure-rank">${m.rankLabel}</span>
-                  <span class="departure-price">${m.priceCfa.toLocaleString("fr-FR")} FCFA</span>
+                  <span class="departure-rank">${l.rankLabel}</span>
+                  <span class="departure-price">${l.priceCfa.toLocaleString("fr-FR")} FCFA</span>
                 </div>
-                <div class="departure-time">${m.time}</div>
+                <div class="departure-time">${l.time}</div>
                 <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--spacing-2);">
-                  📍 ${m.stationName}
+                  📍 ${l.stationName}
                 </div>
               </div>
               <div style="margin-top: var(--spacing-4); display: flex; justify-content: space-between; align-items: center;">
                 <span style="font-size: var(--font-size-xs); color: #34d399; font-weight: 600;">
-                  ✓ ${m.availableSeats} places libres
+                  ✓ ${l.availableSeats} places libres
                 </span>
                 <span style="font-size: var(--font-size-xs); color: #93c5fd; font-weight: 600;">
-                  ${i&&i.id===m.id?"Sélectionné ●":"Choisir ➔"}
+                  ${n&&n.id===l.id?"Sélectionné ●":"Choisir ➔"}
                 </span>
               </div>
             </div>
@@ -633,14 +670,14 @@
         </div>
 
         <!-- Détails du départ sélectionné et module interactif de siège -->
-        ${i?`
+        ${n?`
           <div class="station-details-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-4); flex-wrap: wrap; gap: var(--spacing-2);">
               <h4 style="margin-bottom: 0; color: #ffffff;">
-                Détails du voyage : ${i.rankLabel} (${i.time})
+                Détails du voyage : ${n.rankLabel} (${n.time})
               </h4>
               <span class="departure-rank" style="background-color: rgba(16, 185, 129, 0.2); color: #34d399;">
-                ${i.company}
+                ${n.company}
               </span>
             </div>
 
@@ -649,7 +686,7 @@
               <div>
                 <span style="font-size: var(--font-size-xs); color: #93c5fd; display: block; font-weight: 600;">💺 VOTRE PLACE À BORD DE L'AUTOCAR :</span>
                 <strong id="current-seat-badge" style="color: #ffffff; font-size: var(--font-size-lg);">
-                  Siège N° ${n} (${u})
+                  Siège N° ${c} (${p})
                 </strong>
               </div>
               <button type="button" id="btn-open-seat-selector" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
@@ -658,13 +695,13 @@
             </div>
 
             <p style="margin-bottom: var(--spacing-2); color: var(--color-text-primary);">
-              🏢 <strong>Gare d'embarquement :</strong> ${i.stationName}
+              🏢 <strong>Gare d'embarquement :</strong> ${n.stationName}
             </p>
             <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">
-              📍 <strong>Adresse :</strong> ${i.stationAddress}
+              📍 <strong>Adresse :</strong> ${n.stationAddress}
             </p>
             <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">
-              🚌 <strong>Véhicule :</strong> ${i.busType}
+              🚌 <strong>Véhicule :</strong> ${n.busType}
             </p>
 
             <div class="station-direction-box">
@@ -672,7 +709,7 @@
                 🗺️ Indications pour vous rendre à la gare :
               </strong>
               <p style="margin-bottom: 0; font-size: var(--font-size-sm); color: var(--color-text-primary);">
-                ${i.directions}
+                ${n.directions}
               </p>
             </div>
 
@@ -691,7 +728,7 @@
 
             <!-- Bouton vers la passerelle de paiement Mobile Money -->
             <button type="button" id="btn-proceed-payment" class="btn-card-white" style="width: 100%; margin-top: var(--spacing-4); padding: var(--spacing-4);">
-              <span>Payer mon ticket & Valider le Siège N° ${n} (${i.priceCfa.toLocaleString("fr-FR")} FCFA)</span>
+              <span>Payer mon ticket & Valider le Siège N° ${c} (${n.priceCfa.toLocaleString("fr-FR")} FCFA)</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -699,11 +736,11 @@
           </div>
         `:""}
       </section>
-    `;const g=l.querySelector("#search-route-form");g.addEventListener("submit",async m=>{m.preventDefault(),C.play("horn"),r=g.querySelector("#select-from").value,s=g.querySelector("#select-to").value,o=await F.searchTrips(r,s),i=o.departures[0]||null,d()});const k=l.querySelector("#interactive-bus-sprite");k&&k.addEventListener("click",()=>{C.play("horn")}),l.querySelectorAll(".departure-card").forEach(m=>{m.addEventListener("click",()=>{C.play("click");const c=m.getAttribute("data-dep-id");i=o.departures.find(p=>p.id===c),d()})});const P=l.querySelector("#btn-open-seat-selector");P&&P.addEventListener("click",()=>{ye({currentSeat:n,company:i.company,onSeatConfirmed:m=>{n=m,u=parseInt(m,10)%2===1?"Côté Fenêtre":"Côté Couloir",d()}})});const E=l.querySelector("#btn-proceed-payment");E&&E.addEventListener("click",async()=>{C.play("click"),E.disabled=!0,E.innerHTML="<span>Préparation du paiement sécurisé...</span>";const m={passengerName:a.fullname,passengerPhone:a.phone||"Non renseigné",seatNumber:n,seatType:u,departureCity:r,arrivalCity:s,departureTime:i.time,departureRank:i.rankLabel,stationName:i.stationName,stationAddress:i.stationAddress,directions:i.directions,busType:i.busType,company:i.company,priceCfa:i.priceCfa},c=await F.createReservation(m);sessionStorage.setItem("pending_ticket",JSON.stringify(c)),sessionStorage.setItem("current_ticket",JSON.stringify(c)),window.location.hash="#/payment"}),B(l),O(l)}return F.getCities().then(g=>{g&&g.length>0&&(e=g,d())}),d(),t.appendChild(l),t}const _=[{id:"wave",name:"Wave CI",class:"operator-wave",logoText:"WAVE"},{id:"orange",name:"Orange Money",class:"operator-orange",logoText:"OM"},{id:"mtn",name:"MTN MoMo",class:"operator-mtn",logoText:"MOMO"},{id:"moov",name:"Moov Money",class:"operator-moov",logoText:"MOOV"}];function ke(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("pending_ticket")||sessionStorage.getItem("current_ticket")||"null"),e=M({label:"Modifier mon trajet",onClick:()=>{window.location.hash="#/app"}});if(t.appendChild(e),!a){const i=document.createElement("div");return i.className="card-blue",i.style.maxWidth="500px",i.style.margin="var(--spacing-8) auto",i.style.textAlign="center",i.innerHTML=`
+    `;const y=i.querySelector("#search-route-form");y.addEventListener("submit",async l=>{l.preventDefault(),S.play("horn"),s=y.querySelector("#select-from").value,r=y.querySelector("#select-to").value,o=await B.searchTrips(s,r),n=o.departures[0]||null,m()});const x=i.querySelector("#interactive-bus-sprite");x&&x.addEventListener("click",()=>{S.play("horn")}),i.querySelectorAll(".departure-card").forEach(l=>{l.addEventListener("click",()=>{S.play("click");const d=l.getAttribute("data-dep-id");n=o.departures.find(g=>g.id===d),m()})});const $=i.querySelector("#btn-open-seat-selector");$&&$.addEventListener("click",()=>{Ce({currentSeat:c,company:n.company,onSeatConfirmed:l=>{c=l,p=parseInt(l,10)%2===1?"Côté Fenêtre":"Côté Couloir",m()}})});const z=i.querySelector("#btn-proceed-payment");z&&z.addEventListener("click",async()=>{S.play("click"),z.disabled=!0,z.innerHTML="<span>Préparation du paiement sécurisé...</span>";const l={passengerName:a.fullname,passengerPhone:a.phone||"Non renseigné",seatNumber:c,seatType:p,departureCity:s,arrivalCity:r,departureTime:n.time,departureRank:n.rankLabel,stationName:n.stationName,stationAddress:n.stationAddress,directions:n.directions,busType:n.busType,company:n.company,priceCfa:n.priceCfa},d=await B.createReservation(l);sessionStorage.setItem("pending_ticket",JSON.stringify(d)),sessionStorage.setItem("current_ticket",JSON.stringify(d)),window.location.hash="#/payment"}),O(i),F(i)}return B.getCities().then(y=>{y&&y.length>0&&(e=y,m())}),m(),t.appendChild(i),t}const _=[{id:"wave",name:"Wave CI",class:"operator-wave",logoText:"WAVE"},{id:"orange",name:"Orange Money",class:"operator-orange",logoText:"OM"},{id:"mtn",name:"MTN MoMo",class:"operator-mtn",logoText:"MOMO"},{id:"moov",name:"Moov Money",class:"operator-moov",logoText:"MOOV"}];function ze(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("pending_ticket")||sessionStorage.getItem("current_ticket")||"null"),e=P({label:"Modifier mon trajet",onClick:()=>{window.location.hash="#/app"}});if(t.appendChild(e),!a){const n=document.createElement("div");return n.className="card-blue",n.style.maxWidth="500px",n.style.margin="var(--spacing-8) auto",n.style.textAlign="center",n.innerHTML=`
       <h2>Aucun trajet en attente de paiement</h2>
       <p>Veuillez d'abord sélectionner un départ.</p>
       <a href="#/app" class="btn-card-white" style="margin-top: var(--spacing-4);">Choisir un départ</a>
-    `,t.appendChild(i),t}let r=_[0].id;const s=document.createElement("div");s.className="card-blue auth-card",s.style.maxWidth="560px",s.style.margin="var(--spacing-6) auto";function o(){s.innerHTML=`
+    `,t.appendChild(n),t}let s=_[0].id;const r=document.createElement("div");r.className="card-blue auth-card",r.style.maxWidth="560px",r.style.margin="var(--spacing-6) auto";function o(){r.innerHTML=`
       <div class="auth-header">
         <h1 class="auth-title">Règlement du Ticket</h1>
         <p class="auth-subtitle">Sélectionnez votre moyen de paiement Mobile Money en Côte d'Ivoire.</p>
@@ -728,10 +765,10 @@
       <!-- Sélecteur d'opérateur Mobile Money -->
       <label class="form-label">Opérateur Mobile Money :</label>
       <div class="payment-methods-grid">
-        ${_.map(n=>`
-          <div class="payment-method-card ${r===n.id?"active":""}" data-op-id="${n.id}">
-            <div class="operator-icon-badge ${n.class}">${n.logoText}</div>
-            <span class="operator-name">${n.name}</span>
+        ${_.map(c=>`
+          <div class="payment-method-card ${s===c.id?"active":""}" data-op-id="${c.id}">
+            <div class="operator-icon-badge ${c.class}">${c.logoText}</div>
+            <span class="operator-name">${c.name}</span>
           </div>
         `).join("")}
       </div>
@@ -756,13 +793,13 @@
           </svg>
         </button>
       </form>
-    `,s.querySelectorAll(".payment-method-card").forEach(n=>{n.addEventListener("click",()=>{r=n.getAttribute("data-op-id"),o()})});const i=s.querySelector("#payment-form");i.addEventListener("submit",async n=>{n.preventDefault();const u=i.querySelector("#btn-submit-pay"),b=i.querySelector("#pay-phone"),v=b?b.value.trim():a.passengerPhone;u.disabled=!0,u.innerHTML="<span>Validation auprès de l'opérateur...</span>";const h=_.find(l=>l.id===r);try{const l=await F.initiatePayment({bookingRef:a.bookingRef,operatorId:r,phone:v,amountCfa:a.priceCfa,passengerName:a.passengerName}),d={...a,passengerPhone:v,paymentMethod:h.name,paymentStatus:"PAID",paymentTransactionId:l.transaction?l.transaction.transactionId:`TXN-${r.toUpperCase()}-${Date.now().toString().slice(-6)}`,paymentDate:new Date().toISOString()},g=JSON.parse(localStorage.getItem("user_tickets_history")||"[]");g.unshift(d),localStorage.setItem("user_tickets_history",JSON.stringify(g)),sessionStorage.setItem("current_ticket",JSON.stringify(d)),window.location.hash="#/confirmation"}catch{u.disabled=!1,u.innerHTML="<span>Réessayer le paiement</span>"}})}return o(),t.appendChild(s),t}function we(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_ticket")||"null"),e=M({label:"Retour aux trajets",onClick:()=>{window.location.hash="#/app"}});if(t.appendChild(e),!a){const o=document.createElement("div");return o.className="card-blue",o.style.maxWidth="550px",o.style.margin="var(--spacing-8) auto",o.style.textAlign="center",o.innerHTML=`
+    `,r.querySelectorAll(".payment-method-card").forEach(c=>{c.addEventListener("click",()=>{s=c.getAttribute("data-op-id"),o()})});const n=r.querySelector("#payment-form");n.addEventListener("submit",async c=>{c.preventDefault();const p=n.querySelector("#btn-submit-pay"),f=n.querySelector("#pay-phone"),u=f?f.value.trim():a.passengerPhone;p.disabled=!0,p.innerHTML="<span>Validation auprès de l'opérateur...</span>";const v=_.find(i=>i.id===s);try{const i=await B.initiatePayment({bookingRef:a.bookingRef,operatorId:s,phone:u,amountCfa:a.priceCfa,passengerName:a.passengerName}),m={...a,passengerPhone:u,paymentMethod:v.name,paymentStatus:"PAID",paymentTransactionId:i.transaction?i.transaction.transactionId:`TXN-${s.toUpperCase()}-${Date.now().toString().slice(-6)}`,paymentDate:new Date().toISOString()},y=JSON.parse(localStorage.getItem("user_tickets_history")||"[]");y.unshift(m),localStorage.setItem("user_tickets_history",JSON.stringify(y)),sessionStorage.setItem("current_ticket",JSON.stringify(m)),window.location.hash="#/confirmation"}catch{p.disabled=!1,p.innerHTML="<span>Réessayer le paiement</span>"}})}return o(),t.appendChild(r),t}function Ee(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_ticket")||"null"),e=P({label:"Retour aux trajets",onClick:()=>{window.location.hash="#/app"}});if(t.appendChild(e),!a){const o=document.createElement("div");return o.className="card-blue",o.style.maxWidth="550px",o.style.margin="var(--spacing-8) auto",o.style.textAlign="center",o.innerHTML=`
       <h2 style="margin-bottom: var(--spacing-4);">Aucune réservation trouvée</h2>
       <p>Veuillez d'abord sélectionner un trajet et valider votre départ.</p>
       <a href="#/app" class="btn-card-white" style="margin-top: var(--spacing-4);">
         Rechercher un départ
       </a>
-    `,t.appendChild(o),t}const r=document.createElement("div");r.className="card-blue ticket-container",r.innerHTML=`
+    `,t.appendChild(o),t}const s=document.createElement("div");s.className="card-blue ticket-container",s.innerHTML=`
     <div class="ticket-header-band">
       <h2 style="color: #ffffff; font-size: var(--font-size-xl); margin-bottom: var(--spacing-1);">
         🎉 Réservation & Paiement Confirmés !
@@ -853,7 +890,7 @@
         </a>
       </div>
     </div>
-  `;const s=r.querySelector("#btn-print-ticket");return s&&s.addEventListener("click",()=>{window.print()}),t.appendChild(r),requestAnimationFrame(()=>{ae(),B(t),O(t)}),t}function Ce(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Voyageur", "phone": "" }'),e=document.createElement("div");e.className="booking-topbar",e.innerHTML=`
+  `;const r=s.querySelector("#btn-print-ticket");return r&&r.addEventListener("click",()=>{window.print()}),t.appendChild(s),requestAnimationFrame(()=>{ee(),O(t),F(t)}),t}function $e(){const t=document.createElement("div");t.className="main-content";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Voyageur", "phone": "" }'),e=document.createElement("div");e.className="booking-topbar",e.innerHTML=`
     <div class="user-badge-info">
       <div class="user-avatar">${a.fullname.charAt(0).toUpperCase()}</div>
       <div>
@@ -869,42 +906,42 @@
         🚌 Nouveau Trajet
       </a>
     </div>
-  `,t.appendChild(e);const r=M({label:"Retour à l'espace réservation",onClick:()=>{window.location.hash="#/app"}});t.appendChild(r);const s=document.createElement("div");if(s.style.margin="var(--spacing-4) 0 var(--spacing-6) 0",s.innerHTML=`
+  `,t.appendChild(e);const s=P({label:"Retour à l'espace réservation",onClick:()=>{window.location.hash="#/app"}});t.appendChild(s);const r=document.createElement("div");if(r.style.margin="var(--spacing-4) 0 var(--spacing-6) 0",r.innerHTML=`
     <h1>Mes Billets & Historique des Voyages</h1>
     <p>Retrouvez l'ensemble de vos réservations, vérifiez l'état de vos départs et réimprimez vos tickets.</p>
-  `,t.appendChild(s),history.length===0){const i=document.createElement("div");return i.className="card-blue",i.style.maxWidth="600px",i.style.textAlign="center",i.style.padding="var(--spacing-8)",i.innerHTML=`
+  `,t.appendChild(r),history.length===0){const n=document.createElement("div");return n.className="card-blue",n.style.maxWidth="600px",n.style.textAlign="center",n.style.padding="var(--spacing-8)",n.innerHTML=`
       <div style="font-size: 3rem; margin-bottom: var(--spacing-4);">🎟️</div>
       <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-2);">Aucun voyage enregistré</h2>
       <p>Vous n'avez pas encore réservé de trajet sur la plateforme.</p>
       <a href="#/app" class="btn-card-white" style="margin-top: var(--spacing-4);">
         Réserver mon premier départ
       </a>
-    `,t.appendChild(i),t}const o=document.createElement("div");return o.className="history-list",history.forEach(i=>{const n=document.createElement("div");n.className="card-blue history-item-card",n.innerHTML=`
+    `,t.appendChild(n),t}const o=document.createElement("div");return o.className="history-list",history.forEach(n=>{const c=document.createElement("div");c.className="card-blue history-item-card",c.innerHTML=`
       <div>
         <div style="display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-2);">
-          <span class="history-badge-status status-paid">✓ Payé (${i.paymentMethod||"Mobile Money"})</span>
-          <span style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Réf : ${i.bookingRef}</span>
+          <span class="history-badge-status status-paid">✓ Payé (${n.paymentMethod||"Mobile Money"})</span>
+          <span style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Réf : ${n.bookingRef}</span>
         </div>
         <h3 style="font-size: var(--font-size-xl); color: #60a5fa; margin-bottom: var(--spacing-1);">
-          ${i.departureCity} ➔ ${i.arrivalCity}
+          ${n.departureCity} ➔ ${n.arrivalCity}
         </h3>
         <p style="font-size: var(--font-size-sm); margin-bottom: 0; color: var(--color-text-secondary);">
-          📅 Départ : <strong>${i.departureTime}</strong> (${i.departureRank}) • Gare : ${i.stationName}
+          📅 Départ : <strong>${n.departureTime}</strong> (${n.departureRank}) • Gare : ${n.stationName}
         </p>
       </div>
 
       <div style="display: flex; align-items: center; gap: var(--spacing-4);">
         <span style="font-size: var(--font-size-lg); font-weight: 700; color: #fbbf24;">
-          ${(i.priceCfa||7e3).toLocaleString("fr-FR")} FCFA
+          ${(n.priceCfa||7e3).toLocaleString("fr-FR")} FCFA
         </span>
-        <button type="button" class="btn-card-white" data-ticket-ref="${i.bookingRef}">
+        <button type="button" class="btn-card-white" data-ticket-ref="${n.bookingRef}">
           <span>Voir le billet</span>
         </button>
       </div>
-    `;const u=n.querySelector(`[data-ticket-ref="${i.bookingRef}"]`);u&&u.addEventListener("click",()=>{sessionStorage.setItem("current_ticket",JSON.stringify(i)),window.location.hash="#/confirmation"}),o.appendChild(n)}),t.appendChild(o),t}function H(t,a=!1){let e=document.getElementById("profile-toast-notification");e||(e=document.createElement("div"),e.id="profile-toast-notification",e.className="profile-toast",document.body.appendChild(e)),e.className=`profile-toast ${a?"error":""} show`,e.innerHTML=`
+    `;const p=c.querySelector(`[data-ticket-ref="${n.bookingRef}"]`);p&&p.addEventListener("click",()=>{sessionStorage.setItem("current_ticket",JSON.stringify(n)),window.location.hash="#/confirmation"}),o.appendChild(c)}),t.appendChild(o),t}function G(t,a=!1){let e=document.getElementById("profile-toast-notification");e||(e=document.createElement("div"),e.id="profile-toast-notification",e.className="profile-toast",document.body.appendChild(e)),e.className=`profile-toast ${a?"error":""} show`,e.innerHTML=`
     <span>${a?"⚠️":"✓"}</span>
     <span>${t}</span>
-  `,setTimeout(()=>{e.classList.remove("show")},3500)}function Se(t){if(!t||t.length<6)return"weak";const a=/[A-Z]/.test(t),e=/[a-z]/.test(t),r=/[0-9]/.test(t),s=/[^A-Za-z0-9]/.test(t),o=[a,e,r,s,t.length>=8].filter(Boolean).length;return o>=4?"strong":o>=2?"medium":"weak"}function ze(){const t=document.createElement("div");t.className="main-content profile-container";const a=sessionStorage.getItem("current_user"),e=a?JSON.parse(a):{fullname:"Kouassi Jean-Philippe",username:"kouassi_jp",phone:"+225 07 12 34 56 78",email:"jean.kouassi@transport.ci",city:"Abidjan",emergencyContactName:"Kouassi Marie (Épouse)",emergencyContactPhone:"+225 05 98 76 54 32",preferredPayment:"wave",preferredCompany:"UTB",seatPreference:"fenetre",smsAlerts:!0,memberSince:"Janvier 2026"};e.username=e.username||e.fullname.toLowerCase().replace(/[\s-]/g,"_"),e.city=e.city||"Abidjan",e.emergencyContactName=e.emergencyContactName||"",e.emergencyContactPhone=e.emergencyContactPhone||"",e.preferredPayment=e.preferredPayment||"wave",e.preferredCompany=e.preferredCompany||"Toutes compagnies",e.seatPreference=e.seatPreference||"fenetre",e.smsAlerts=e.smsAlerts!==void 0?e.smsAlerts:!0,e.memberSince=e.memberSince||"2026";const r=JSON.parse(localStorage.getItem("user_tickets_history")||"[]"),s=r.length,o=r.reduce((y,x)=>y+(x.priceCfa||0),0),i=s*150+500,n=s>=5?"Membre Gold ⭐":s>=2?"Membre Silver ✨":"Passager Certifié ✓",u=M({label:"Retour aux trajets",onClick:()=>{window.location.hash="#/app"}});t.appendChild(u);const b=document.createElement("div");b.className="profile-hero-card",b.innerHTML=`
+  `,setTimeout(()=>{e.classList.remove("show")},3500)}function Ne(t){if(!t||t.length<6)return"weak";const a=/[A-Z]/.test(t),e=/[a-z]/.test(t),s=/[0-9]/.test(t),r=/[^A-Za-z0-9]/.test(t),o=[a,e,s,r,t.length>=8].filter(Boolean).length;return o>=4?"strong":o>=2?"medium":"weak"}function Ae(){const t=document.createElement("div");t.className="main-content profile-container";const a=sessionStorage.getItem("current_user"),e=a?JSON.parse(a):{fullname:"Kouassi Jean-Philippe",username:"kouassi_jp",phone:"+225 07 12 34 56 78",email:"jean.kouassi@transport.ci",city:"Abidjan",emergencyContactName:"Kouassi Marie (Épouse)",emergencyContactPhone:"+225 05 98 76 54 32",preferredPayment:"wave",preferredCompany:"UTB",seatPreference:"fenetre",smsAlerts:!0,memberSince:"Janvier 2026"};e.username=e.username||e.fullname.toLowerCase().replace(/[\s-]/g,"_"),e.city=e.city||"Abidjan",e.emergencyContactName=e.emergencyContactName||"",e.emergencyContactPhone=e.emergencyContactPhone||"",e.preferredPayment=e.preferredPayment||"wave",e.preferredCompany=e.preferredCompany||"Toutes compagnies",e.seatPreference=e.seatPreference||"fenetre",e.smsAlerts=e.smsAlerts!==void 0?e.smsAlerts:!0,e.memberSince=e.memberSince||"2026";const s=JSON.parse(localStorage.getItem("user_tickets_history")||"[]"),r=s.length,o=s.reduce((h,k)=>h+(k.priceCfa||0),0),n=r*150+500,c=r>=5?"Membre Gold ⭐":r>=2?"Membre Silver ✨":"Passager Certifié ✓",p=P({label:"Retour aux trajets",onClick:()=>{window.location.hash="#/app"}});t.appendChild(p);const f=document.createElement("div");f.className="profile-hero-card",f.innerHTML=`
     <div class="profile-user-details">
       <div class="profile-avatar-large" id="profile-avatar-display">
         ${e.fullname.charAt(0).toUpperCase()}
@@ -915,7 +952,7 @@
           <span class="profile-username-badge" id="profile-hero-username">@${e.username}</span>
         </h1>
         <div class="profile-meta-text">
-          <span class="profile-status-badge">${n}</span>
+          <span class="profile-status-badge">${c}</span>
           <span>📍 <strong id="profile-hero-city">${e.city}</strong></span>
           <span>📞 <span id="profile-hero-phone">${e.phone}</span></span>
         </div>
@@ -924,7 +961,7 @@
 
     <div class="profile-hero-actions">
       <a href="#/history" class="btn-card-white" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
-        🎟️ Mes Billets (${s})
+        🎟️ Mes Billets (${r})
       </a>
       <a href="#/app" class="btn-primary-blue" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
         🚌 Réserver
@@ -933,10 +970,10 @@
         🚪 Déconnexion
       </button>
     </div>
-  `,t.appendChild(b);const v=document.createElement("div");v.className="profile-stats-grid",v.innerHTML=`
+  `,t.appendChild(f);const u=document.createElement("div");u.className="profile-stats-grid",u.innerHTML=`
     <div class="profile-stat-card">
       <div class="profile-stat-icon">🎟️</div>
-      <div class="profile-stat-value">${s}</div>
+      <div class="profile-stat-value">${r}</div>
       <div class="profile-stat-label">Voyages Effectués</div>
     </div>
     <div class="profile-stat-card">
@@ -946,15 +983,15 @@
     </div>
     <div class="profile-stat-card">
       <div class="profile-stat-icon">🎁</div>
-      <div class="profile-stat-value">${i}</div>
+      <div class="profile-stat-value">${n}</div>
       <div class="profile-stat-label">Points Fidélité</div>
     </div>
     <div class="profile-stat-card">
       <div class="profile-stat-icon">🏆</div>
-      <div class="profile-stat-value" style="font-size: var(--font-size-lg); color: #34d399;">${n}</div>
+      <div class="profile-stat-value" style="font-size: var(--font-size-lg); color: #34d399;">${c}</div>
       <div class="profile-stat-label">Statut Voyageur</div>
     </div>
-  `,t.appendChild(v);const h=document.createElement("div");h.className="profile-grid-layout";const l=document.createElement("div");l.className="profile-section-card",l.innerHTML=`
+  `,t.appendChild(u);const v=document.createElement("div");v.className="profile-grid-layout";const i=document.createElement("div");i.className="profile-section-card",i.innerHTML=`
     <div class="profile-section-header">
       <div class="profile-section-icon">👤</div>
       <div>
@@ -1027,7 +1064,7 @@
       <div class="form-group">
         <label for="prof-city" class="form-label">Ville de résidence principale</label>
         <select id="prof-city" name="city" class="form-select">
-          ${T.map(y=>`<option value="${y}" ${y===e.city?"selected":""}>${y}</option>`).join("")}
+          ${q.map(h=>`<option value="${h}" ${h===e.city?"selected":""}>${h}</option>`).join("")}
         </select>
       </div>
 
@@ -1038,7 +1075,7 @@
         </svg>
       </button>
     </form>
-  `,h.appendChild(l);const d=document.createElement("div");d.className="profile-section-card",d.innerHTML=`
+  `,v.appendChild(i);const m=document.createElement("div");m.className="profile-section-card",m.innerHTML=`
     <div class="profile-section-header">
       <div class="profile-section-icon">🔒</div>
       <div>
@@ -1106,7 +1143,7 @@
         </svg>
       </button>
     </form>
-  `,h.appendChild(d);const g=document.createElement("div");g.className="profile-section-card profile-card-full",g.innerHTML=`
+  `,v.appendChild(m);const y=document.createElement("div");y.className="profile-section-card profile-card-full",y.innerHTML=`
     <div class="profile-section-header">
       <div class="profile-section-icon">⚙️</div>
       <div>
@@ -1195,12 +1232,12 @@
         </svg>
       </button>
     </form>
-  `,h.appendChild(g),t.appendChild(h);const k=l.querySelector("#form-personal-info");k.addEventListener("submit",y=>{y.preventDefault();const x=k.querySelector("#prof-username").value.trim(),S=k.querySelector("#prof-fullname").value.trim(),$=k.querySelector("#prof-phone").value.trim(),f=k.querySelector("#prof-email").value.trim(),z=k.querySelector("#prof-city").value;let q=!0;x?k.querySelector("#fb-prof-username").className="form-feedback":(k.querySelector("#fb-prof-username").className="form-feedback error",q=!1),S?k.querySelector("#fb-prof-fullname").className="form-feedback":(k.querySelector("#fb-prof-fullname").className="form-feedback error",q=!1),!$||$.length<8?(k.querySelector("#fb-prof-phone").className="form-feedback error",q=!1):k.querySelector("#fb-prof-phone").className="form-feedback",q&&(e.username=x,e.fullname=S,e.phone=$,e.email=f,e.city=z,sessionStorage.setItem("current_user",JSON.stringify(e)),localStorage.setItem("saved_passenger_profile",JSON.stringify(e)),t.querySelector("#profile-hero-name").innerHTML=`
+  `,v.appendChild(y),t.appendChild(v);const x=i.querySelector("#form-personal-info");x.addEventListener("submit",h=>{h.preventDefault();const k=x.querySelector("#prof-username").value.trim(),E=x.querySelector("#prof-fullname").value.trim(),b=x.querySelector("#prof-phone").value.trim(),C=x.querySelector("#prof-email").value.trim(),L=x.querySelector("#prof-city").value;let M=!0;k?x.querySelector("#fb-prof-username").className="form-feedback":(x.querySelector("#fb-prof-username").className="form-feedback error",M=!1),E?x.querySelector("#fb-prof-fullname").className="form-feedback":(x.querySelector("#fb-prof-fullname").className="form-feedback error",M=!1),!b||b.length<8?(x.querySelector("#fb-prof-phone").className="form-feedback error",M=!1):x.querySelector("#fb-prof-phone").className="form-feedback",M&&(e.username=k,e.fullname=E,e.phone=b,e.email=C,e.city=L,sessionStorage.setItem("current_user",JSON.stringify(e)),localStorage.setItem("saved_passenger_profile",JSON.stringify(e)),t.querySelector("#profile-hero-name").innerHTML=`
         ${e.fullname}
         <span class="profile-username-badge" id="profile-hero-username">@${e.username}</span>
-      `,t.querySelector("#profile-avatar-display").textContent=e.fullname.charAt(0).toUpperCase(),t.querySelector("#profile-hero-city").textContent=e.city,t.querySelector("#profile-hero-phone").textContent=e.phone,H("Vos informations personnelles ont été mises à jour avec succès !"))});const P=d.querySelector("#prof-new-pwd"),E=d.querySelector("#pwd-strength-fill"),m=d.querySelector("#pwd-strength-text");P.addEventListener("input",()=>{const y=P.value;if(!y){E.className="password-strength-fill",m.textContent="Sécurité : Entrez un mot de passe";return}const x=Se(y);E.className=`password-strength-fill ${x}`,x==="strong"?(m.textContent="Sécurité : Mot de passe robuste et sécurisé ✓",m.style.color="#34d399"):x==="medium"?(m.textContent="Sécurité : Niveau moyen (ajoutez des chiffres ou symboles)",m.style.color="#fbbf24"):(m.textContent="Sécurité : Mot de passe trop court ou faible",m.style.color="#ef4444")});const c=d.querySelector("#form-password-change");c.addEventListener("submit",y=>{y.preventDefault();const x=c.querySelector("#prof-old-pwd").value,S=c.querySelector("#prof-new-pwd").value,$=c.querySelector("#prof-confirm-pwd").value;let f=!0;x?c.querySelector("#fb-prof-old-pwd").className="form-feedback":(c.querySelector("#fb-prof-old-pwd").className="form-feedback error",f=!1),S.length<6&&(m.textContent="Erreur : Le nouveau mot de passe doit comporter au moins 6 caractères.",m.style.color="#ef4444",f=!1),S!==$?(c.querySelector("#fb-prof-confirm-pwd").className="form-feedback error",f=!1):c.querySelector("#fb-prof-confirm-pwd").className="form-feedback",f&&(e.passwordUpdated=new Date().toISOString(),sessionStorage.setItem("current_user",JSON.stringify(e)),c.reset(),E.className="password-strength-fill",m.textContent="Sécurité : Entrez un mot de passe",m.style.color="var(--color-text-muted)",H("Votre mot de passe a été modifié avec succès !"))});const p=g.querySelector("#form-preferences");p.querySelectorAll(".operator-radio-label").forEach(y=>{y.addEventListener("click",()=>{p.querySelectorAll(".operator-radio-label").forEach(S=>S.classList.remove("selected")),y.classList.add("selected");const x=y.querySelector("input");x&&(x.checked=!0)})}),p.addEventListener("submit",y=>{y.preventDefault();const x=p.querySelector("#prof-emergency-name").value.trim(),S=p.querySelector("#prof-emergency-phone").value.trim(),$=p.querySelector('input[name="preferredPayment"]:checked'),f=$?$.value:"wave",z=p.querySelector("#prof-seat-pref").value,q=p.querySelector("#prof-sms-alerts").checked;e.emergencyContactName=x,e.emergencyContactPhone=S,e.preferredPayment=f,e.seatPreference=z,e.smsAlerts=q,sessionStorage.setItem("current_user",JSON.stringify(e)),localStorage.setItem("saved_passenger_profile",JSON.stringify(e)),H("Vos préférences de voyage et contact d'urgence ont été enregistrés !")});const w=b.querySelector("#btn-logout-profile");return w&&w.addEventListener("click",()=>{sessionStorage.removeItem("current_user"),window.location.hash="#/"}),t}const J=[{id:"doc",name:"Document / Pli Express",icon:"📄",desc:"Courrier, dossiers administratifs, passeports, diplômes (< 1 kg)",basePrice:1500,maxWeight:1},{id:"small",name:"Petit Colis",icon:"📦",desc:"Vêtements, petits paquets, accessoires (1 à 5 kg)",basePrice:2500,maxWeight:5},{id:"medium",name:"Sac / Sacoche Moyenne",icon:"🧳",desc:"Sacs de voyage, cartons moyens, pièces détachées (5 à 15 kg)",basePrice:4e3,maxWeight:15},{id:"large",name:"Gros Carton / Vivres",icon:"📦📦",desc:"Cartons d'ignames, sacs de riz, marchandises en vrac (15 à 30 kg)",basePrice:6e3,maxWeight:30},{id:"heavy",name:"Fret Lourd / Électroménager",icon:"📺",desc:"Télévisions, moteurs, colis volumineux (30 à 50 kg)",basePrice:9e3,maxWeight:50},{id:"fresh",name:"Denrées & Produits Frais",icon:"🧊",desc:"Poissons fumés, attiéké, fruits avec priorité d'embarquement",basePrice:5e3,maxWeight:25}];function j(t,a=2,e={}){let s=(J.find(o=>o.id===t)||J[1]).basePrice;return a>10&&(s+=(a-10)*150),e.isFragile&&(s+=500),e.isInsured&&(s+=1e3),Math.round(s)}function Ee(t,a){const e=(t||"ABJ").slice(0,3).toUpperCase(),r=(a||"BDK").slice(0,3).toUpperCase(),s=Math.floor(1e5+Math.random()*9e5);return`COLIS-${e}-${r}-${s}`}function $e(){return Math.floor(1e3+Math.random()*9e3).toString()}function Ne(){const t=document.createElement("div");t.className="main-content courier-container";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Expéditeur Express", "phone": "+225 07 12 34 56 78" }');let e="send",r="small",s=3,o=!1,i=!1,n="wave",u=null;const b=U();t.appendChild(b);const v=M({label:"Retour aux départs voyageurs",onClick:()=>{window.location.hash="#/app"}});t.appendChild(v);const h=document.createElement("div");h.className="courier-hero-banner",h.innerHTML=`
+      `,t.querySelector("#profile-avatar-display").textContent=e.fullname.charAt(0).toUpperCase(),t.querySelector("#profile-hero-city").textContent=e.city,t.querySelector("#profile-hero-phone").textContent=e.phone,G("Vos informations personnelles ont été mises à jour avec succès !"))});const $=m.querySelector("#prof-new-pwd"),z=m.querySelector("#pwd-strength-fill"),l=m.querySelector("#pwd-strength-text");$.addEventListener("input",()=>{const h=$.value;if(!h){z.className="password-strength-fill",l.textContent="Sécurité : Entrez un mot de passe";return}const k=Ne(h);z.className=`password-strength-fill ${k}`,k==="strong"?(l.textContent="Sécurité : Mot de passe robuste et sécurisé ✓",l.style.color="#34d399"):k==="medium"?(l.textContent="Sécurité : Niveau moyen (ajoutez des chiffres ou symboles)",l.style.color="#fbbf24"):(l.textContent="Sécurité : Mot de passe trop court ou faible",l.style.color="#ef4444")});const d=m.querySelector("#form-password-change");d.addEventListener("submit",h=>{h.preventDefault();const k=d.querySelector("#prof-old-pwd").value,E=d.querySelector("#prof-new-pwd").value,b=d.querySelector("#prof-confirm-pwd").value;let C=!0;k?d.querySelector("#fb-prof-old-pwd").className="form-feedback":(d.querySelector("#fb-prof-old-pwd").className="form-feedback error",C=!1),E.length<6&&(l.textContent="Erreur : Le nouveau mot de passe doit comporter au moins 6 caractères.",l.style.color="#ef4444",C=!1),E!==b?(d.querySelector("#fb-prof-confirm-pwd").className="form-feedback error",C=!1):d.querySelector("#fb-prof-confirm-pwd").className="form-feedback",C&&(e.passwordUpdated=new Date().toISOString(),sessionStorage.setItem("current_user",JSON.stringify(e)),d.reset(),z.className="password-strength-fill",l.textContent="Sécurité : Entrez un mot de passe",l.style.color="var(--color-text-muted)",G("Votre mot de passe a été modifié avec succès !"))});const g=y.querySelector("#form-preferences");g.querySelectorAll(".operator-radio-label").forEach(h=>{h.addEventListener("click",()=>{g.querySelectorAll(".operator-radio-label").forEach(E=>E.classList.remove("selected")),h.classList.add("selected");const k=h.querySelector("input");k&&(k.checked=!0)})}),g.addEventListener("submit",h=>{h.preventDefault();const k=g.querySelector("#prof-emergency-name").value.trim(),E=g.querySelector("#prof-emergency-phone").value.trim(),b=g.querySelector('input[name="preferredPayment"]:checked'),C=b?b.value:"wave",L=g.querySelector("#prof-seat-pref").value,M=g.querySelector("#prof-sms-alerts").checked;e.emergencyContactName=k,e.emergencyContactPhone=E,e.preferredPayment=C,e.seatPreference=L,e.smsAlerts=M,sessionStorage.setItem("current_user",JSON.stringify(e)),localStorage.setItem("saved_passenger_profile",JSON.stringify(e)),G("Vos préférences de voyage et contact d'urgence ont été enregistrés !")});const w=f.querySelector("#btn-logout-profile");return w&&w.addEventListener("click",()=>{sessionStorage.removeItem("current_user"),window.location.hash="#/"}),t}const H=[{id:"doc",name:"Document / Pli Express",icon:"📄",desc:"Courrier, dossiers administratifs, passeports, diplômes (< 1 kg)",basePrice:1500,maxWeight:1},{id:"small",name:"Petit Colis",icon:"📦",desc:"Vêtements, petits paquets, accessoires (1 à 5 kg)",basePrice:2500,maxWeight:5},{id:"medium",name:"Sac / Sacoche Moyenne",icon:"🧳",desc:"Sacs de voyage, cartons moyens, pièces détachées (5 à 15 kg)",basePrice:4e3,maxWeight:15},{id:"large",name:"Gros Carton / Vivres",icon:"📦📦",desc:"Cartons d'ignames, sacs de riz, marchandises en vrac (15 à 30 kg)",basePrice:6e3,maxWeight:30},{id:"heavy",name:"Fret Lourd / Électroménager",icon:"📺",desc:"Télévisions, moteurs, colis volumineux (30 à 50 kg)",basePrice:9e3,maxWeight:50},{id:"fresh",name:"Denrées & Produits Frais",icon:"🧊",desc:"Poissons fumés, attiéké, fruits avec priorité d'embarquement",basePrice:5e3,maxWeight:25}];function j(t,a=2,e={}){let r=(H.find(o=>o.id===t)||H[1]).basePrice;return a>10&&(r+=(a-10)*150),e.isFragile&&(r+=500),e.isInsured&&(r+=1e3),Math.round(r)}function Me(t,a){const e=(t||"ABJ").slice(0,3).toUpperCase(),s=(a||"BDK").slice(0,3).toUpperCase(),r=Math.floor(1e5+Math.random()*9e5);return`COLIS-${e}-${s}-${r}`}function Pe(){return Math.floor(1e3+Math.random()*9e3).toString()}function qe(){const t=document.createElement("div");t.className="main-content courier-container";const a=JSON.parse(sessionStorage.getItem("current_user")||'{"fullname": "Expéditeur Express", "phone": "+225 07 12 34 56 78" }');let e="send",s="small",r=3,o=!1,n=!1,c="wave",p=null;const f=P({label:"Retour aux départs voyageurs",onClick:()=>{window.location.hash="#/app"}});t.appendChild(f);const u=document.createElement("div");u.className="courier-hero-banner no-tilt",u.innerHTML=`
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--spacing-2);">
-      <span class="radar-dot" style="background-color: #10b981;"></span>
+      <span class="radar-dot" style="background-color: #10b981; animation: none;"></span>
       <span style="font-size: var(--font-size-xs); color: #34d399; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
         Service Fret & Courrier Express en Gare Routière
       </span>
@@ -1211,7 +1248,7 @@
     <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); max-width: 720px; margin-bottom: 0;">
       Acheminement sécurisé en soute d'autocar VIP le jour même. Code PIN secret de retrait envoyé par SMS au destinataire et traçabilité en temps réel.
     </p>
-  `,t.appendChild(h);const l=document.createElement("div");l.className="courier-tabs-nav",l.innerHTML=`
+  `,t.appendChild(u);const v=document.createElement("div");v.className="courier-tabs-nav",v.innerHTML=`
     <button type="button" class="courier-tab-btn active" data-tab="send">
       <span>📤 Expédier un Colis</span>
     </button>
@@ -1221,8 +1258,8 @@
     <button type="button" class="courier-tab-btn" data-tab="history">
       <span>📋 Mes Expéditions</span>
     </button>
-  `,t.appendChild(l);const d=document.createElement("div");d.id="courier-tab-content",t.appendChild(d);function g(){l.querySelectorAll(".courier-tab-btn").forEach(c=>{c.classList.toggle("active",c.getAttribute("data-tab")===e)}),e==="send"?k():e==="track"?P():e==="history"?E():e==="receipt"&&m(),requestAnimationFrame(()=>{B(d),O(d)})}function k(){const c=j(r,s,{isFragile:o,isInsured:i});d.innerHTML=`
-      <div class="card-blue" style="border: 1px solid rgba(59, 130, 246, 0.4);">
+  `,t.appendChild(v);const i=document.createElement("div");i.id="courier-tab-content",t.appendChild(i);function m(){v.querySelectorAll(".courier-tab-btn").forEach(l=>{l.classList.toggle("active",l.getAttribute("data-tab")===e)}),e==="send"?y():e==="track"?x():e==="history"?$():e==="receipt"&&z(),requestAnimationFrame(()=>{O(i)})}function y(){const l=j(s,r,{isFragile:o,isInsured:n});i.innerHTML=`
+      <div class="card-blue no-tilt" style="border: 1px solid rgba(59, 130, 246, 0.4);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-4); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: var(--spacing-3); flex-wrap: wrap; gap: var(--spacing-2);">
           <div>
             <h2 style="font-size: var(--font-size-xl); margin-bottom: 2px;">Bordereau d'Expédition de Marchandise</h2>
@@ -1254,7 +1291,7 @@
               <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" style="font-size: var(--font-size-xs);">Ville & Gare de dépôt</label>
                 <select id="sender-city" class="form-select">
-                  ${T.map(f=>`<option value="${f}" ${f==="Abidjan"?"selected":""}>${f} (Gare Centrale)</option>`).join("")}
+                  ${q.map(b=>`<option value="${b}" ${b==="Abidjan"?"selected":""}>${b} (Gare Centrale)</option>`).join("")}
                 </select>
               </div>
             </div>
@@ -1275,7 +1312,7 @@
               <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" style="font-size: var(--font-size-xs);">Ville & Gare de retrait</label>
                 <select id="receiver-city" class="form-select">
-                  ${T.map(f=>`<option value="${f}" ${f==="Bondoukou"?"selected":""}>${f} (Gare Centrale)</option>`).join("")}
+                  ${q.map(b=>`<option value="${b}" ${b==="Bondoukou"?"selected":""}>${b} (Gare Centrale)</option>`).join("")}
                 </select>
               </div>
             </div>
@@ -1287,11 +1324,11 @@
               📦 Nature et Type de Marchandise à expédier :
             </label>
             <div class="package-types-grid">
-              ${J.map(f=>`
-                <div class="package-type-card ${r===f.id?"selected":""}" data-cat-id="${f.id}">
-                  <div class="package-type-icon">${f.icon}</div>
-                  <div class="package-type-name">${f.name}</div>
-                  <div class="package-type-price">Dès ${f.basePrice.toLocaleString("fr-FR")} FCFA</div>
+              ${H.map(b=>`
+                <div class="package-type-card ${s===b.id?"selected":""}" data-cat-id="${b.id}">
+                  <div class="package-type-icon">${b.icon}</div>
+                  <div class="package-type-name">${b.name}</div>
+                  <div class="package-type-price">Dès ${b.basePrice.toLocaleString("fr-FR")} FCFA</div>
                 </div>
               `).join("")}
             </div>
@@ -1301,9 +1338,9 @@
           <div class="weight-slider-container">
             <div class="weight-display-badge">
               <span style="font-weight: 700; color: #ffffff; font-size: var(--font-size-sm);">⚖️ Poids estimé de la marchandise :</span>
-              <strong id="weight-label" style="color: #60a5fa; font-size: var(--font-size-lg);">${s} kg</strong>
+              <strong id="weight-label" style="color: #60a5fa; font-size: var(--font-size-lg);">${r} kg</strong>
             </div>
-            <input type="range" id="weight-slider" class="weight-range-input" min="1" max="50" value="${s}" />
+            <input type="range" id="weight-slider" class="weight-range-input" min="1" max="50" value="${r}" />
             <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--color-text-muted); margin-top: 4px;">
               <span>1 kg (Pli express)</span>
               <span>15 kg (Carton moyen)</span>
@@ -1328,7 +1365,7 @@
             </label>
 
             <label style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: var(--spacing-3); display: flex; align-items: center; gap: var(--spacing-3); cursor: pointer;">
-              <input type="checkbox" id="check-insurance" ${i?"checked":""} style="width: 18px; height: 18px; cursor: pointer;" />
+              <input type="checkbox" id="check-insurance" ${n?"checked":""} style="width: 18px; height: 18px; cursor: pointer;" />
               <div>
                 <strong style="color: #34d399; font-size: var(--font-size-xs); display: block;">🛡️ Assurance Déclarée (+1 000 F)</strong>
                 <span style="font-size: 10px; color: var(--color-text-muted);">Garantie remboursement 100% en cas d'avarie</span>
@@ -1352,7 +1389,7 @@
               <div>
                 <span style="font-size: var(--font-size-xs); color: #93c5fd; text-transform: uppercase; font-weight: 700;">Coût Total de l'Expédition</span>
                 <div id="courier-total-price" style="font-size: var(--font-size-3xl); font-weight: 900; color: #fbbf24;">
-                  ${c.toLocaleString("fr-FR")} FCFA
+                  ${l.toLocaleString("fr-FR")} FCFA
                 </div>
               </div>
               <div style="text-align: right;">
@@ -1364,33 +1401,33 @@
             <div style="margin-bottom: var(--spacing-4);">
               <label class="form-label" style="font-size: var(--font-size-xs);">Choisir l'opérateur de paiement Mobile Money :</label>
               <div class="operator-radio-group">
-                <label class="operator-radio-label ${n==="wave"?"selected":""}">
-                  <input type="radio" name="courier-op" value="wave" ${n==="wave"?"checked":""} />
+                <label class="operator-radio-label ${c==="wave"?"selected":""}">
+                  <input type="radio" name="courier-op" value="wave" ${c==="wave"?"checked":""} />
                   <span>🌊 Wave</span>
                 </label>
-                <label class="operator-radio-label ${n==="orange"?"selected":""}">
-                  <input type="radio" name="courier-op" value="orange" ${n==="orange"?"checked":""} />
+                <label class="operator-radio-label ${c==="orange"?"selected":""}">
+                  <input type="radio" name="courier-op" value="orange" ${c==="orange"?"checked":""} />
                   <span>🍊 Orange Money</span>
                 </label>
-                <label class="operator-radio-label ${n==="mtn"?"selected":""}">
-                  <input type="radio" name="courier-op" value="mtn" ${n==="mtn"?"checked":""} />
+                <label class="operator-radio-label ${c==="mtn"?"selected":""}">
+                  <input type="radio" name="courier-op" value="mtn" ${c==="mtn"?"checked":""} />
                   <span>💛 MTN MoMo</span>
                 </label>
-                <label class="operator-radio-label ${n==="moov"?"selected":""}">
-                  <input type="radio" name="courier-op" value="moov" ${n==="moov"?"checked":""} />
+                <label class="operator-radio-label ${c==="moov"?"selected":""}">
+                  <input type="radio" name="courier-op" value="moov" ${c==="moov"?"checked":""} />
                   <span>🔵 Moov Flooz</span>
                 </label>
               </div>
             </div>
 
             <button type="submit" class="btn-card-white" style="width: 100%; padding: var(--spacing-4); font-size: var(--font-size-base);">
-              <span>Valider l'envoi & Payer (${c.toLocaleString("fr-FR")} FCFA) ➔</span>
+              <span>Valider l'envoi & Payer (${l.toLocaleString("fr-FR")} FCFA) ➔</span>
             </button>
           </div>
         </form>
       </div>
-    `;const p=d.querySelector("#form-send-package"),w=d.querySelector("#weight-slider"),y=d.querySelector("#weight-label"),x=d.querySelector("#courier-total-price");d.querySelectorAll(".package-type-card").forEach(f=>{f.addEventListener("click",()=>{C.play("click"),r=f.getAttribute("data-cat-id"),k()})}),w&&w.addEventListener("input",f=>{s=parseInt(f.target.value,10),y&&(y.textContent=`${s} kg`);const z=j(r,s,{isFragile:o,isInsured:i});x&&(x.textContent=`${z.toLocaleString("fr-FR")} FCFA`)});const S=d.querySelector("#check-fragile");S&&S.addEventListener("change",f=>{o=f.target.checked;const z=j(r,s,{isFragile:o,isInsured:i});x&&(x.textContent=`${z.toLocaleString("fr-FR")} FCFA`)});const $=d.querySelector("#check-insurance");$&&$.addEventListener("change",f=>{i=f.target.checked;const z=j(r,s,{isFragile:o,isInsured:i});x&&(x.textContent=`${z.toLocaleString("fr-FR")} FCFA`)}),d.querySelectorAll(".operator-radio-label").forEach(f=>{f.addEventListener("click",()=>{d.querySelectorAll(".operator-radio-label").forEach(z=>z.classList.remove("selected")),f.classList.add("selected"),n=f.querySelector("input").value})}),p.addEventListener("submit",f=>{f.preventDefault();const z=p.querySelector("#sender-name").value.trim(),q=p.querySelector("#sender-phone").value.trim(),D=p.querySelector("#sender-city").value,W=p.querySelector("#receiver-name").value.trim(),K=p.querySelector("#receiver-phone").value.trim(),V=p.querySelector("#receiver-city").value,Y=p.querySelector("#package-description").value.trim(),se=p.querySelector("#courier-departure-time").value;if(!z||!q||!W||!K||!Y){alert("Veuillez remplir toutes les informations obligatoires pour émettre le colis.");return}const oe=Ee(D,V),ie=$e(),ne=j(r,s,{isFragile:o,isInsured:i}),Q={trackingNumber:oe,secretPin:ie,senderName:z,senderPhone:q,senderCity:D,receiverName:W,receiverPhone:K,receiverCity:V,description:Y,departureTime:se,category:r,weightKg:s,isFragile:o,isInsured:i,priceCfa:ne,paymentOperator:n,createdAt:new Date().toISOString(),status:"EN_TRANSIT",stationDropName:`Gare Routière Centrale de ${D}`,stationPickupName:`Gare Routière Principale de ${V}`},X=JSON.parse(localStorage.getItem("user_couriers_history")||"[]");X.unshift(Q),localStorage.setItem("user_couriers_history",JSON.stringify(X)),u=Q,e="receipt",g(),ae()})}function P(){d.innerHTML=`
-      <div class="card-blue" style="max-width: 780px; margin: 0 auto;">
+    `;const d=i.querySelector("#form-send-package"),g=i.querySelector("#weight-slider"),w=i.querySelector("#weight-label"),h=i.querySelector("#courier-total-price");i.querySelectorAll(".package-type-card").forEach(b=>{b.addEventListener("click",()=>{S.play("click"),s=b.getAttribute("data-cat-id"),y()})}),g&&g.addEventListener("input",b=>{r=parseInt(b.target.value,10),w&&(w.textContent=`${r} kg`);const C=j(s,r,{isFragile:o,isInsured:n});h&&(h.textContent=`${C.toLocaleString("fr-FR")} FCFA`)});const k=i.querySelector("#check-fragile");k&&k.addEventListener("change",b=>{o=b.target.checked;const C=j(s,r,{isFragile:o,isInsured:n});h&&(h.textContent=`${C.toLocaleString("fr-FR")} FCFA`)});const E=i.querySelector("#check-insurance");E&&E.addEventListener("change",b=>{n=b.target.checked;const C=j(s,r,{isFragile:o,isInsured:n});h&&(h.textContent=`${C.toLocaleString("fr-FR")} FCFA`)}),i.querySelectorAll(".operator-radio-label").forEach(b=>{b.addEventListener("click",()=>{i.querySelectorAll(".operator-radio-label").forEach(C=>C.classList.remove("selected")),b.classList.add("selected"),c=b.querySelector("input").value})}),d.addEventListener("submit",b=>{b.preventDefault();const C=d.querySelector("#sender-name").value.trim(),L=d.querySelector("#sender-phone").value.trim(),M=d.querySelector("#sender-city").value,J=d.querySelector("#receiver-name").value.trim(),W=d.querySelector("#receiver-phone").value.trim(),D=d.querySelector("#receiver-city").value,U=d.querySelector("#package-description").value.trim(),re=d.querySelector("#courier-departure-time").value;if(!C||!L||!J||!W||!U){alert("Veuillez remplir toutes les informations obligatoires pour émettre le colis.");return}const oe=Me(M,D),ne=Pe(),ie=j(s,r,{isFragile:o,isInsured:n}),K={trackingNumber:oe,secretPin:ne,senderName:C,senderPhone:L,senderCity:M,receiverName:J,receiverPhone:W,receiverCity:D,description:U,departureTime:re,category:s,weightKg:r,isFragile:o,isInsured:n,priceCfa:ie,paymentOperator:c,createdAt:new Date().toISOString(),status:"EN_TRANSIT",stationDropName:`Gare Routière Centrale de ${M}`,stationPickupName:`Gare Routière Principale de ${D}`},Y=JSON.parse(localStorage.getItem("user_couriers_history")||"[]");Y.unshift(K),localStorage.setItem("user_couriers_history",JSON.stringify(Y)),p=K,e="receipt",m(),ee()})}function x(){i.innerHTML=`
+      <div class="card-blue no-tilt" style="max-width: 780px; margin: 0 auto;">
         <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2);">
           🔍 Suivi de Colis & Marchandise en Temps Réel
         </h2>
@@ -1490,8 +1527,8 @@
           </div>
         </div>
       </div>
-    `;const c=d.querySelector("#form-track-search"),p=d.querySelector("#tracking-input");c.addEventListener("submit",w=>{w.preventDefault(),C.play("click");const y=p.value.trim().toUpperCase();alert(`Recherche en cours pour le colis : ${y}. Statut : En cours d'acheminement sur l'axe interurbain.`)}),d.querySelectorAll(".quick-track-sample").forEach(w=>{w.addEventListener("click",()=>{p.value=w.getAttribute("data-code")})})}function E(){const c=JSON.parse(localStorage.getItem("user_couriers_history")||"[]");if(c.length===0){d.innerHTML=`
-        <div class="card-blue" style="max-width: 600px; margin: 0 auto; text-align: center; padding: var(--spacing-8);">
+    `;const l=i.querySelector("#form-track-search"),d=i.querySelector("#tracking-input");l.addEventListener("submit",g=>{g.preventDefault(),S.play("click");const w=d.value.trim().toUpperCase();alert(`Recherche en cours pour le colis : ${w}. Statut : En cours d'acheminement sur l'axe interurbain.`)}),i.querySelectorAll(".quick-track-sample").forEach(g=>{g.addEventListener("click",()=>{d.value=g.getAttribute("data-code")})})}function $(){const l=JSON.parse(localStorage.getItem("user_couriers_history")||"[]");if(l.length===0){i.innerHTML=`
+        <div class="card-blue no-tilt" style="max-width: 600px; margin: 0 auto; text-align: center; padding: var(--spacing-8);">
           <div style="font-size: 3rem; margin-bottom: var(--spacing-3);">📦</div>
           <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-2);">Aucun colis expédié pour le moment</h2>
           <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">
@@ -1501,37 +1538,37 @@
             <span>Expédier mon premier colis</span>
           </button>
         </div>
-      `;const p=d.querySelector("#btn-goto-send");p&&p.addEventListener("click",()=>{e="send",g()});return}d.innerHTML=`
+      `;const d=i.querySelector("#btn-goto-send");d&&d.addEventListener("click",()=>{e="send",m()});return}i.innerHTML=`
       <div style="display: flex; flex-direction: column; gap: var(--spacing-4);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <h2 style="font-size: var(--font-size-xl); margin-bottom: 0;">Mes Colis & Marchandises (${c.length})</h2>
+          <h2 style="font-size: var(--font-size-xl); margin-bottom: 0;">Mes Colis & Marchandises (${l.length})</h2>
           <button type="button" id="btn-new-package-top" class="btn-primary-blue" style="font-size: var(--font-size-xs); padding: var(--spacing-2) var(--spacing-4);">
             + Nouvel Envoi
           </button>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: var(--spacing-3);">
-          ${c.map(p=>`
-            <div class="card-blue" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-3); padding: var(--spacing-4);">
+          ${l.map(d=>`
+            <div class="card-blue no-tilt" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-3); padding: var(--spacing-4);">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <span class="profile-status-badge">✓ Payé (${p.paymentOperator.toUpperCase()})</span>
-                  <strong style="color: #60a5fa; font-size: var(--font-size-sm);">${p.trackingNumber}</strong>
-                  <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 2px 6px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 700;">PIN: ${p.secretPin}</span>
+                  <span class="profile-status-badge">✓ Payé (${d.paymentOperator.toUpperCase()})</span>
+                  <strong style="color: #60a5fa; font-size: var(--font-size-sm);">${d.trackingNumber}</strong>
+                  <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 2px 6px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 700;">PIN: ${d.secretPin}</span>
                 </div>
                 <h3 style="font-size: var(--font-size-base); color: #ffffff; margin-bottom: 2px;">
-                  ${p.senderCity} ➔ ${p.receiverCity} • <span style="color: #cbd5e1; font-weight: normal;">Destinataire : <strong>${p.receiverName}</strong> (${p.receiverPhone})</span>
+                  ${d.senderCity} ➔ ${d.receiverCity} • <span style="color: #cbd5e1; font-weight: normal;">Destinataire : <strong>${d.receiverName}</strong> (${d.receiverPhone})</span>
                 </h3>
                 <p style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: 0;">
-                  📦 ${p.description} (${p.weightKg} kg) • Convoi : ${p.departureTime}
+                  📦 ${d.description} (${d.weightKg} kg) • Convoi : ${d.departureTime}
                 </p>
               </div>
 
               <div style="display: flex; align-items: center; gap: var(--spacing-3);">
                 <span style="font-size: var(--font-size-lg); font-weight: 800; color: #fbbf24;">
-                  ${p.priceCfa.toLocaleString("fr-FR")} FCFA
+                  ${d.priceCfa.toLocaleString("fr-FR")} FCFA
                 </span>
-                <button type="button" class="btn-card-white btn-view-receipt" data-tracking="${p.trackingNumber}">
+                <button type="button" class="btn-card-white btn-view-receipt" data-tracking="${d.trackingNumber}">
                   <span>Voir Bordereau</span>
                 </button>
               </div>
@@ -1539,23 +1576,23 @@
           `).join("")}
         </div>
       </div>
-    `,d.querySelector("#btn-new-package-top").addEventListener("click",()=>{e="send",g()}),d.querySelectorAll(".btn-view-receipt").forEach(p=>{p.addEventListener("click",()=>{const w=p.getAttribute("data-tracking"),y=c.find(x=>x.trackingNumber===w);y&&(u=y,e="receipt",g())})})}function m(){if(!u){e="send",g();return}const c=u,p=encodeURIComponent(`📦 BORDEREAU COLIS GARE EXPRESS
-Bonjour ${c.receiverName},
-Un colis vous a été expédié de ${c.senderCity} vers ${c.receiverCity} par ${c.senderName}.
+    `,i.querySelector("#btn-new-package-top").addEventListener("click",()=>{e="send",m()}),i.querySelectorAll(".btn-view-receipt").forEach(d=>{d.addEventListener("click",()=>{const g=d.getAttribute("data-tracking"),w=l.find(h=>h.trackingNumber===g);w&&(p=w,e="receipt",m())})})}function z(){if(!p){e="send",m();return}const l=p,d=encodeURIComponent(`📦 BORDEREAU COLIS GARE EXPRESS
+Bonjour ${l.receiverName},
+Un colis vous a été expédié de ${l.senderCity} vers ${l.receiverCity} par ${l.senderName}.
 
-📌 N° Suivi : ${c.trackingNumber}
-🔑 CODE PIN SECRET DE RETRAIT : ${c.secretPin}
-🏢 Point de retrait : ${c.stationPickupName}
-⏰ Convoi de : ${c.departureTime}
+📌 N° Suivi : ${l.trackingNumber}
+🔑 CODE PIN SECRET DE RETRAIT : ${l.secretPin}
+🏢 Point de retrait : ${l.stationPickupName}
+⏰ Convoi de : ${l.departureTime}
 
-Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupérer le colis.`);d.innerHTML=`
-      <div class="card-blue courier-receipt-card">
+Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupérer le colis.`);i.innerHTML=`
+      <div class="card-blue courier-receipt-card no-tilt">
         <div class="courier-receipt-header">
           <h2 style="color: #ffffff; font-size: var(--font-size-xl); margin-bottom: 2px;">
             ✓ BORDEREAU OFFICIEL D'EXPÉDITION COLIS
           </h2>
           <span style="color: rgba(255,255,255,0.9); font-size: var(--font-size-sm); font-weight: 700;">
-            N° Suivi : ${c.trackingNumber}
+            N° Suivi : ${l.trackingNumber}
           </span>
         </div>
 
@@ -1572,7 +1609,7 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
             <span style="font-size: var(--font-size-xs); color: #fbbf24; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px;">
               🔑 CODE PIN SECRET DE RETRAIT (À FOURNIR AU DESTINATAIRE) :
             </span>
-            <div class="pin-code-large">${c.secretPin}</div>
+            <div class="pin-code-large">${l.secretPin}</div>
             <span style="font-size: 11px; color: var(--color-text-secondary);">
               Exigé au guichet de destination avec la pièce d'identité du destinataire.
             </span>
@@ -1581,34 +1618,34 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-4); font-size: var(--font-size-sm); margin: var(--spacing-4) 0;">
             <div>
               <span style="color: var(--color-text-muted); display: block; font-size: var(--font-size-xs);">Expéditeur :</span>
-              <strong style="color: #ffffff;">${c.senderName}</strong>
-              <div style="font-size: var(--font-size-xs); color: #cbd5e1;">📞 ${c.senderPhone}</div>
-              <div style="font-size: var(--font-size-xs); color: #93c5fd;">📍 ${c.stationDropName}</div>
+              <strong style="color: #ffffff;">${l.senderName}</strong>
+              <div style="font-size: var(--font-size-xs); color: #cbd5e1;">📞 ${l.senderPhone}</div>
+              <div style="font-size: var(--font-size-xs); color: #93c5fd;">📍 ${l.stationDropName}</div>
             </div>
 
             <div>
               <span style="color: var(--color-text-muted); display: block; font-size: var(--font-size-xs);">Destinataire :</span>
-              <strong style="color: #ffffff;">${c.receiverName}</strong>
-              <div style="font-size: var(--font-size-xs); color: #cbd5e1;">📞 ${c.receiverPhone}</div>
-              <div style="font-size: var(--font-size-xs); color: #93c5fd;">📍 ${c.stationPickupName}</div>
+              <strong style="color: #ffffff;">${l.receiverName}</strong>
+              <div style="font-size: var(--font-size-xs); color: #cbd5e1;">📞 ${l.receiverPhone}</div>
+              <div style="font-size: var(--font-size-xs); color: #93c5fd;">📍 ${l.stationPickupName}</div>
             </div>
           </div>
 
           <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: var(--spacing-3); font-size: var(--font-size-xs); margin-bottom: var(--spacing-4);">
             <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-              <span>📦 Contenu déclaré : <strong>${c.description}</strong></span>
-              <span>⚖️ Poids : <strong>${c.weightKg} kg</strong></span>
+              <span>📦 Contenu déclaré : <strong>${l.description}</strong></span>
+              <span>⚖️ Poids : <strong>${l.weightKg} kg</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between;">
-              <span>Convoi : <strong>${c.departureTime}</strong></span>
-              <span style="color: #fbbf24; font-weight: 700;">Règlement : ${c.priceCfa.toLocaleString("fr-FR")} FCFA (Réglé par ${c.paymentOperator.toUpperCase()})</span>
+              <span>Convoi : <strong>${l.departureTime}</strong></span>
+              <span style="color: #fbbf24; font-weight: 700;">Règlement : ${l.priceCfa.toLocaleString("fr-FR")} FCFA (Réglé par ${l.paymentOperator.toUpperCase()})</span>
             </div>
           </div>
 
           <!-- Boutons d'action : Partager WhatsApp & Imprimer -->
           <div style="display: flex; gap: var(--spacing-3); flex-wrap: wrap;">
             <a 
-              href="https://api.whatsapp.com/send?text=${p}" 
+              href="https://api.whatsapp.com/send?text=${d}" 
               target="_blank" 
               rel="noopener noreferrer" 
               class="btn-primary-blue" 
@@ -1625,7 +1662,7 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
           </div>
         </div>
       </div>
-    `;const w=d.querySelector("#btn-print-courier");w&&w.addEventListener("click",()=>{window.print()});const y=d.querySelector("#btn-back-to-courier-list");y&&y.addEventListener("click",()=>{e="history",g()})}return l.querySelectorAll(".courier-tab-btn").forEach(c=>{c.addEventListener("click",()=>{C.play("click"),e=c.getAttribute("data-tab"),g()})}),g(),t}function Ae(){const t=document.createElement("div");t.className="main-content";const a=M({label:"Retour à l'espace voyageur",onClick:()=>{window.location.hash="#/app"}});t.appendChild(a);const e=document.createElement("div");e.style.margin="var(--spacing-4) 0 var(--spacing-6) 0",e.style.display="flex",e.style.justifyContent="space-between",e.style.alignItems="center",e.style.flexWrap="wrap",e.style.gap="var(--spacing-4)",e.innerHTML=`
+    `;const g=i.querySelector("#btn-print-courier");g&&g.addEventListener("click",()=>{window.print()});const w=i.querySelector("#btn-back-to-courier-list");w&&w.addEventListener("click",()=>{e="history",m()})}return v.querySelectorAll(".courier-tab-btn").forEach(l=>{l.addEventListener("click",()=>{S.play("click"),e=l.getAttribute("data-tab"),m()})}),m(),t}function Te(){const t=document.createElement("div");t.className="main-content";const a=P({label:"Retour à l'espace voyageur",onClick:()=>{window.location.hash="#/app"}});t.appendChild(a);const e=document.createElement("div");e.style.margin="var(--spacing-4) 0 var(--spacing-6) 0",e.style.display="flex",e.style.justifyContent="space-between",e.style.alignItems="center",e.style.flexWrap="wrap",e.style.gap="var(--spacing-4)",e.innerHTML=`
     <div>
       <h1 style="margin-bottom: var(--spacing-1);">Tableau de Bord Administrateur</h1>
       <p style="margin-bottom: 0;">Supervision en direct des départs, des réservations et des gares.</p>
@@ -1633,7 +1670,7 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
     <a href="#/admin/departures" class="btn-primary-blue">
       <span>+ Programmer un départ</span>
     </a>
-  `,t.appendChild(e);const r=document.createElement("div");r.className="admin-kpi-grid",r.innerHTML=`
+  `,t.appendChild(e);const s=document.createElement("div");s.className="admin-kpi-grid",s.innerHTML=`
     <div class="card-blue kpi-card">
       <span class="kpi-title">Convois programmés aujourd'hui</span>
       <div class="kpi-value">12 Départs</div>
@@ -1657,7 +1694,7 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
       <div class="kpi-value" style="color: #fbbf24;">1 988 000 F</div>
       <span class="kpi-trend">Mobile Money (Wave / OM / MTN)</span>
     </div>
-  `,t.appendChild(r);const s=document.createElement("div");return s.className="card-blue",s.innerHTML=`
+  `,t.appendChild(s);const r=document.createElement("div");return r.className="card-blue",r.innerHTML=`
     <h2 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-4);">
       Départs en cours et à venir (Gare Routière)
     </h2>
@@ -1709,7 +1746,7 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
         </tbody>
       </table>
     </div>
-  `,t.appendChild(s),t}function Me(){const t=document.createElement("div");t.className="main-content";const a=M({label:"Retour au tableau de bord",onClick:()=>{window.location.hash="#/admin"}});t.appendChild(a);const e=document.createElement("div");e.className="card-blue auth-card",e.style.maxWidth="680px",e.style.margin="var(--spacing-6) auto",e.innerHTML=`
+  `,t.appendChild(r),t}function Le(){const t=document.createElement("div");t.className="main-content";const a=P({label:"Retour au tableau de bord",onClick:()=>{window.location.hash="#/admin"}});t.appendChild(a);const e=document.createElement("div");e.className="card-blue auth-card",e.style.maxWidth="680px",e.style.margin="var(--spacing-6) auto",e.innerHTML=`
     <div class="auth-header">
       <h1 class="auth-title">Programmer un Nouveau Départ</h1>
       <p class="auth-subtitle">Configurez un horaire, une gare d'embarquement et la capacité du car.</p>
@@ -1720,14 +1757,14 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
         <div class="form-group">
           <label class="form-label" for="adm-from">Ville de départ</label>
           <select id="adm-from" class="form-select" required>
-            ${T.map(s=>`<option value="${s}">${s}</option>`).join("")}
+            ${q.map(r=>`<option value="${r}">${r}</option>`).join("")}
           </select>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="adm-to">Ville d'arrivée</label>
           <select id="adm-to" class="form-select" required>
-            ${T.map((s,o)=>`<option value="${s}" ${o===1?"selected":""}>${s}</option>`).join("")}
+            ${q.map((r,o)=>`<option value="${r}" ${o===1?"selected":""}>${r}</option>`).join("")}
           </select>
         </div>
       </div>
@@ -1770,4 +1807,4 @@ Veuillez vous munir de votre pièce d'identité et de ce code PIN pour récupér
         <span>Enregistrer et publier le départ</span>
       </button>
     </form>
-  `;const r=e.querySelector("#admin-departure-form");return r.addEventListener("submit",s=>{s.preventDefault();const o=r.querySelector("#btn-save-departure");o.disabled=!0,o.innerHTML="<span>Publication en cours...</span>",setTimeout(()=>{window.location.hash="#/admin"},600)}),t.appendChild(e),t}const I=document.getElementById("app"),ee={"/":ve,"/register":ge,"/login":be,"/app":xe,"/payment":ke,"/confirmation":we,"/history":Ce,"/profile":ze,"/courier":Ne,"/admin":Ae,"/admin/departures":Me};function te(){if(!I)return;const t=window.location.hash.slice(1)||"/",a=t.startsWith("/")?t:`/${t}`,e=ee[a]||ee["/"];I.innerHTML="";const r=e();I.appendChild(r),window.scrollTo({top:0,behavior:"smooth"}),requestAnimationFrame(()=>{B(I),O(I)})}document.addEventListener("DOMContentLoaded",()=>{le(),ue(),window.addEventListener("hashchange",te),te()});
+  `;const s=e.querySelector("#admin-departure-form");return s.addEventListener("submit",r=>{r.preventDefault();const o=s.querySelector("#btn-save-departure");o.disabled=!0,o.innerHTML="<span>Publication en cours...</span>",setTimeout(()=>{window.location.hash="#/admin"},600)}),t.appendChild(e),t}const I=document.getElementById("app"),X={"/":xe,"/register":ke,"/login":we,"/app":Se,"/payment":ze,"/confirmation":Ee,"/history":$e,"/profile":Ae,"/courier":qe,"/admin":Te,"/admin/departures":Le};function Z(){if(!I)return;const t=window.location.hash.slice(1)||"/",a=t.startsWith("/")?t:`/${t}`,e=X[a]||X["/"];a==="/courier"?document.body.classList.add("page-courier"):document.body.classList.remove("page-courier"),I.innerHTML="";const s=e();I.appendChild(s),window.scrollTo({top:0,behavior:"smooth"}),requestAnimationFrame(()=>{O(I),a!=="/courier"&&F(I)})}document.addEventListener("DOMContentLoaded",()=>{ye(),le(),ue(),window.addEventListener("hashchange",Z),Z()});

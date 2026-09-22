@@ -76,7 +76,7 @@ export function CourierPage() {
     <div className="main-content courier-container">
       <BackButton label="Retour aux départs voyageurs" onClick={() => { window.location.hash = '#/app'; }} />
 
-      <div className="courier-hero-banner">
+      <div className="courier-hero-banner no-tilt">
         <h1 style={{ fontSize: 'var(--font-size-3xl)', color: '#ffffff', marginBottom: 'var(--spacing-2)' }}>
           Expédiez vos Colis & Marchandises à travers la Côte d'Ivoire
         </h1>
@@ -110,7 +110,7 @@ export function CourierPage() {
       </div>
 
       {activeTab === 'send' && (
-        <div className="card-blue" style={{ border: '1px solid rgba(59, 130, 246, 0.4)' }}>
+        <div className="card-blue no-tilt" style={{ border: '1px solid rgba(59, 130, 246, 0.4)' }}>
           <form onSubmit={handleSendSubmit}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--spacing-6)', marginBottom: 'var(--spacing-6)' }}>
               {/* Sender */}

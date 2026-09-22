@@ -253,10 +253,27 @@ export function init3DTiltCards(root = document) {
   const cards = root.querySelectorAll('.card-blue, .departure-card, .feature-card, .profile-hero-card');
 
   cards.forEach((card) => {
+    // Ne jamais appliquer de tilt 3D sur le service courrier ou sur les conteneurs de formulaires
+    if (
+      card.closest('.courier-container') ||
+      card.closest('.no-tilt') ||
+      card.classList.contains('no-tilt') ||
+      card.classList.contains('courier-receipt-card') ||
+      document.body.classList.contains('page-courier')
+    ) {
+      card.style.transform = 'none';
+      return;
+    }
+
     if (card.dataset.hasTilt) return;
     card.dataset.hasTilt = 'true';
 
     card.addEventListener('mousemove', (e) => {
+      if (card.closest('.courier-container') || document.body.classList.contains('page-courier')) {
+        card.style.transform = 'none';
+        return;
+      }
+
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;

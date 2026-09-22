@@ -3,6 +3,7 @@
  * @description Composant En-tête de navigation de l'application (Section 6.1 du cahier des charges).
  */
 
+import logoSrc from '../assets/logo.png';
 import { openModal } from './Modals.js';
 import { SoundEngine } from '../services/interactiveEffects.js';
 
@@ -18,14 +19,8 @@ export function createHeader() {
   const isSoundOn = SoundEngine.isEnabled();
 
   header.innerHTML = `
-    <a href="#/" class="brand-logo" aria-label="Accueil - Gare Routière">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-        <path d="M7 10h10"></path>
-        <path d="M7 14h10"></path>
-        <circle cx="8" cy="18" r="1"></circle>
-        <circle cx="16" cy="18" r="1"></circle>
-      </svg>
+    <a href="#/" class="brand-logo" aria-label="Accueil - GareExpress">
+      <img src="${logoSrc}" alt="Logo GareExpress" class="brand-logo-img" />
       <span>Gare<span style="color: var(--color-btn-blue-bg);">Express</span></span>
       <span class="brand-badge">Côte d'Ivoire</span>
     </a>

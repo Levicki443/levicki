@@ -5,18 +5,22 @@
 
 import { CITIES, findTrip } from '../data/tripsData.js';
 
-const API_BASE_URL = 'http://localhost:5000/api';
-const TIMEOUT_MS = 3000;
+export const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL)
+  ? import.meta.env.VITE_API_URL
+  : 'http://localhost:5000/api';
+
+const TIMEOUT_MS = 4000;
 
 /**
  * Exécute une requête fetch avec un délai d'expiration sécurisé.
  * @param {string} url - URL à requêter.
  * @param {RequestInit} [options={}] - Options de la requête.
+ * @param {number} [customTimeoutMs] - Délai d'expiration optionnel.
  * @returns {Promise<Response>} Réponse fetch.
  */
-async function fetchWithTimeout(url, options = {}) {
+async function fetchWithTimeout(url, options = {}, customTimeoutMs = TIMEOUT_MS) {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const timeoutId = setTimeout(() => controller.abort(), customTimeoutMs);
 
   try {
     const response = await fetch(url, {
@@ -30,6 +34,24 @@ async function fetchWithTimeout(url, options = {}) {
 }
 
 export const ApiService = {
+  /**
+   * Vérifie la disponibilité et l'état de santé du Backend (Ping de réveil).
+   * @param {number} [timeoutMs=4000]
+   * @returns {Promise<boolean>}
+   */
+  async checkHealth(timeoutMs = 4000) {
+    try {
+      const res = await fetchWithTimeout(`${API_BASE_URL}/health`, {}, timeoutMs);
+      if (res.ok) {
+        const json = await res.json().catch(() => ({ status: 'healthy' }));
+        return json.status === 'healthy' || res.status === 200;
+      }
+    } catch {
+      // Backend endormi ou inaccessible
+    }
+    return false;
+  },
+
   /**
    * Récupère la liste des villes ivoiriennes.
    * @returns {Promise<string[]>}
